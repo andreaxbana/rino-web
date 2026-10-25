@@ -1,8 +1,8 @@
 {
-  "build_id": "k1-16a8b810fd1646cf",
-  "source_sha256": "16a8b810fd1646cf47f29565b397c0dd1b7179d060edf1ee5448307fd4bdb348",
-  "fragment_sha256": "94d0d5af02f9a93cb90237190be4258a2de69973441eb6427d7a4fe4c418679b",
-  "standalone_sha256": "37669d73292a8f899da71cc861e6959884500d007235b0c604ac621b7e7831a1",
+  "build_id": "k1-9387bbd8f7edb97d",
+  "source_sha256": "9387bbd8f7edb97db7c5d4cc1d4a1366a14a092958a8b9cd6a9e4ad9e7e02540",
+  "fragment_sha256": "cfe7fc6c7d5e66574b085458eb8294e7e127c45aeb4164038a6eddceca712edc",
+  "standalone_sha256": "678a743aa310d9297c2fa020c5acaecb6bb8b8eaecf7f72ffb7bf11e349129af",
   "recognition": {
     "entry": "./recognition/offline-recognizer.mjs",
     "id": "kotoba-offline-trained-ensemble",
