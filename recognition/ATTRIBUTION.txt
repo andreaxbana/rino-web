@@ -1,0 +1,47 @@
+Offline handwriting recognition
+
+Character recognition powered by machine learning from Dariyooo (DaAppLab).
+DaKanji Single Character Recognition v2.0: quantized ONNX CNN and 6,507 labels.
+Copyright (c) 2021 CaptainDario. MIT license: LICENSE-DaKanji.txt.
+https://github.com/dariyooo/DaKanji-Single-Kanji-Recognition/releases/tag/v2.0
+The unmodified release ONNX and label archives were checked against their
+published SHA-256 values. Provenance is retained in upstream-release.json.
+
+KanjiDNN v3 by gaiseras: trained 3,181-class CNN, including a REJECT class.
+Apache-2.0 as declared by the author's model card, retained in kanjidnn/README.md.
+License: kanjidnn/LICENSE-Apache-2.0.txt.
+https://huggingface.co/gaiseras/kanjiDNN/tree/b1ae6fdb62a521dfcadaff022085b7d965e2c649
+The model and class labels are unmodified. Training data described by the
+author includes ETL9G and KanjiVG, with finger-drawing augmentation.
+
+Tegaki Japanese handwriting model 0.3: 6,420 learned linear SVM classifiers.
+Model, original training XML and derived stroke-count metadata: LGPL-2.1.
+See zinnia/tegaki-zinnia-japanese-0.3/COPYING and README.txt.
+https://github.com/tegaki/tegaki/releases/tag/v0.3
+The .model weights are unmodified. Corresponding source is included as
+handwriting-ja.xml.gz with the upstream Makefile and VERSION. The derived
+stroke-count table counts <stroke> elements for each XML character; it is
+used only to veto unsupported classifications, not to promote a target.
+The upstream build recipe uses tegaki-build, available from the Tegaki source:
+https://github.com/tegaki/tegaki/tree/master/tegaki-tools
+
+Zinnia feature extraction and linear SVM inference:
+Copyright (c) 2005-2008 Taku Kudo. BSD-3-Clause, see zinnia/COPYING.
+https://github.com/taku910/zinnia
+This distribution includes a JavaScript port in zinnia/svm.mjs, with the
+original feature.cpp, feature.h, recognizer.cpp and common.h for review.
+The exact source revision is in zinnia/revision.txt.
+Changes: in-memory bounded model parsing, typed arrays, dense scratch feature
+storage and a JavaScript API. The trained feature definitions and scoring
+equation are retained; minor floating-point differences can exist.
+
+ONNX Runtime Web 1.30.0, Copyright Microsoft Corporation. MIT license.
+See runtime/LICENSE-ONNX-Runtime.txt and runtime/ThirdPartyNotices.txt.
+https://github.com/microsoft/onnxruntime/releases/tag/v1.30.0
+The distributed JavaScript and WebAssembly files are unmodified npm assets.
+
+Application-owned orchestration, rasterization and decision policy:
+offline-recognizer.mjs, raster.mjs, decision.mjs and supporting QA scripts.
+These are separate from the LGPL model data. Models may be replaced by the
+user without changing application code, provided their documented format,
+label order and tensor shapes remain compatible.

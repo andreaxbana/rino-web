@@ -1,0 +1,98 @@
+Import ./recognition/offline-recognizer.mjs from the locally served app.
+The module exports {id, version, offline, ready, recognize}; the default export
+contains the same members. It also sets window.KotobaOfflineRecognizer.
+
+await recognize(strokes, {canvas:109}) returns:
+  decision: 'confident' or 'uncertain'
+  candidates: the selected trained model's ranked {character,score} readings
+  selectedModel: 'kanjidnn', 'dakanji', or 'zinnia'
+  evidence: all three trained models' ranked candidates
+  segmentation: {submitted, continuous} meaningful pen-stroke counts
+  reason, id, version, offline:true, latencyMs, scoreMeaning
+
+Only decision==='confident' permits automatic grading of candidates[0].
+All other outcomes, model load errors and invalid input require uncertainty.
+The expected answer MUST NOT be passed to this provider. Comparison with the
+question happens afterward. A candidate elsewhere in the list is not a pass.
+
+Scores are uncalibrated model outputs, NOT measured probabilities that the
+learner is correct. KanjiDNN logits are passed through stable softmax;
+DaKanji emits quantized softmax values itself; Zinnia outputs signed SVM
+margins. Their numeric scales are never averaged or treated as interchangeable.
+
+Drawing conversion: use raw centerline points in the square canvas coordinate
+system. Preserve all strokes and their direction. The CNN view centers the
+whole ink bounding box, retains aspect ratio, maps it to a 52-pixel span in a
+64-pixel square, and renders round antialiased 2.5-pixel strokes with white ink
+on black. This is a deterministic stroke-to-image adaptation to the models'
+64x64 ink-foreground inputs; no stroke geometry is repaired or trimmed.
+Zinnia uses strokes normalized by the square canvas dimensions. Version 1.1.0
+joins only consecutive, nearby, smoothly continuing fragments for Zinnia and
+stroke-count validation. The CNN image still uses the original unmodified ink.
+Corners, retracing and arbitrary disconnected parts are not joined. Original
+Zinnia evidence is retained as zinniaRaw whenever segmentation changes.
+
+The abstention policy is intentionally conservative. Strong conflicting model
+readings and known stroke-count mismatches yield uncertainty. Stroke count is
+a veto, never a lookup of the expected character. Extra pen lifts or joined
+strokes can therefore remain uncertain, even when their raster looks right.
+For covered kanji, the count table comes from the same KanjiVG references used
+in the app's lessons. Historical Tegaki counts remain for other classes. This
+corrects 26 taught characters whose model metadata had a different count.
+The SVM's own top reading, whether selected or used as a veto, needs a top-five position and at least
+0.01 softmax support from both raster models; this is independent corroboration,
+not a search for the practice answer. A smaller CNN cannot overrule a plausible
+class outside its own vocabulary. A strong explicit REJECT prevents grading.
+Zero-length taps do not count as meaningful strokes.
+Stroke order/direction coaching belongs in a separate teaching layer.
+Confident kana or digit readings remain uncertain in isolated kanji practice.
+
+The app adapter also reuses its independent reference-shape matcher as a veto:
+if that matcher confidently identifies a different character, the attempt is
+unscored. Its recognition call receives the model's inferred character (or a
+fixed available reference key), never the question's answer. This can abstain,
+but cannot select a different reading, promote a candidate, or rescue a missing
+trained model. The provider alone does not include this final app-layer veto.
+
+Version 1.0.1 resolves the graphical 一/ー ambiguity specifically for kanji
+practice. When KanjiDNN's top reading is ー and DaKanji's own top reading is
+一 at its existing strong threshold, one substantial, slender horizontal
+stroke can be read as 一. The geometry guard excludes tiny dashes, hooks,
+retracing and multiple pen strokes. Only that pair's conflict is suppressed;
+other decisive readings and explicit rejection still cause abstention. Raw
+evidence is preserved, and the provider reports kanji-horizontal-homograph.
+This rule never receives the question's expected answer. It is not a general
+Japanese-text OCR policy, where surrounding text would distinguish these marks.
+
+All weights, runtime modules and WebAssembly are in the asset manifest.
+No model is downloaded from a third-party URL at runtime, no CDN is used, and
+no strokes are transmitted. Initialization loads only same-origin local files.
+Use one thread in ONNX Runtime so no cross-origin isolation is required.
+The browser must support WebAssembly SIMD and module scripts. A local HTTP
+server is recommended; direct file:// module imports are browser-dependent.
+To work without the original site/network, the complete model asset directory
+and local app must be installed/cached. Do not ship only the HTML fragment.
+
+General diagnostics for 1.1.0 are in qa/general-recognition-review/. Across
+4,207 model/policy cases, reference acceptance improves from 603/630 to 629/630;
+the same-ink extra-pen-lift set improves from 0/630 to 386/630. There are no
+new confident wrong positive readings in that set and no altered negative
+accepted as its original character across 348 missing/extra-stroke cases.
+The original 79 handwriting fixtures stay at 71 correct and eight uncertain.
+These are mostly reference-derived and authored cases, not human accuracy.
+The final app adapter additionally prevents reproduced 日/目 confusion after
+a pen lift; the 月/目 case abstains through continuity/count checking.
+
+Known limits at implementation: reconstructed screenshot 月 stays uncertain;
+three authored 口 examples, one authored 月, and one authored long-tail 日
+also stay uncertain. Two authored 人 shapes are uncertain because a broader
+model favors a visually similar class missing from the primary CNN's vocabulary.
+Both exact retained 日 inputs are recognized as 日. The regression set is small,
+includes authored and reconstructed traces, and is not an accuracy benchmark.
+The chosen cutoffs are engineering abstention rules, not statistically
+calibrated confidence. Independent human-labeled device data is still needed.
+
+Reproduce local verification with node recognition-model/verify-provider.mjs.
+See provider-verification.json and model-comparison.json for raw local evidence.
+Asset SHA-256 hashes and copy paths are in asset-manifest.json. Regenerate that
+file with node recognition-model/write-manifest.mjs after changing any asset.

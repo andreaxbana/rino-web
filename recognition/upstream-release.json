@@ -1,0 +1,19 @@
+{
+  "url": "https://github.com/dariyooo/DaKanji-Single-Kanji-Recognition/releases/tag/v2.0",
+  "tag": "v2.0",
+  "assets": [
+    {
+      "name": "char_classifier_labels.zip",
+      "size": 14176,
+      "digest": "sha256:1f7de7c2fd7fb65bdec34e136ac76a0aa69b1c860f2b340ce325102ce48e9457",
+      "url": "https://github.com/dariyooo/DaKanji-Single-Kanji-Recognition/releases/download/v2.0/char_classifier_labels.zip"
+    },
+    {
+      "name": "char_classifier_onnx.zip",
+      "size": 1739407,
+      "digest": "sha256:82a687dd6c57e3075535f385e9ae973ebe2427c3dcde8f66912f9d8b6e7b2467",
+      "url": "https://github.com/dariyooo/DaKanji-Single-Kanji-Recognition/releases/download/v2.0/char_classifier_onnx.zip"
+    }
+  ],
+  "commit": "531becfc42cec1a0ebf2632a010926feb7954c9f"
+}

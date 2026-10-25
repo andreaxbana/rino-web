@@ -1,0 +1,7 @@
+{
+  "target_size": 64,
+  "binarize": true,
+  "margin_frac": 0.1,
+  "ink_threshold": 200,
+  "normalization": "ink=1.0, background=0.0, i.e. (255 - pixel) / 255"
+}

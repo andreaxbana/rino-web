@@ -1,0 +1,51 @@
+{
+  "id": "rino-study-world",
+  "version": 1,
+  "files": [
+    {
+      "path": "rino/welcome-smooth-atlas.webp",
+      "sha256": "4744e2504e4b8025eaaaa7396a577afc4d4d9736e68f2043f98308e1d73b6f34",
+      "bytes": 281254
+    },
+    {
+      "path": "rino/welcome-smooth-still.webp",
+      "sha256": "a26961215049aaa115b322efd6feece9328da962585a0857228060c15281c58f",
+      "bytes": 18132
+    },
+    {
+      "path": "rino/kawaii-wink.webp",
+      "sha256": "c0cc999519069fe69343671ae916ef75d532ab3bee009b83a351acf1a56acac6",
+      "bytes": 20852
+    },
+    {
+      "path": "rino/kawaii-thinking.webp",
+      "sha256": "ab119b5cf21b97ac7eefa3bd39df75c850fd576b8b05cb0f849244a30bdc614c",
+      "bytes": 25268
+    },
+    {
+      "path": "rino/kawaii-ready.webp",
+      "sha256": "db93eac60853152e6c55b8b45326e0b0d344c91a441e917582691849ca4af1d1",
+      "bytes": 21280
+    },
+    {
+      "path": "rino/rear.webp",
+      "sha256": "314e76013e212947b95079289ceae806468d883d8dd1e16a9428c4330cb1be72",
+      "bytes": 16430
+    },
+    {
+      "path": "rino/study-picnic.svg",
+      "sha256": "e58138906a5f480bf702430516fb723761ea8be2a00ea439b9a586262c597e4f",
+      "bytes": 2278
+    },
+    {
+      "path": "rino/result-confetti.svg",
+      "sha256": "68a5c455c62e3d73c67c750dc759fe8bed1e352f5cce8a3c56625c1128e49281",
+      "bytes": 1296
+    },
+    {
+      "path": "rino/study-garden.svg",
+      "sha256": "30bb9d2a41ba93e14ee22c8ac4403988d42ed5327f8e30e90170ae74d903ceae",
+      "bytes": 1292
+    }
+  ]
+}

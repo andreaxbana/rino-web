@@ -1,0 +1,19 @@
+{
+  "build_id": "k1-2a90786b936ff514",
+  "source_sha256": "2a90786b936ff51454865b67b9f76b0481d9968f6da5f6f0573624d6833f8ac7",
+  "fragment_sha256": "ce8409a1fdceab447d12dea7299b6643597cb2d389e10ee6b051b61e2af58bfe",
+  "standalone_sha256": "355fe5fd35b8ed8f61dd515228b098152ca88b296d976d0341344b5a36fde1c5",
+  "recognition": {
+    "entry": "./recognition/offline-recognizer.mjs",
+    "id": "kotoba-offline-trained-ensemble",
+    "version": "1.1.1",
+    "assetsSha256": "b58f8ac25a102706a4565db7e0f8b9e62e745c76a256b659b5ce1ea00c095823",
+    "bytes": 55774976
+  },
+  "rino": {
+    "id": "rino-study-world",
+    "version": 1,
+    "assetsSha256": "f5082ea52c4a2050a5efece6c7930d09f08beccebef5396362f9a6afb8c9e79d",
+    "bytes": 388082
+  }
+}

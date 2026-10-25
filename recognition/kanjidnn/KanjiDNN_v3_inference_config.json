@@ -1,0 +1,5 @@
+{
+  "reject_class_index": 3180,
+  "rejection_threshold": 0.5,
+  "rejection_note": "Force REJECT when the top softmax probability is below rejection_threshold, regardless of argmax -- see kanjirec/inference.py."
+}

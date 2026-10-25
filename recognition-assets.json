@@ -1,0 +1,191 @@
+{
+  "id": "kotoba-offline-trained-ensemble",
+  "version": "1.1.1",
+  "files": [
+    {
+      "path": "recognition/offline-recognizer.mjs",
+      "sha256": "3192e3f861a993807d28169eb17e60c7a017ae882b695d781272029254528207",
+      "bytes": 5585
+    },
+    {
+      "path": "recognition/raster.mjs",
+      "sha256": "cbab8e163cc3d51b509364f976045e1e7e8d50193bfa4f5a0421d25d72ae5a14",
+      "bytes": 1487
+    },
+    {
+      "path": "recognition/decision.mjs",
+      "sha256": "38ca0ad08e5bedaec21978013b410e3c96883dcba6fcc0e78f2f5fd911095f22",
+      "bytes": 4208
+    },
+    {
+      "path": "recognition/stroke-continuity.mjs",
+      "sha256": "11367aedcbf50ed34094a6944db786b050bb990059da308583ff85a2d226fb88",
+      "bytes": 1790
+    },
+    {
+      "path": "recognition/reference-stroke-counts.json",
+      "sha256": "885e296d466b7219f246f59b85150798ce2c07c33b9c5c8e9527e42fb0ad7d30",
+      "bytes": 37710
+    },
+    {
+      "path": "recognition/ATTRIBUTION.txt",
+      "sha256": "1bb3ec698120afcd894696ada2a5908dcce2dd105a5def4922935a7daebb4a7e",
+      "bytes": 2808
+    },
+    {
+      "path": "recognition/INTEGRATION.txt",
+      "sha256": "1767096eee5ea6d80e09093508942473028ee941db2caf8dcc82e4e3319060a9",
+      "bytes": 6556
+    },
+    {
+      "path": "recognition/LICENSE-DaKanji.txt",
+      "sha256": "7d1e84def59e1bedb1c3a8c3038d77cf33027be52d2b64f0811571ce58e5be11",
+      "bytes": 1069
+    },
+    {
+      "path": "recognition/upstream-release.json",
+      "sha256": "463274dd62bfbfb20598b5d893e3e6692220f1c28996c77b7d2a6f46748c31ed",
+      "bytes": 772
+    },
+    {
+      "path": "recognition/dakanji/char_classifier.onnx",
+      "sha256": "2c8d334e1541720dd1f8603a9dc3ecd270842756c99fbe24ce2de3e925e1f4a7",
+      "bytes": 2230001
+    },
+    {
+      "path": "recognition/dakanji/char_classifier_labels.txt",
+      "sha256": "a3b26bee5c6b37f3e76f802c8012c6b00c0dfbcda90de1a208d62386b2c6b3ba",
+      "bytes": 19521
+    },
+    {
+      "path": "recognition/kanjidnn/KanjiDNN_v3.onnx",
+      "sha256": "7a904f4383b5f5d43bf4f74dd864efa1ce74860d53602b784af767391144d336",
+      "bytes": 11786146
+    },
+    {
+      "path": "recognition/kanjidnn/KanjiDNN_v3_classes.json",
+      "sha256": "859329d9403254af3ef8a12b77ef4016a117bff391654486d1c843cbbf592c57",
+      "bytes": 28635
+    },
+    {
+      "path": "recognition/kanjidnn/KanjiDNN_v3_inference_config.json",
+      "sha256": "e369f068e4ac425f8bbcbb7c5670c50b0ba4ba6d4d4a2a1968857dc85cb403f1",
+      "bytes": 212
+    },
+    {
+      "path": "recognition/kanjidnn/KanjiDNN_v3_preprocessing_config.json",
+      "sha256": "3c55797585ff61a6b8226800c9d958156c0f5940383fb09de8529437b1b471d6",
+      "bytes": 161
+    },
+    {
+      "path": "recognition/kanjidnn/README.md",
+      "sha256": "c4aed689adc4d15d4f06b040824b71f6bf8ca3e50ab155d4585f752294e96d28",
+      "bytes": 3720
+    },
+    {
+      "path": "recognition/kanjidnn/LICENSE-Apache-2.0.txt",
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "bytes": 11358
+    },
+    {
+      "path": "recognition/kanjidnn/revision.txt",
+      "sha256": "5dbc8cdacb5462b7b35581e8c988c4a8a1e40ee757358784ea2fc46ca27cd6ce",
+      "bytes": 40
+    },
+    {
+      "path": "recognition/runtime/ort.wasm.min.mjs",
+      "sha256": "219e6a1fc8a9938268d18efca3c91d310bd2f4a59bbd13744df5b2b7fc6cee3b",
+      "bytes": 50126
+    },
+    {
+      "path": "recognition/runtime/ort-wasm-simd-threaded.mjs",
+      "sha256": "e13f7f94fc51b4ca72b12faeb1ee95f4ace6dfbc8939bc718aabdc0a27c4299b",
+      "bytes": 24381
+    },
+    {
+      "path": "recognition/runtime/ort-wasm-simd-threaded.wasm",
+      "sha256": "3398c10d07d229bd91b364548e130e0e51a8e5704b88c7c083ebbeb78842dee2",
+      "bytes": 14239897
+    },
+    {
+      "path": "recognition/runtime/LICENSE-ONNX-Runtime.txt",
+      "sha256": "2f07c72751aed99790b8a4869cf2311df85a860b22ded05fa22803587a48922c",
+      "bytes": 1073
+    },
+    {
+      "path": "recognition/runtime/ThirdPartyNotices.txt",
+      "sha256": "143764b952fdb1a7c69ce653bfba74a7744d6a8a573bfb73e235fba356c83de3",
+      "bytes": 338088
+    },
+    {
+      "path": "recognition/zinnia/svm.mjs",
+      "sha256": "6a9a6b17e3a2bfe5c723e896c91cd11c9f7885632ace31b24c1a37035ae51296",
+      "bytes": 3135
+    },
+    {
+      "path": "recognition/zinnia/COPYING",
+      "sha256": "822856fc8cec7c88e90e182dacd8eca5306836fc09df817c9dbb1d6337f6a1cc",
+      "bytes": 1494
+    },
+    {
+      "path": "recognition/zinnia/revision.txt",
+      "sha256": "131179c96b4f2f1ae4edd6f4f59bfb0d39d9090d00f56ea2309297b98abdb3a6",
+      "bytes": 40
+    },
+    {
+      "path": "recognition/zinnia/feature.cpp",
+      "sha256": "895ddab1c83f7573aff52606c82a5dba0ad5fdd1482d78dd7cc9d2d5429c0a52",
+      "bytes": 5103
+    },
+    {
+      "path": "recognition/zinnia/feature.h",
+      "sha256": "422974751cf8c8ff9bb2124b79612dd0673e278b468c9fd3454eef3d3afdaf18",
+      "bytes": 1338
+    },
+    {
+      "path": "recognition/zinnia/recognizer.cpp",
+      "sha256": "5004186e88d6de8b30a5ef453e85e99503f8f9e6d40960af9cef5e8c8f25a1cd",
+      "bytes": 4872
+    },
+    {
+      "path": "recognition/zinnia/common.h",
+      "sha256": "e7ee93b94d1517230528974e98d3285907c51e80461577e84e3a8bbdc62762db",
+      "bytes": 3405
+    },
+    {
+      "path": "recognition/zinnia/stroke-counts.json",
+      "sha256": "bf7ee0380a52129294cbe0cda5d497b3f24c5317a3ba6cb62839c6fae0e1de2c",
+      "bytes": 55926
+    },
+    {
+      "path": "recognition/zinnia/tegaki-zinnia-japanese-0.3/handwriting-ja.model",
+      "sha256": "d58618576d12c1ea38992606f30d19158a0a3beda3ac23bacccf1e48e651f2b2",
+      "bytes": 26068668
+    },
+    {
+      "path": "recognition/zinnia/tegaki-zinnia-japanese-0.3/handwriting-ja.xml.gz",
+      "sha256": "f25951c77806375e783de4dcc6809d04fb9df8b46867e26c7f9a32b6ed0cd3ab",
+      "bytes": 807573
+    },
+    {
+      "path": "recognition/zinnia/tegaki-zinnia-japanese-0.3/COPYING",
+      "sha256": "a190dc9c8043755d90f8b0a75fa66b9e42d4af4c980bf5ddc633f0124db3cee7",
+      "bytes": 26430
+    },
+    {
+      "path": "recognition/zinnia/tegaki-zinnia-japanese-0.3/README.txt",
+      "sha256": "d376ae0f5e72ea93d62490442f008191e3d82b709b6e19f01f9d05dcbb738d2b",
+      "bytes": 1352
+    },
+    {
+      "path": "recognition/zinnia/tegaki-zinnia-japanese-0.3/Makefile",
+      "sha256": "552ee35f72c7e8992ca99ad7e3a05a44b2621cdf6d09fbdb5892830f906a94f2",
+      "bytes": 292
+    },
+    {
+      "path": "recognition/zinnia/tegaki-zinnia-japanese-0.3/VERSION",
+      "sha256": "e2556a181068db2c7e3b2b127de33540448820fb1e97da29239833b6a8e09764",
+      "bytes": 4
+    }
+  ]
+}
