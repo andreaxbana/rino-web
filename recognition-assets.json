@@ -1,6 +1,6 @@
 {
   "id": "kotoba-offline-trained-ensemble",
-  "version": "1.1.1",
+  "version": "1.2.0",
   "files": [
     {
       "path": "recognition/offline-recognizer.mjs",
@@ -18,6 +18,21 @@
       "bytes": 4208
     },
     {
+      "path": "recognition/recognition-worker.mjs",
+      "sha256": "fe55c7817d582b50035c0f654848676a0264f310e8a0845cf9b96c2efdf4d3e0",
+      "bytes": 1861
+    },
+    {
+      "path": "recognition/reference-templates.json.gz",
+      "sha256": "496a9a58ad6ed3cc5be008486ad88a3bace0a6f7af4915a203de1b6021861764",
+      "bytes": 15986137
+    },
+    {
+      "path": "recognition/reference-templates-meta.json",
+      "sha256": "f0e06cf83a972c50d76e91f2a0ce9d92c0b62b1d21f4a5d1916fa702e924e81a",
+      "bytes": 240
+    },
+    {
       "path": "recognition/stroke-continuity.mjs",
       "sha256": "11367aedcbf50ed34094a6944db786b050bb990059da308583ff85a2d226fb88",
       "bytes": 1790
@@ -29,13 +44,13 @@
     },
     {
       "path": "recognition/ATTRIBUTION.txt",
-      "sha256": "1bb3ec698120afcd894696ada2a5908dcce2dd105a5def4922935a7daebb4a7e",
-      "bytes": 2808
+      "sha256": "0fd87ec388b713153c05a7daac86e60c094819ee0ab236a033b74d6f96033bad",
+      "bytes": 3421
     },
     {
       "path": "recognition/INTEGRATION.txt",
-      "sha256": "1767096eee5ea6d80e09093508942473028ee941db2caf8dcc82e4e3319060a9",
-      "bytes": 6556
+      "sha256": "b0c22779f7f9b13db9d15af9a51e49f6d14a60d6abaf8c36de40c44c84a9714f",
+      "bytes": 7541
     },
     {
       "path": "recognition/LICENSE-DaKanji.txt",
@@ -186,6 +201,11 @@
       "path": "recognition/zinnia/tegaki-zinnia-japanese-0.3/VERSION",
       "sha256": "e2556a181068db2c7e3b2b127de33540448820fb1e97da29239833b6a8e09764",
       "bytes": 4
+    },
+    {
+      "path": "recognition/reference-matcher.js",
+      "sha256": "156b55cb67c1a092690f62959ebb9a73621668c9d5815b5524aaa367998e1bac",
+      "bytes": 34907
     }
   ]
 }

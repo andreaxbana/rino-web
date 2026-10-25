@@ -1,5 +1,15 @@
 Offline handwriting recognition
 
+Precomputed reference templates: derived from the app's KanjiVG stroke paths,
+copyright Ulrich Apel and contributors, Creative Commons Attribution-ShareAlike
+3.0. https://kanjivg.tagaini.net/
+License: https://creativecommons.org/licenses/by-sa/3.0/
+Changes: each original SVG path is sampled at 41 equally spaced positions by
+the browser SVG implementation; no character-specific recognition tuning.
+The compressed samples preserve those coordinates exactly. Generation and
+source integrity are recorded in generate-reference-templates.mjs and
+reference-templates-meta.json in the application source repository.
+
 Character recognition powered by machine learning from Dariyooo (DaAppLab).
 DaKanji Single Character Recognition v2.0: quantized ONNX CNN and 6,507 labels.
 Copyright (c) 2021 CaptainDario. MIT license: LICENSE-DaKanji.txt.

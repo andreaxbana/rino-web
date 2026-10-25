@@ -1,4 +1,19 @@
-Import ./recognition/offline-recognizer.mjs from the locally served app.
+The browser app uses practice-recognition.js to start the same-origin module
+worker ./recognition/recognition-worker.mjs. Only the drawing and a request ID
+are sent to the worker. Model loading, inference and independent shape matching
+run there so the phone UI can paint, navigate and cancel a check. Cancellation,
+worker failures and deadlines terminate the worker and leave the drawing
+unscored; the next check creates a fresh worker. Cold initialization has a
+120-second deadline; once ready, checking has a 30-second deadline.
+
+Reference geometry is prepared at development time with the original browser
+SVG sampler, rather than sampling every reference when Check is pressed.
+Regenerate it with node recognition-model/generate-reference-templates.mjs
+after changing practice-data.json character paths or practice-engine.js.
+reference-templates-meta.json records their source hashes; builds reject
+stale references. The browser needs module workers and DecompressionStream.
+
+For direct provider benchmarks, import ./recognition/offline-recognizer.mjs.
 The module exports {id, version, offline, ready, recognize}; the default export
 contains the same members. It also sets window.KotobaOfflineRecognizer.
 
