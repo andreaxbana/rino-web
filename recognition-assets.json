@@ -4,8 +4,8 @@
   "files": [
     {
       "path": "recognition/offline-recognizer.mjs",
-      "sha256": "3192e3f861a993807d28169eb17e60c7a017ae882b695d781272029254528207",
-      "bytes": 5585
+      "sha256": "e85194ff055aed3744f043dd9f7c617dc8153a3e37ec3405cbb091fc6e46c442",
+      "bytes": 5611
     },
     {
       "path": "recognition/raster.mjs",
@@ -19,8 +19,13 @@
     },
     {
       "path": "recognition/recognition-worker.mjs",
-      "sha256": "fe55c7817d582b50035c0f654848676a0264f310e8a0845cf9b96c2efdf4d3e0",
-      "bytes": 1861
+      "sha256": "3cb35f03e1f26a2b3cf3a7ebe8e12367fa9f4abeb7796c458b3527465fe94f1f",
+      "bytes": 2217
+    },
+    {
+      "path": "recognition/asset-loader.mjs",
+      "sha256": "6490b4f73d02dbf60bb709bdbfdf3bf579887895b180a72a2d495c647ce6374f",
+      "bytes": 1051
     },
     {
       "path": "recognition/reference-templates.json.gz",

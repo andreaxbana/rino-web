@@ -1,0 +1,147 @@
+/* Build inserts the exact shell and asset integrity manifest below. */
+const CONFIG = {"buildId":"k1-466a29f2e2fab00c","shellSha256":"6a31e67f3ccea2ee16f9c6bf765650b6416931db1213c67222f09b06c29c5e5b","recognitionHash":"0e0533989301e93f00ce3b7a78b1230c833e56279d50e8835e30c1790f2689f1","assets":[{"path":"recognition/offline-recognizer.mjs","sha256":"e85194ff055aed3744f043dd9f7c617dc8153a3e37ec3405cbb091fc6e46c442","bytes":5611},{"path":"recognition/raster.mjs","sha256":"cbab8e163cc3d51b509364f976045e1e7e8d50193bfa4f5a0421d25d72ae5a14","bytes":1487},{"path":"recognition/decision.mjs","sha256":"38ca0ad08e5bedaec21978013b410e3c96883dcba6fcc0e78f2f5fd911095f22","bytes":4208},{"path":"recognition/recognition-worker.mjs","sha256":"3cb35f03e1f26a2b3cf3a7ebe8e12367fa9f4abeb7796c458b3527465fe94f1f","bytes":2217},{"path":"recognition/asset-loader.mjs","sha256":"6490b4f73d02dbf60bb709bdbfdf3bf579887895b180a72a2d495c647ce6374f","bytes":1051},{"path":"recognition/reference-templates.json.gz","sha256":"496a9a58ad6ed3cc5be008486ad88a3bace0a6f7af4915a203de1b6021861764","bytes":15986137},{"path":"recognition/reference-templates-meta.json","sha256":"f0e06cf83a972c50d76e91f2a0ce9d92c0b62b1d21f4a5d1916fa702e924e81a","bytes":240},{"path":"recognition/stroke-continuity.mjs","sha256":"11367aedcbf50ed34094a6944db786b050bb990059da308583ff85a2d226fb88","bytes":1790},{"path":"recognition/reference-stroke-counts.json","sha256":"885e296d466b7219f246f59b85150798ce2c07c33b9c5c8e9527e42fb0ad7d30","bytes":37710},{"path":"recognition/ATTRIBUTION.txt","sha256":"0fd87ec388b713153c05a7daac86e60c094819ee0ab236a033b74d6f96033bad","bytes":3421},{"path":"recognition/INTEGRATION.txt","sha256":"b0c22779f7f9b13db9d15af9a51e49f6d14a60d6abaf8c36de40c44c84a9714f","bytes":7541},{"path":"recognition/LICENSE-DaKanji.txt","sha256":"7d1e84def59e1bedb1c3a8c3038d77cf33027be52d2b64f0811571ce58e5be11","bytes":1069},{"path":"recognition/upstream-release.json","sha256":"463274dd62bfbfb20598b5d893e3e6692220f1c28996c77b7d2a6f46748c31ed","bytes":772},{"path":"recognition/dakanji/char_classifier.onnx","sha256":"2c8d334e1541720dd1f8603a9dc3ecd270842756c99fbe24ce2de3e925e1f4a7","bytes":2230001},{"path":"recognition/dakanji/char_classifier_labels.txt","sha256":"a3b26bee5c6b37f3e76f802c8012c6b00c0dfbcda90de1a208d62386b2c6b3ba","bytes":19521},{"path":"recognition/kanjidnn/KanjiDNN_v3.onnx","sha256":"7a904f4383b5f5d43bf4f74dd864efa1ce74860d53602b784af767391144d336","bytes":11786146},{"path":"recognition/kanjidnn/KanjiDNN_v3_classes.json","sha256":"859329d9403254af3ef8a12b77ef4016a117bff391654486d1c843cbbf592c57","bytes":28635},{"path":"recognition/kanjidnn/KanjiDNN_v3_inference_config.json","sha256":"e369f068e4ac425f8bbcbb7c5670c50b0ba4ba6d4d4a2a1968857dc85cb403f1","bytes":212},{"path":"recognition/kanjidnn/KanjiDNN_v3_preprocessing_config.json","sha256":"3c55797585ff61a6b8226800c9d958156c0f5940383fb09de8529437b1b471d6","bytes":161},{"path":"recognition/kanjidnn/README.md","sha256":"c4aed689adc4d15d4f06b040824b71f6bf8ca3e50ab155d4585f752294e96d28","bytes":3720},{"path":"recognition/kanjidnn/LICENSE-Apache-2.0.txt","sha256":"cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30","bytes":11358},{"path":"recognition/kanjidnn/revision.txt","sha256":"5dbc8cdacb5462b7b35581e8c988c4a8a1e40ee757358784ea2fc46ca27cd6ce","bytes":40},{"path":"recognition/runtime/ort.wasm.min.mjs","sha256":"219e6a1fc8a9938268d18efca3c91d310bd2f4a59bbd13744df5b2b7fc6cee3b","bytes":50126},{"path":"recognition/runtime/ort-wasm-simd-threaded.mjs","sha256":"e13f7f94fc51b4ca72b12faeb1ee95f4ace6dfbc8939bc718aabdc0a27c4299b","bytes":24381},{"path":"recognition/runtime/ort-wasm-simd-threaded.wasm","sha256":"3398c10d07d229bd91b364548e130e0e51a8e5704b88c7c083ebbeb78842dee2","bytes":14239897},{"path":"recognition/runtime/LICENSE-ONNX-Runtime.txt","sha256":"2f07c72751aed99790b8a4869cf2311df85a860b22ded05fa22803587a48922c","bytes":1073},{"path":"recognition/runtime/ThirdPartyNotices.txt","sha256":"143764b952fdb1a7c69ce653bfba74a7744d6a8a573bfb73e235fba356c83de3","bytes":338088},{"path":"recognition/zinnia/svm.mjs","sha256":"6a9a6b17e3a2bfe5c723e896c91cd11c9f7885632ace31b24c1a37035ae51296","bytes":3135},{"path":"recognition/zinnia/COPYING","sha256":"822856fc8cec7c88e90e182dacd8eca5306836fc09df817c9dbb1d6337f6a1cc","bytes":1494},{"path":"recognition/zinnia/revision.txt","sha256":"131179c96b4f2f1ae4edd6f4f59bfb0d39d9090d00f56ea2309297b98abdb3a6","bytes":40},{"path":"recognition/zinnia/feature.cpp","sha256":"895ddab1c83f7573aff52606c82a5dba0ad5fdd1482d78dd7cc9d2d5429c0a52","bytes":5103},{"path":"recognition/zinnia/feature.h","sha256":"422974751cf8c8ff9bb2124b79612dd0673e278b468c9fd3454eef3d3afdaf18","bytes":1338},{"path":"recognition/zinnia/recognizer.cpp","sha256":"5004186e88d6de8b30a5ef453e85e99503f8f9e6d40960af9cef5e8c8f25a1cd","bytes":4872},{"path":"recognition/zinnia/common.h","sha256":"e7ee93b94d1517230528974e98d3285907c51e80461577e84e3a8bbdc62762db","bytes":3405},{"path":"recognition/zinnia/stroke-counts.json","sha256":"bf7ee0380a52129294cbe0cda5d497b3f24c5317a3ba6cb62839c6fae0e1de2c","bytes":55926},{"path":"recognition/zinnia/tegaki-zinnia-japanese-0.3/handwriting-ja.model","sha256":"d58618576d12c1ea38992606f30d19158a0a3beda3ac23bacccf1e48e651f2b2","bytes":26068668},{"path":"recognition/zinnia/tegaki-zinnia-japanese-0.3/handwriting-ja.xml.gz","sha256":"f25951c77806375e783de4dcc6809d04fb9df8b46867e26c7f9a32b6ed0cd3ab","bytes":807573},{"path":"recognition/zinnia/tegaki-zinnia-japanese-0.3/COPYING","sha256":"a190dc9c8043755d90f8b0a75fa66b9e42d4af4c980bf5ddc633f0124db3cee7","bytes":26430},{"path":"recognition/zinnia/tegaki-zinnia-japanese-0.3/README.txt","sha256":"d376ae0f5e72ea93d62490442f008191e3d82b709b6e19f01f9d05dcbb738d2b","bytes":1352},{"path":"recognition/zinnia/tegaki-zinnia-japanese-0.3/Makefile","sha256":"552ee35f72c7e8992ca99ad7e3a05a44b2621cdf6d09fbdb5892830f906a94f2","bytes":292},{"path":"recognition/zinnia/tegaki-zinnia-japanese-0.3/VERSION","sha256":"e2556a181068db2c7e3b2b127de33540448820fb1e97da29239833b6a8e09764","bytes":4},{"path":"recognition/reference-matcher.js","sha256":"156b55cb67c1a092690f62959ebb9a73621668c9d5815b5524aaa367998e1bac","bytes":34907},{"path":"rino/welcome-smooth-atlas.webp","sha256":"4744e2504e4b8025eaaaa7396a577afc4d4d9736e68f2043f98308e1d73b6f34","bytes":281254},{"path":"rino/welcome-smooth-still.webp","sha256":"a26961215049aaa115b322efd6feece9328da962585a0857228060c15281c58f","bytes":18132},{"path":"rino/kawaii-wink.webp","sha256":"c0cc999519069fe69343671ae916ef75d532ab3bee009b83a351acf1a56acac6","bytes":20852},{"path":"rino/kawaii-thinking.webp","sha256":"ab119b5cf21b97ac7eefa3bd39df75c850fd576b8b05cb0f849244a30bdc614c","bytes":25268},{"path":"rino/kawaii-ready.webp","sha256":"db93eac60853152e6c55b8b45326e0b0d344c91a441e917582691849ca4af1d1","bytes":21280},{"path":"rino/rear.webp","sha256":"314e76013e212947b95079289ceae806468d883d8dd1e16a9428c4330cb1be72","bytes":16430},{"path":"rino/study-picnic.svg","sha256":"e58138906a5f480bf702430516fb723761ea8be2a00ea439b9a586262c597e4f","bytes":2278},{"path":"rino/result-confetti.svg","sha256":"68a5c455c62e3d73c67c750dc759fe8bed1e352f5cce8a3c56625c1128e49281","bytes":1296},{"path":"rino/study-garden.svg","sha256":"30bb9d2a41ba93e14ee22c8ac4403988d42ed5327f8e30e90170ae74d903ceae","bytes":1292}],"checkerFiles":["recognition/recognition-worker.mjs","recognition/offline-recognizer.mjs","recognition/reference-matcher.js","recognition/reference-templates.json.gz","recognition/asset-loader.mjs","recognition/raster.mjs","recognition/decision.mjs","recognition/stroke-continuity.mjs","recognition/zinnia/svm.mjs","recognition/runtime/ort.wasm.min.mjs","recognition/runtime/ort-wasm-simd-threaded.mjs","recognition/runtime/ort-wasm-simd-threaded.wasm","recognition/kanjidnn/KanjiDNN_v3.onnx","recognition/kanjidnn/KanjiDNN_v3_classes.json","recognition/dakanji/char_classifier.onnx","recognition/dakanji/char_classifier_labels.txt","recognition/zinnia/tegaki-zinnia-japanese-0.3/handwriting-ja.model","recognition/zinnia/stroke-counts.json","recognition/reference-stroke-counts.json"]};
+const BASE = new URL(self.registration.scope);
+const PREFIX = `rino-offline-v1:${encodeURIComponent(BASE.pathname)}:`;
+const CACHE = PREFIX + CONFIG.buildId;
+const SHELL = new URL('index.html', BASE).href;
+const assets = new Map(CONFIG.assets.map(asset => [new URL(asset.path, BASE).href, asset]));
+const inflight = new Map();
+const downloadEpoch = crypto.randomUUID();
+let cacheError = null;
+let downloadedBytes = 0, lastProgress = 0;
+const digest = async bytes => Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256', bytes)), byte => byte.toString(16).padStart(2, '0')).join('');
+function verifiedResponse(bytes, response, hash) {
+  const headers = new Headers(response.headers);
+  headers.delete('content-encoding'); headers.delete('content-length');
+  headers.set('X-Rino-Asset-Sha256', hash);
+  return new Response(bytes, { status: response.status, statusText: response.statusText, headers });
+}
+async function verify(response, expected, reportProgress = false) {
+  if (!response?.ok || response.type === 'opaque') throw new Error('Offline asset unavailable');
+  let bytes;
+  if (reportProgress && response.body) {
+    const reader = response.body.getReader(), chunks = []; let length = 0;
+    for (;;) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      chunks.push(value); length += value.byteLength; downloadedBytes += value.byteLength;
+      if (Date.now() - lastProgress > 200) {
+        lastProgress = Date.now();
+        await broadcastProgress();
+      }
+    }
+    bytes = new Uint8Array(length); let offset = 0;
+    for (const chunk of chunks) { bytes.set(chunk, offset); offset += chunk.byteLength; }
+    await broadcastProgress();
+  } else bytes = await response.arrayBuffer();
+  if (await digest(bytes) !== expected) throw new Error('Offline asset version mismatch');
+  return verifiedResponse(bytes, response, expected);
+}
+async function status() {
+  let appReady = false, checkerReady = false, checkerCachedBytes = 0, checkerFilesSaved = 0;
+  try {
+    const cache = await caches.open(CACHE);
+    appReady = (await cache.match(SHELL))?.headers.get('X-Rino-Asset-Sha256') === CONFIG.shellSha256;
+    for (const relative of CONFIG.checkerFiles) {
+      const url = new URL(relative, BASE).href, asset = assets.get(url);
+      if (asset && (await cache.match(url))?.headers.get('X-Rino-Asset-Sha256') === asset.sha256) {
+        checkerFilesSaved++; checkerCachedBytes += asset.bytes;
+      }
+    }
+    checkerReady = checkerFilesSaved === CONFIG.checkerFiles.length;
+  } catch { cacheError = 'storage'; }
+  return { type: 'RINO_OFFLINE_STATUS', buildId: CONFIG.buildId, appReady, checkerReady, checkerCachedBytes, checkerFilesSaved, checkerFilesTotal: CONFIG.checkerFiles.length, downloadedBytes, downloadEpoch, error: cacheError };
+}
+async function broadcastProgress() {
+  for (const client of await self.clients.matchAll({ type: 'window', includeUncontrolled: true })) {
+    if (client.url.startsWith(BASE.href)) client.postMessage({ type: 'RINO_OFFLINE_STATUS', buildId: CONFIG.buildId, downloadedBytes, downloadEpoch });
+  }
+}
+async function broadcast() {
+  const value = await status();
+  for (const client of await self.clients.matchAll({ type: 'window', includeUncontrolled: true })) {
+    if (client.url.startsWith(BASE.href)) client.postMessage(value);
+  }
+}
+async function saveShell() {
+  const cache = await caches.open(CACHE);
+  let shell;
+  try { shell = await verify(await cache.match(SHELL), CONFIG.shellSha256); } catch {}
+  if (!shell) {
+    const url = new URL(SHELL); url.searchParams.set('offline-build', CONFIG.buildId);
+    shell = await verify(await fetch(url, { cache: 'reload' }), CONFIG.shellSha256);
+  }
+  await cache.put(SHELL, shell);
+  cacheError = null;
+  return cache;
+}
+async function install() {
+  const cache = await saveShell();
+  // A UI-only release can reuse verified checker bytes. Never fetch model files
+  // in install, and never borrow an asset whose build-manifest hash differs.
+  for (const name of await caches.keys()) {
+    if (!name.startsWith(PREFIX) || name === CACHE) continue;
+    const previous = await caches.open(name);
+    for (const [url, asset] of assets) {
+      if (await cache.match(url)) continue;
+      const response = await previous.match(url);
+      if (response?.headers.get('X-Rino-Asset-Sha256') === asset.sha256) {
+        try { await cache.put(url, response); } catch { cacheError = 'storage'; }
+      }
+    }
+  }
+}
+async function getAsset(url, asset) {
+  let cache;
+  try {
+    cache = await caches.open(CACHE);
+    const cached = await cache.match(url);
+    if (cached?.headers.get('X-Rino-Asset-Sha256') === asset.sha256) return cached;
+  } catch { cacheError = 'storage'; }
+  const response = await verify(await fetch(url, { cache: 'no-cache' }), asset.sha256, asset.path.startsWith('recognition/'));
+  if (cache) {
+    try { await cache.put(url, response.clone()); cacheError = null; }
+    catch { cacheError = 'storage'; }
+  }
+  return response;
+}
+self.addEventListener('install', event => event.waitUntil(install()));
+self.addEventListener('activate', event => event.waitUntil((async () => {
+  await self.clients.claim();
+  for (const name of await caches.keys()) if (name.startsWith(PREFIX) && name !== CACHE) await caches.delete(name);
+  await broadcast();
+})()));
+self.addEventListener('message', event => {
+  if (!['RINO_OFFLINE_STATUS', 'RINO_OFFLINE_SAVE_SHELL'].includes(event.data?.type)) return;
+  event.waitUntil((async () => {
+    if (event.data.type === 'RINO_OFFLINE_SAVE_SHELL' && event.data.buildId === CONFIG.buildId) {
+      try { await saveShell(); } catch { cacheError = 'unavailable'; }
+      await broadcast();
+    }
+    event.ports[0]?.postMessage(await status());
+  })());
+});
+self.addEventListener('fetch', event => {
+  if (event.request.method !== 'GET') return;
+  const url = new URL(event.request.url);
+  if (url.origin !== BASE.origin) return;
+  if (event.request.mode === 'navigate' && (url.pathname === BASE.pathname || url.pathname === new URL(SHELL).pathname)) {
+    // Keep the shell and the model pack on the same release until all old tabs
+    // are closed. Updates never reload or replace an active lesson.
+    event.respondWith(caches.open(CACHE).then(cache => cache.match(SHELL)).then(response => response || fetch(event.request)));
+    return;
+  }
+  const version = url.searchParams.get('v'); url.search = ''; url.hash = '';
+  const asset = assets.get(url.href);
+  if (!asset) return;
+  if (asset.path === 'recognition/recognition-worker.mjs' && version && version !== CONFIG.recognitionHash) {
+    event.respondWith(Promise.resolve(new Response('RiNO update requires reopening the app.', { status: 409 }))); return;
+  }
+  let pending = inflight.get(url.href);
+  if (!pending) {
+    pending = getAsset(url.href, asset).catch(() => new Response('Asset unavailable. Reconnect and retry.', { status: 503 })).finally(() => inflight.delete(url.href));
+    inflight.set(url.href, pending);
+  }
+  event.respondWith(pending.then(response => response.clone()));
+  event.waitUntil(pending.then(() => broadcast()).catch(() => {}));
+});

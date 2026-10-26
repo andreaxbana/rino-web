@@ -2,6 +2,7 @@ import { raster } from './raster.mjs';
 import { loadModel, classify } from './zinnia/svm.mjs';
 import { decide } from './decision.mjs';
 import { joinContinuousStrokes } from './stroke-continuity.mjs';
+import { fetchAsset } from './asset-loader.mjs';
 
 export const id='kotoba-offline-trained-ensemble';
 export const version='1.1.1';
@@ -15,7 +16,7 @@ async function bytes(path) {
     const fs=await import('node:fs/promises');return new Uint8Array(await fs.readFile(url));
   }
   if(url.origin!==new URL(import.meta.url).origin)throw Error('Recognition assets must remain local');
-  const response=await fetch(url,{credentials:'same-origin'});
+  const response=await fetchAsset(url);
   if(!response.ok)throw Error('The offline handwriting model could not be loaded');
   return new Uint8Array(await response.arrayBuffer());
 }
