@@ -1,0 +1,373 @@
+{
+  "version": 1,
+  "sourceSha256": "d58618576d12c1ea38992606f30d19158a0a3beda3ac23bacccf1e48e651f2b2",
+  "blockSize": 1000,
+  "classes": 6420,
+  "labels": {
+    "path": "labels.bin.gz",
+    "bytes": 39053,
+    "sha256": "07ab8a683f611d50b1d8f70be2d2c08e3a1607a73aa72a58a82589d694ccf746"
+  },
+  "blocks": [
+    {
+      "id": 0,
+      "path": "block-0.bin.gz",
+      "bytes": 977994,
+      "sha256": "dc66a1ec817847dea925c9eb991f0835efd551b8a3493e6203f73ba5b5c52448"
+    },
+    {
+      "id": 1,
+      "path": "block-1.bin.gz",
+      "bytes": 807761,
+      "sha256": "f20531c98ffa4e8424628f73dfffacb952c00573352e28ad6b0ebcb37d6c48d4"
+    },
+    {
+      "id": 2,
+      "path": "block-2.bin.gz",
+      "bytes": 660389,
+      "sha256": "fef0a64640cf8ad9526ad32c410e04cf58a4dfa59851face7ae8ea2900dc85c4"
+    },
+    {
+      "id": 3,
+      "path": "block-3.bin.gz",
+      "bytes": 607108,
+      "sha256": "021b6bd35339dd3ecc8c18b6c6f08c9353005598869d340442b979a3ede3b7d6"
+    },
+    {
+      "id": 4,
+      "path": "block-4.bin.gz",
+      "bytes": 647361,
+      "sha256": "70a782cbf2950a6fe688612ef2a46e95d04a6db7eb7f95f74e8bbd82ec3b8084"
+    },
+    {
+      "id": 5,
+      "path": "block-5.bin.gz",
+      "bytes": 660980,
+      "sha256": "4861dc86ac3e44ec7351b0b320d1daa3a2efbd6ad752174b885bc3fd74521712"
+    },
+    {
+      "id": 6,
+      "path": "block-6.bin.gz",
+      "bytes": 614385,
+      "sha256": "00ce9e52a5bf47ea936f7752d3a87a56eaedccc3851d3b8e653b467c476f2455"
+    },
+    {
+      "id": 7,
+      "path": "block-7.bin.gz",
+      "bytes": 600882,
+      "sha256": "d9aefad03c195a3d934dc0ec3d06e1b29017c91eaf44057db80fc8ebfa470e75"
+    },
+    {
+      "id": 8,
+      "path": "block-8.bin.gz",
+      "bytes": 558426,
+      "sha256": "3aaa03e11f86906112c6c74289c089d4fdbe9ee855a4c528b716423138fa8ec8"
+    },
+    {
+      "id": 9,
+      "path": "block-9.bin.gz",
+      "bytes": 513057,
+      "sha256": "8336ae6f3e2b43ee7fd385392b71f3a657c19ef3b81d13cb3f5d005f6911932f"
+    },
+    {
+      "id": 10,
+      "path": "block-10.bin.gz",
+      "bytes": 468863,
+      "sha256": "52bf1a4ddaa3e3bb12ea2df706695ccf82b687a414c49608abc0e12fa7c70f49"
+    },
+    {
+      "id": 11,
+      "path": "block-11.bin.gz",
+      "bytes": 390496,
+      "sha256": "c94ad9d93727e00bd03f56ba53bba043c42405a1465f9185e23699c4f261d8b7"
+    },
+    {
+      "id": 12,
+      "path": "block-12.bin.gz",
+      "bytes": 325275,
+      "sha256": "f286f346f838af85031cafd5fd416125022098475bed0a4b582f99e866d62d5a"
+    },
+    {
+      "id": 13,
+      "path": "block-13.bin.gz",
+      "bytes": 250694,
+      "sha256": "a5835e923795129d6e62fc9f44e6730d6a9adfb00374c100608b4d7ded582aa7"
+    },
+    {
+      "id": 14,
+      "path": "block-14.bin.gz",
+      "bytes": 203775,
+      "sha256": "60f7df7645919e261523dc32c719ff14ba9025fd9652743a8fd5f93e7399a3e6"
+    },
+    {
+      "id": 15,
+      "path": "block-15.bin.gz",
+      "bytes": 147414,
+      "sha256": "9e5984e006d451b5e83c8db372d67b1cbec96817984976e3c1c6d7b28cb6a9fd"
+    },
+    {
+      "id": 16,
+      "path": "block-16.bin.gz",
+      "bytes": 114415,
+      "sha256": "54edfb6c9fc6fb02891ae006b0de197b3b99dbb89381b954df96c7ade05f67a0"
+    },
+    {
+      "id": 17,
+      "path": "block-17.bin.gz",
+      "bytes": 75635,
+      "sha256": "0e9fce3959f2d502e20b79cf5f984673b8f22180577b002a898d2f5a9465881b"
+    },
+    {
+      "id": 18,
+      "path": "block-18.bin.gz",
+      "bytes": 56850,
+      "sha256": "af804911f49048be195af42e047d486adbb3ea7cfdd3ec4fc350b4469dfa120c"
+    },
+    {
+      "id": 19,
+      "path": "block-19.bin.gz",
+      "bytes": 43490,
+      "sha256": "4a5d8b8975e822e18fd81335eeae9a840a5325c907e14b6cafa3cd7799937c1b"
+    },
+    {
+      "id": 20,
+      "path": "block-20.bin.gz",
+      "bytes": 27157,
+      "sha256": "21fbe2861b1938297429bf6522ac089aa0da60d4846af3811c89386aaebf3e29"
+    },
+    {
+      "id": 21,
+      "path": "block-21.bin.gz",
+      "bytes": 19532,
+      "sha256": "e48e9ddf86c360c10297758fa8de39d4a69fe7ee978bd9f1b0984adddb5ae624"
+    },
+    {
+      "id": 22,
+      "path": "block-22.bin.gz",
+      "bytes": 11825,
+      "sha256": "444d61bf774cc8358e70f848fafa26e1998f7900b7122771016d6786840f2f24"
+    },
+    {
+      "id": 23,
+      "path": "block-23.bin.gz",
+      "bytes": 8708,
+      "sha256": "93257e101ea467edbafcca0c1ec3749346b1dce95dedf0981e890c9fa5e4ed97"
+    },
+    {
+      "id": 24,
+      "path": "block-24.bin.gz",
+      "bytes": 3784,
+      "sha256": "155a7edb59db5c659b7e6c40a910161c840fd3c4a65ac3f8b943501630736d2e"
+    },
+    {
+      "id": 25,
+      "path": "block-25.bin.gz",
+      "bytes": 2667,
+      "sha256": "e11a2107abd51f979c6365239fee9fc624119d67fa49935688d87a88d08c2f51"
+    },
+    {
+      "id": 26,
+      "path": "block-26.bin.gz",
+      "bytes": 2104,
+      "sha256": "12a83f23b222e4e20031f3d03ee37ba5ae16d9ce9791ac9deb865ecad2ce011a"
+    },
+    {
+      "id": 27,
+      "path": "block-27.bin.gz",
+      "bytes": 1496,
+      "sha256": "4bdcf5f2c6ad8ef552c8e107517f7b871a0f390d35a46d6aa8bb018eff531279"
+    },
+    {
+      "id": 28,
+      "path": "block-28.bin.gz",
+      "bytes": 409,
+      "sha256": "59be3fc7040d651557055bca7bd1743bc9183f065837e740dca5db45c1388862"
+    },
+    {
+      "id": 29,
+      "path": "block-29.bin.gz",
+      "bytes": 463,
+      "sha256": "c4f3494fe5e5b44f41a856a8b8869fe0b9ff2ffcdb6d68bae51f86c50c0992fc"
+    },
+    {
+      "id": 101,
+      "path": "block-101.bin.gz",
+      "bytes": 282832,
+      "sha256": "67f6fd6bac84bbc363e157f1e2221881bf3562d7e9386aeb7bd8398b9dd12afa"
+    },
+    {
+      "id": 102,
+      "path": "block-102.bin.gz",
+      "bytes": 269887,
+      "sha256": "4f7560aaf0204ee3960c6d3f311520102e1786bbb46209094b1a3c4c0a3fdb97"
+    },
+    {
+      "id": 103,
+      "path": "block-103.bin.gz",
+      "bytes": 266464,
+      "sha256": "bbeca60c21dfb223341e9b8c3a464838a4672dc67638952a0b6b8e86cc18d0d2"
+    },
+    {
+      "id": 104,
+      "path": "block-104.bin.gz",
+      "bytes": 261037,
+      "sha256": "89ce8101833f61fbfb38a24ed62de8c69bb822887b8819ddc87ca742bc846719"
+    },
+    {
+      "id": 105,
+      "path": "block-105.bin.gz",
+      "bytes": 257062,
+      "sha256": "942512b86b522471e716addb2159a513e0f067542fce37bd97002e105eef7a39"
+    },
+    {
+      "id": 106,
+      "path": "block-106.bin.gz",
+      "bytes": 253683,
+      "sha256": "58b48f6949390debeec64f03d11bd718d6c99c95146685a522f417a042d1d12f"
+    },
+    {
+      "id": 107,
+      "path": "block-107.bin.gz",
+      "bytes": 247766,
+      "sha256": "42b466036b95832ab6c4a60906cebbeae05dcb0d2af863b0ad55735f6c145c45"
+    },
+    {
+      "id": 108,
+      "path": "block-108.bin.gz",
+      "bytes": 237022,
+      "sha256": "7ee5ace9d5a53fdb69fb751aee9e4f151c732e736cb7bae7bfc93c4ad28b8ed3"
+    },
+    {
+      "id": 109,
+      "path": "block-109.bin.gz",
+      "bytes": 222004,
+      "sha256": "08140c59d39d7df547fdf2c8e0456f57652b312e4f24f2192b3a30f645e9f543"
+    },
+    {
+      "id": 110,
+      "path": "block-110.bin.gz",
+      "bytes": 202957,
+      "sha256": "87944972be5f230894630f538663f90293298023be6cee98d2d038a39c2d5005"
+    },
+    {
+      "id": 111,
+      "path": "block-111.bin.gz",
+      "bytes": 180456,
+      "sha256": "5d87ea979d68844fd2f35c366c30c36a4051f8442746f6c9c23d3a8b7ef0c43e"
+    },
+    {
+      "id": 112,
+      "path": "block-112.bin.gz",
+      "bytes": 153409,
+      "sha256": "19e1f7983fb3c3da066a800e28314107452103b916efbe1a3fa5ea101e3f2186"
+    },
+    {
+      "id": 113,
+      "path": "block-113.bin.gz",
+      "bytes": 126879,
+      "sha256": "1f977c73f0d0a179d52ce78f1e6f0f38bbdaf43eb457abaa86fc488ac787b6df"
+    },
+    {
+      "id": 114,
+      "path": "block-114.bin.gz",
+      "bytes": 103916,
+      "sha256": "60c97989242b9aa6fd5a3f1ea8322055f7abbfbb48b5e194fa896c768479333c"
+    },
+    {
+      "id": 115,
+      "path": "block-115.bin.gz",
+      "bytes": 81286,
+      "sha256": "5c0c738f82156211828862e7936fc25b66bddbc435b0feceacfe82385156b821"
+    },
+    {
+      "id": 116,
+      "path": "block-116.bin.gz",
+      "bytes": 61512,
+      "sha256": "9554b4247834b3fe2943f17464b377c0be7da296786c518dfb0e0362d19f160b"
+    },
+    {
+      "id": 117,
+      "path": "block-117.bin.gz",
+      "bytes": 44955,
+      "sha256": "9ec7b2bacb7fb960797632ddc04c38793172ef8cbf6f5ebde8deb6ca2584b2d6"
+    },
+    {
+      "id": 118,
+      "path": "block-118.bin.gz",
+      "bytes": 34048,
+      "sha256": "8af1520cb534d660700768b02b5b7eb3a796d05b7cd06ea949d5be1e43f4b1b2"
+    },
+    {
+      "id": 119,
+      "path": "block-119.bin.gz",
+      "bytes": 25196,
+      "sha256": "81281c102ca8c12f0e7410abfecad8085cb9951c881626a89204fba4f2563db6"
+    },
+    {
+      "id": 120,
+      "path": "block-120.bin.gz",
+      "bytes": 17061,
+      "sha256": "9cf801d17f4c40b44ce11fb6aba1a450ee712928b8b5880ead5ff97750b29bf8"
+    },
+    {
+      "id": 121,
+      "path": "block-121.bin.gz",
+      "bytes": 11296,
+      "sha256": "39503b51c295717c213c26efeba666bde191ad759ca22ca73144e0052c461f2a"
+    },
+    {
+      "id": 122,
+      "path": "block-122.bin.gz",
+      "bytes": 7559,
+      "sha256": "c060883bc2b17f3da27a73424f9f3b81b8ca864730a8aef46ef2738083359cc9"
+    },
+    {
+      "id": 123,
+      "path": "block-123.bin.gz",
+      "bytes": 4682,
+      "sha256": "83b0a055eff67165546df38e8b7937442898e64fb0025554eae4fa007639cacf"
+    },
+    {
+      "id": 124,
+      "path": "block-124.bin.gz",
+      "bytes": 2925,
+      "sha256": "74620c2938eb3436da0b19195072b684c9c25e645a709c7bb4e1019cfe05a87c"
+    },
+    {
+      "id": 125,
+      "path": "block-125.bin.gz",
+      "bytes": 1799,
+      "sha256": "37bbd136026a0026a56dd03f063e2b08d682c5f100fa81f6ab3b1fd9e6909cf9"
+    },
+    {
+      "id": 126,
+      "path": "block-126.bin.gz",
+      "bytes": 1464,
+      "sha256": "79c6908ff03e96c75d4840cf9c7d75d51851db779fdc4dee8242034daaeb21b1"
+    },
+    {
+      "id": 127,
+      "path": "block-127.bin.gz",
+      "bytes": 748,
+      "sha256": "82aa848120d028d50424e20627dd7594a4b3f2b23dfb05dcfbff0f20ed9fc7d6"
+    },
+    {
+      "id": 128,
+      "path": "block-128.bin.gz",
+      "bytes": 395,
+      "sha256": "802ee531edbf058b5cf7c0e04f6e5fe3db278513ec9c1adc6fed431888b03222"
+    },
+    {
+      "id": 129,
+      "path": "block-129.bin.gz",
+      "bytes": 241,
+      "sha256": "e10c62f5a8a2ffd183b2942b1cca02789719faa2088df2f774f05ff1862eff84"
+    },
+    {
+      "id": 2000,
+      "path": "block-2000.bin.gz",
+      "bytes": 321149,
+      "sha256": "3645dce00e58a7a9bc986bd748413ac92e2479e191221de68e6f30dc355199d5"
+    }
+  ]
+}

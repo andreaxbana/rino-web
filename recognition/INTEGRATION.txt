@@ -1,6 +1,8 @@
 The browser app uses practice-recognition.js to start the same-origin module
-worker ./recognition/recognition-worker.mjs. Only the drawing and a request ID
-are sent to the worker. Model loading, inference and independent shape matching
+worker ./recognition/recognition-worker.mjs. Handwriting sessions start common
+model preparation with a request ID and a prepare message, without any drawing.
+Checks send only the drawing and a request ID, never the question or answer.
+Model loading, inference and independent shape matching
 run there so the phone UI can paint, navigate and cancel a check. Cancellation,
 worker failures and deadlines terminate the worker and leave the drawing
 unscored; the next check creates a fresh worker. Cold initialization has a
@@ -12,9 +14,23 @@ Regenerate it with node recognition-model/generate-reference-templates.mjs
 after changing practice-data.json character paths or practice-engine.js.
 reference-templates-meta.json records their source hashes; builds reject
 stale references. The browser needs module workers and DecompressionStream.
+Production uses lossless Float32 reference shards selected by the submitted
+stroke count plus/minus two, exactly the candidates used by the matcher.
+The original global order is retained for ties, and no lesson filtering occurs.
+The legacy JSON references remain the independent source-tree QA baseline.
+
+Neural models and the WASM binary use gzip transport. Zinnia's full 6,420-class
+model uses lossless feature blocks; only blocks addressed by the ink's actual
+features are loaded. All class biases, weights, summation order and decision
+rules are unchanged. Regenerate with node recognition-model/zinnia/pack-model.mjs,
+then node recognition-model/write-manifest.mjs. Builds validate exact packed
+weight/source equivalence. Unloaded blocks contribute exactly zero for that ink.
+Reference and feature shards are cached as used. Offline status claims a fully
+saved checker only once every required shard is cached; fresh shapes can need
+additional files while online. No handwriting is uploaded for recognition.
 
 For direct provider benchmarks, import ./recognition/offline-recognizer.mjs.
-The module exports {id, version, offline, ready, recognize}; the default export
+The module exports {id, version, offline, ready, prepareInk, isPrepared, recognize}; the default export
 contains the same members. It also sets window.KotobaOfflineRecognizer.
 
 await recognize(strokes, {canvas:109}) returns:

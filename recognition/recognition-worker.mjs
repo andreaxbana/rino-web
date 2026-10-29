@@ -1,33 +1,28 @@
-import {id,version,ready,recognize} from './offline-recognizer.mjs';
+import {id,version,ready,prepareInk,isPrepared,recognize} from './offline-recognizer.mjs';
 import './reference-matcher.js';
-import {fetchAsset,subscribeAssetLoading} from './asset-loader.mjs';
+import {subscribeAssetLoading} from './asset-loader.mjs';
+import {loadReferences,referencesReady} from './reference-loader.mjs';
 
-let references;
-async function loadReferences(){
-  if(!references)references=(async()=>{
-    const response=await fetchAsset(new URL('./reference-templates.json.gz',import.meta.url));
-    if(!response.ok||!response.body)throw Error('Reference data could not be loaded');
-    const decoded=response.body.pipeThrough(new DecompressionStream('gzip'));
-    const templates=await new Response(decoded).json();
-    if(!templates||typeof templates!=='object'||!Object.keys(templates).length)throw Error('Reference data is empty');
-    return templates;
-  })().catch(error=>{references=null;throw error;});
-  return references;
-}
+let coreReady=false;
 
 // The worker never receives the practice question, its answer or lesson scope.
-// Both recognizers retain their complete independent character collections.
+// Every trained class and every geometrically eligible reference remains in
+// contention. Only data with zero contribution for this ink is left unloaded.
 self.addEventListener('message',async event=>{
-  const {requestId,strokes}=event.data||{};
-  if(!Number.isSafeInteger(requestId)||!Array.isArray(strokes))return;
+  const {requestId,strokes,type}=event.data||{},preparing=type==='prepare';
+  if(!Number.isSafeInteger(requestId)||(!preparing&&!Array.isArray(strokes)))return;
   let unsubscribe=()=>{},lastUpdate=0;
   try{
-    self.postMessage({requestId,type:'progress',phase:'loading'});
-    unsubscribe=subscribeAssetLoading(({loadedBytes})=>{
-      const now=Date.now();
-      if(loadedBytes>0&&now-lastUpdate>=200){lastUpdate=now;self.postMessage({requestId,type:'progress',phase:'loading',loadedBytes});}
-    });
-    const [,templates]=await Promise.all([ready(),loadReferences()]);
+    if(preparing?!coreReady:!isPrepared(strokes)||!referencesReady(strokes)){
+      self.postMessage({requestId,type:'progress',phase:'loading'});
+      unsubscribe=subscribeAssetLoading(({loadedBytes})=>{
+        const now=Date.now();
+        if(loadedBytes>0&&now-lastUpdate>=200){lastUpdate=now;self.postMessage({requestId,type:'progress',phase:'loading',loadedBytes});}
+      },{fresh:true});
+    }
+    if(preparing){await ready();coreReady=true;self.postMessage({requestId,type:'prepared'});return;}
+    const [,templates]=await Promise.all([prepareInk(strokes),loadReferences(strokes)]);
+    coreReady=true;
     unsubscribe();
     self.postMessage({requestId,type:'progress',phase:'checking'});
     const prediction=await recognize(strokes,{canvas:{width:109,height:109}});

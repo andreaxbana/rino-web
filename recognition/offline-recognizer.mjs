@@ -1,24 +1,30 @@
 import { raster } from './raster.mjs';
-import { loadModel, classify } from './zinnia/svm.mjs';
+import { createPackedModel } from './zinnia/packed-model.mjs';
 import { decide } from './decision.mjs';
 import { joinContinuousStrokes } from './stroke-continuity.mjs';
 import { fetchAsset } from './asset-loader.mjs';
 
 export const id='kotoba-offline-trained-ensemble';
-export const version='1.1.1';
+export const version='1.2.0';
 export const offline=true;
 const runtimeUrl=new URL('./runtime/ort.wasm.min.mjs',import.meta.url);
-let initialization;
+let initialization,initialized=false;
+const zinnia=createPackedModel(path=>bytes('./zinnia/packed/'+path));
 async function bytes(path) {
   const url=new URL(path,import.meta.url);
   // The Node branch exists only for local reproducible QA; browser assets are same-origin.
+  let response;
   if(url.protocol==='file:'&&typeof process!=='undefined'&&process.versions?.node) {
-    const fs=await import('node:fs/promises');return new Uint8Array(await fs.readFile(url));
+    const fs=await import('node:fs/promises');response=new Response(await fs.readFile(url));
+  }else{
+    if(url.origin!==new URL(import.meta.url).origin)throw Error('Recognition assets must remain local');
+    response=await fetchAsset(url);
   }
-  if(url.origin!==new URL(import.meta.url).origin)throw Error('Recognition assets must remain local');
-  const response=await fetchAsset(url);
   if(!response.ok)throw Error('The offline handwriting model could not be loaded');
-  return new Uint8Array(await response.arrayBuffer());
+  // Explicit compressed transport is lossless and works on static hosts whose
+  // default HTTP compression excludes model and WebAssembly files.
+  const decoded=path.endsWith('.gz')?new Response(response.body.pipeThrough(new DecompressionStream('gzip'))):response;
+  return new Uint8Array(await decoded.arrayBuffer());
 }
 const json=async path=>JSON.parse(new TextDecoder().decode(await bytes(path)));
 async function initialize() {
@@ -27,18 +33,28 @@ async function initialize() {
   if(!ort?.InferenceSession)throw Error('Offline inference runtime is unavailable');
   ort.env.wasm.numThreads=1;
   ort.env.wasm.wasmPaths=new URL('./runtime/',import.meta.url).href;
-  const [kd,dk,z,kLabels,dLabels,counts,referenceCounts]=await Promise.all([
-    bytes('./kanjidnn/KanjiDNN_v3.onnx'),bytes('./dakanji/char_classifier.onnx'),
-    bytes('./zinnia/tegaki-zinnia-japanese-0.3/handwriting-ja.model'),
+  const [kd,dk,wasm,kLabels,dLabels,counts,referenceCounts]=await Promise.all([
+    bytes('./kanjidnn/KanjiDNN_v3.onnx.gz'),bytes('./dakanji/char_classifier.onnx.gz'),
+    bytes('./runtime/ort-wasm-simd-threaded.wasm.gz'),
     json('./kanjidnn/KanjiDNN_v3_classes.json'),bytes('./dakanji/char_classifier_labels.txt'),json('./zinnia/stroke-counts.json'),json('./reference-stroke-counts.json')
   ]);
+  ort.env.wasm.wasmBinary=wasm;
   const k=await ort.InferenceSession.create(kd,{executionProviders:['wasm']});
   const d=await ort.InferenceSession.create(dk,{executionProviders:['wasm']});
-  return {ort,k,d,z:loadModel(z),kLabels,dLabels:Array.from(new TextDecoder().decode(dLabels).trim()),counts:{...counts,...referenceCounts.characters},classSets:{kanjidnn:new Set(kLabels)}};
+  await zinnia.ready();initialized=true;
+  return {ort,k,d,z:zinnia,kLabels,dLabels:Array.from(new TextDecoder().decode(dLabels).trim()),counts:{...counts,...referenceCounts.characters},classSets:{kanjidnn:new Set(kLabels)}};
 }
 export async function ready() {
-  if(!initialization)initialization=initialize().catch(error=>{initialization=null;throw error;});
+  if(!initialization)initialization=initialize().catch(error=>{initialization=null;initialized=false;throw error;});
   await initialization;
+}
+export async function prepare(strokes){
+  const continuous=joinContinuousStrokes(strokes);
+  await Promise.all([ready(),zinnia.prepare(strokes),zinnia.prepare(continuous)]);
+}
+export const prepareInk=prepare;
+export function isPrepared(strokes){
+  return initialized&&zinnia.isPrepared(strokes)&&zinnia.isPrepared(joinContinuousStrokes(strokes));
 }
 function validStrokes(input,canvas) {
   if(!Array.isArray(input)||!input.length||input.length>40)return null;
@@ -72,20 +88,20 @@ export async function recognize(input,{canvas=109}={}) {
     const x=stroke.map(p=>p[0]),y=stroke.map(p=>p[1]);
     return Math.max(Math.max(...x)-Math.min(...x),Math.max(...y)-Math.min(...y))<span*.008;
   }))return {candidates:[],decision:'uncertain',reason:'insufficient-stroke-extent'};
-  await ready();
+  await prepare(strokes);
   const {ort,k,d,z,kLabels,dLabels,counts,classSets}=await initialization;
   const tensor=new ort.Tensor('float32',raster(strokes),[1,1,64,64]);
   const kr=await k.run({[k.inputNames[0]]:tensor}),dr=await d.run({[d.inputNames[0]]:tensor});
   const logits=kr[k.outputNames[0]].data,max=Math.max(...logits);
   const exp=Array.from(logits,x=>Math.exp(x-max)),sum=exp.reduce((a,b)=>a+b,0);
   const continuous=joinContinuousStrokes(strokes);
-  const evidence={kanjidnn:rank(exp.map(x=>x/sum),kLabels),dakanji:rank(dr[d.outputNames[0]].data,dLabels),zinnia:classify(z,continuous,{limit:10})};
-  if(continuous.length!==strokes.length)evidence.zinniaRaw=classify(z,strokes,{limit:10});
+  const evidence={kanjidnn:rank(exp.map(x=>x/sum),kLabels),dakanji:rank(dr[d.outputNames[0]].data,dLabels),zinnia:z.classify(continuous,{limit:10})};
+  if(continuous.length!==strokes.length)evidence.zinniaRaw=z.classify(strokes,{limit:10});
   const decision=decide(evidence,continuous.length,counts,classSets,continuous);
   return {id,version,offline,...decision,candidates:evidence[decision.selectedModel],evidence,
     segmentation:{submitted:strokes.length,continuous:continuous.length},
     scoreMeaning:decision.selectedModel==='zinnia'?'uncalibrated-svm-margin':'uncalibrated-softmax',
     latencyMs:performance.now()-start};
 }
-export default {id,version,offline,ready,recognize};
-if(typeof window!=='undefined')window.KotobaOfflineRecognizer={id,version,offline,ready,recognize};
+export default {id,version,offline,ready,prepare,prepareInk,isPrepared,recognize};
+if(typeof window!=='undefined')window.KotobaOfflineRecognizer={id,version,offline,ready,prepare,prepareInk,isPrepared,recognize};
