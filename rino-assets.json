@@ -46,6 +46,106 @@
       "path": "rino/study-garden.svg",
       "sha256": "30bb9d2a41ba93e14ee22c8ac4403988d42ed5327f8e30e90170ae74d903ceae",
       "bytes": 1292
+    },
+    {
+      "path": "rino/reading/dancing-with-a-discovery.webp",
+      "sha256": "5858495bf6c389bd751dfb46da72afb5423606f5e227c11ab959f1f268d0362f",
+      "bytes": 19998
+    },
+    {
+      "path": "rino/reading/tiptoe-bookshelf-reach.webp",
+      "sha256": "e74f7e9ec145a70dda8896311c0c6d6af733b40281febf4a5c29259b00b19ed1",
+      "bytes": 17206
+    },
+    {
+      "path": "rino/reading/huddled-umbrella-holder.webp",
+      "sha256": "2725e721723ac0cc67ccf375facadc657ca004435fc2c274e8cf2a1086bdfec1",
+      "bytes": 17004
+    },
+    {
+      "path": "rino/reading/seated-birthday-painter.webp",
+      "sha256": "02d26a6cdd78714545dfc3440d6637f7c40b633c9de1a67d72257a28f8d7325f",
+      "bytes": 15890
+    },
+    {
+      "path": "rino/reading/popcorn-in-a-cinema-seat.webp",
+      "sha256": "27c7499197abbd57c6edaced1e8585d90538eb2392bccbdd9748e552948b40c1",
+      "bytes": 17282
+    },
+    {
+      "path": "rino/reading/cross-legged-cafe-guitarist.webp",
+      "sha256": "c6a2f69adc0308403b5ba260ef08e8c6b1d39e9027556dd1456051051727edf2",
+      "bytes": 18556
+    },
+    {
+      "path": "rino/reading/curious-bench-discovery.webp",
+      "sha256": "e473341079d75ac1acc55b5944e1dbf7dba3d1da522b797a3991bff2efe6a67e",
+      "bytes": 16474
+    },
+    {
+      "path": "rino/reading/mandarin-photo-model.webp",
+      "sha256": "4c90715a0fd676f787096ed18d0f7f110cc7c9bd13ba363056bf63c7d538ea3b",
+      "bytes": 19992
+    },
+    {
+      "path": "rino/reading/nose-in-an-old-cookbook.webp",
+      "sha256": "f10b7a6674a22d4b72ec6f27ca3c6384444767817e35acc0bf7f6e652e004b93",
+      "bytes": 19596
+    },
+    {
+      "path": "rino/reading/picnic-puffy-cheeks.webp",
+      "sha256": "5176759dd180f4ebe6c0ef6ffe0555c16f34696c9fb8b9b4029753e1cf9286fc",
+      "bytes": 16488
+    },
+    {
+      "path": "rino/reading/band-keyboard-player.webp",
+      "sha256": "b42acfb0fb00a5a7e551216bf183a54538ac0ae423b7fbcd80f0fe2f5bd78b7f",
+      "bytes": 18500
+    },
+    {
+      "path": "rino/reading/reclining-reader-with-bread.webp",
+      "sha256": "902d28f378098c62f883012df85b9cf773a49630f233a7981af3fb9e861b9446",
+      "bytes": 18384
+    },
+    {
+      "path": "rino/reading/two-cup-apron-balancing.webp",
+      "sha256": "5d0ba818788b96bf5e79cf3b918313992c34c985e8f3a04882e32994e64e3e39",
+      "bytes": 20016
+    },
+    {
+      "path": "rino/reading/eyes-closed-deep-listening.webp",
+      "sha256": "2b089f7826dae3d18691a0cfcf6024fefc2fe458a8753c436d84d02eb438d0c5",
+      "bytes": 15958
+    },
+    {
+      "path": "rino/reading/unplugged-singer-calling-out.webp",
+      "sha256": "717fab1e398b4b933a19c1668b89bbbab814643bba2ca4380fb1b1d6579c5a87",
+      "bytes": 19002
+    },
+    {
+      "path": "rino/reading/craning-toward-familiar-clock.webp",
+      "sha256": "59baa4ed2bfe5522872343464de3c6803243a603b42e9b7df68490d1e3f64703",
+      "bytes": 17412
+    },
+    {
+      "path": "rino/reading/window-seat-record-listener.webp",
+      "sha256": "fb31cb845f9058a88445ccd97526e8fc4afc28d7e7b9782072a1ff938b266751",
+      "bytes": 17150
+    },
+    {
+      "path": "rino/reading/cookbook-phone-and-cake.webp",
+      "sha256": "a383dcc5ce0571691b00825b9852457743a636ad625491b3e50976413b0ea496",
+      "bytes": 20676
+    },
+    {
+      "path": "rino/reading/crouched-paper-fish-maker.webp",
+      "sha256": "0556afdd798c45bf6e0b6ad5cbf63d526bdc1b1f7f9779290833071de84978e7",
+      "bytes": 18368
+    },
+    {
+      "path": "rino/reading/seaside-hat-rescue.webp",
+      "sha256": "ce6254f14e16a55f3e1c4ecb5929f0d8282e79a4621104d8d6f524d5c991861e",
+      "bytes": 17892
     }
   ]
 }

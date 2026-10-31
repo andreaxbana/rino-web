@@ -19,13 +19,13 @@
     },
     {
       "path": "recognition/recognition-worker.mjs",
-      "sha256": "864006a216f36239c0632b5eff4f7c8927da247e503bddf401ff9aff00a86948",
-      "bytes": 2071
+      "sha256": "0541109c6880eb50f4f254eae18d6000567e958b4cf23c625773b0d2a610a8e1",
+      "bytes": 2206
     },
     {
       "path": "recognition/asset-loader.mjs",
-      "sha256": "66e051164d3279578cb1b2f353fda69ced640212e194983dda01efbe685811ea",
-      "bytes": 1236
+      "sha256": "9e4851533c358e5c585e14af6a8aa7173307563d6d7a0fd6771ebec6e82a1f9a",
+      "bytes": 2115
     },
     {
       "path": "recognition/reference-codec.mjs",
@@ -64,8 +64,8 @@
     },
     {
       "path": "recognition/INTEGRATION.txt",
-      "sha256": "aff28e61835e5e2f721fce5697eca7202746fec91d31fbf55ad7d9ed27911ec3",
-      "bytes": 8711
+      "sha256": "b539a6d5257accff665b8e36faa8ff3b7c08201909f48f2404f141186629ac5a",
+      "bytes": 9018
     },
     {
       "path": "recognition/LICENSE-DaKanji.txt",

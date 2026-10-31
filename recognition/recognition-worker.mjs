@@ -11,13 +11,13 @@ let coreReady=false;
 self.addEventListener('message',async event=>{
   const {requestId,strokes,type}=event.data||{},preparing=type==='prepare';
   if(!Number.isSafeInteger(requestId)||(!preparing&&!Array.isArray(strokes)))return;
-  let unsubscribe=()=>{},lastUpdate=0;
+  let unsubscribe=()=>{},lastUpdate=0,lastActivity=null;
   try{
     if(preparing?!coreReady:!isPrepared(strokes)||!referencesReady(strokes)){
-      self.postMessage({requestId,type:'progress',phase:'loading'});
-      unsubscribe=subscribeAssetLoading(({loadedBytes})=>{
+      self.postMessage({requestId,type:'progress',phase:'loading',activity:'starting'});
+      unsubscribe=subscribeAssetLoading(({loadedBytes,downloadedBytes,activity})=>{
         const now=Date.now();
-        if(loadedBytes>0&&now-lastUpdate>=200){lastUpdate=now;self.postMessage({requestId,type:'progress',phase:'loading',loadedBytes});}
+        if(activity!==lastActivity||loadedBytes>0&&now-lastUpdate>=200){lastUpdate=now;lastActivity=activity;self.postMessage({requestId,type:'progress',phase:'loading',loadedBytes,downloadedBytes,activity});}
       },{fresh:true});
     }
     if(preparing){await ready();coreReady=true;self.postMessage({requestId,type:'prepared'});return;}

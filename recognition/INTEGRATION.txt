@@ -1,6 +1,10 @@
 The browser app uses practice-recognition.js to start the same-origin module
-worker ./recognition/recognition-worker.mjs. Handwriting sessions start common
-model preparation with a request ID and a prepare message, without any drawing.
+worker ./recognition/recognition-worker.mjs. Handwriting setup starts common
+model preparation while the learner chooses kanji, with a request ID and a
+prepare message, without any drawing. Session preparation shares that worker.
+Progress distinguishes real network downloads, cached reads and local startup;
+cached or unknown-source byte counts are never presented as download totals.
+Verified model bytes are reused by content hash across recognition-pack scopes.
 Checks send only the drawing and a request ID, never the question or answer.
 Model loading, inference and independent shape matching
 run there so the phone UI can paint, navigate and cancel a check. Cancellation,
