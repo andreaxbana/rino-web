@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Updating RiNO</title><style>html{font:16px system-ui,sans-serif;background:#f3f0f5;color:#263b5c}body{margin:0;min-height:100svh;display:grid;place-content:center;text-align:center;padding:24px;box-sizing:border-box}h1{font-size:36px;line-height:1.2;margin:0 0 16px}h1 span{color:transparent;background:linear-gradient(#d94b45 0 29%,#263b5c 29% 100%);background-clip:text;-webkit-background-clip:text}p{line-height:1.5}a{color:inherit}</style></head><body><main><h1>R<span>i</span>NO</h1><p role="status">Opening the updated app…<br>Your saved progress stays on this device.</p><p><a id="open-app" href="./index.html">Open RiNO</a></p></main><script>
+(async()=>{
+  const base=new URL('./',location.href);
+  const target=new URL('index.html',base);
+  target.searchParams.set('refresh',Date.now().toString(36));
+  target.hash=location.hash||'#/practice/kanji/setup';
+  document.getElementById('open-app').href=target.href;
+  try{
+    if('serviceWorker' in navigator){
+      for(const registration of await navigator.serviceWorker.getRegistrations()){
+        const workers=[registration.active,registration.waiting,registration.installing];
+        if(registration.scope===base.href&&workers.some(worker=>worker&&new URL(worker.scriptURL).pathname===base.pathname+'rino-offline-sw.js'))await registration.unregister();
+      }
+    }
+  }catch{}
+  location.replace(target.href);
+})();
+</script></body></html>
