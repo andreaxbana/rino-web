@@ -146,6 +146,11 @@
       "path": "rino/reading/seaside-hat-rescue.webp",
       "sha256": "ce6254f14e16a55f3e1c4ecb5929f0d8282e79a4621104d8d6f524d5c991861e",
       "bytes": 17892
+    },
+    {
+      "path": "rino/correct-fuji.webp",
+      "sha256": "40dc2917427e00b83d2a11549bad8b8064e89e622af9728ce0782b5dc03374f2",
+      "bytes": 82352
     }
   ]
 }
