@@ -267,6 +267,34 @@
     function sourceMarkup(k,note) {
       return `<details class="rdict-sources"><summary>Sources &amp; entry notes</summary><p>Kanji meanings and selected readings: <a href="https://www.edrdg.org/wiki/KANJIDIC_Project.html" target="_blank" rel="noopener noreferrer">KANJIDIC2 / EDRDG</a>.${note?.sourceUrl ? ` Additional kanji reference: <a href="${safeUrl(note.sourceUrl)}" target="_blank" rel="noopener noreferrer">Kanjipedia ↗</a>. Learner explanations are written for RiNO.` : ''}</p>${k.notes ? `<p>${bilingual(k.notes)}</p>` : ''}<p>Stroke diagrams and component shapes: KanjiVG © Ulrich Apel &amp; contributors, <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank" rel="noopener noreferrer">CC BY-SA 3.0</a>. Adapted stroke data remains under that licence.</p></details>`;
     }
+    function wordExamples(word) {
+      const examples=[...(word.learner_examples || []),...(word.context_examples || [])];
+      if(word.example_ja){const occurrence=word.occurrence || globalThis.RinoDictionaryReference?.occurrence(word);if(occurrence)examples.push({...word,occurrence});}
+      const learner=word.learner;
+      if(learner?.sentence){const tokens=[],pattern=/([\p{Script=Han}々]+[ぁ-ゖァ-ヺー]*)\[([^\]]+)\]/gu;let offset=0;for(const m of learner.sentence.matchAll(pattern)){if(m.index>offset)tokens.push({text:learner.sentence.slice(offset,m.index)});tokens.push({text:m[1],reading:m[2]});offset=m.index+m[0].length;}if(offset<learner.sentence.length)tokens.push({text:learner.sentence.slice(offset)});const s={example_ja:tokens.map(t=>t.text).join(''),example_ruby:tokens,example_en:learner.translation,example_source:'Original RiNO example'};const occurrence=globalThis.RinoDictionaryReference?.occurrence(word,s);if(occurrence)examples.unshift({...s,occurrence});}
+      const seen=new Set();
+      return examples.filter(s=>s.occurrence&&!seen.has(s.example_ja)&&seen.add(s.example_ja));
+    }
+    function wordHelp({word,reading,id,meaning_en}) {
+      const match=index.words.get(id);
+      const exact=match&&key(match.reading)===key(reading)&&[match.word,...match.alternate_forms || []].some(form=>key(form)===key(word));
+      const pair=index.words.get(index.pairs.get(key(word)+'\0'+key(reading)));
+      const ref=index.reference?.byPair.get(globalThis.RinoDictionaryReference.pair(word,reading)) || [];
+      const glossMatches=ref.filter(entry=>entry.glosses.some(gloss=>key(gloss)===key(meaning_en)));
+      const unique=ref.length===1?ref[0]:glossMatches.length===1?glossMatches[0]:null;
+      const entry=exact?match:unique?(pair?.reference_key===unique.reference_key?pair:unique):!ref.length&&pair&&key(pair.reading)===key(reading)?pair:null;
+      const guidance=notes.wordUsage?.[entry?.reference_key];
+      const editorial=reference.examples?.[entry?.reference_key];
+      const examples=guidance&&editorial?.length?editorial:entry?wordExamples({...entry,learner_examples:editorial || entry.learner_examples}):[];
+      const senses=entry?.senses?.filter(sense=>!sense.forms?.length||sense.forms.includes(word));
+      const type=readingWords?.partOfSpeech({...entry,word,reading});
+      return {word,reading,type:guidance?.type || entry?.learner?.pos || (type?.short==='?'?'':type?.full),
+        definition:guidance?.definition || entry?.learner?.definition,
+        senses:senses?.length?senses.map(sense=>sense.glosses.slice(0,3).join(', ')):[meaning_en || entry?.meaning_en],
+        usage:guidance?.usage || entry?.learner?.usage || entry?.example_sense_note,compare:guidance?.compare,
+        examples:examples.filter(sentence=>sentence.example_en).slice(0,2).map(sentence=>wordExample(sentence,entry,true)),
+        dictionaryId:entry&&index.words.has(entry.id)?entry.id:''};
+    }
     function wordDetail(word) {
       if (!word) return '<p class="rdict-muted">Choose a word to read its definition and example.</p>';
       const learner = word.learner;
@@ -281,10 +309,7 @@
       const table = core?.rows?.length && ['verb','i-adjective','na-adjective'].includes(forms.kind) ? `<details class="rdict-forms"><summary>Useful word forms</summary><p>${bilingual(forms.summary)}</p><table class="rdict-form-table"><caption class="jp-sr">Word forms for <span lang="ja">${esc(word.word)}</span></caption><thead><tr>${columns.map(column => `<th scope="col">${esc(column)}</th>`).join('')}</tr></thead><tbody>${core.rows.map(row => `<tr><th scope="row">${esc(row.label)}</th><td><span class="rdict-form-label" aria-hidden="true">${esc(columns[1])}</span>${formMarkup(row.plain || row.form)}</td><td><span class="rdict-form-label" aria-hidden="true">${esc(columns[2])}</span>${formMarkup(row.polite)}</td></tr>`).join('')}</tbody></table></details>` : '';
       const learn = index.catalogWords.has(word.id) ? action('Open word in Learn','learn',word.id) : '';
       const senses=word.senses?.length?word.senses:[{id:'local:'+word.id,glosses:meanings,pos:word.dictionary_pos || []}];
-      const examples=[...(word.learner_examples || []),...(word.context_examples || [])];
-      if(word.example_ja){const occurrence=word.occurrence || globalThis.RinoDictionaryReference?.occurrence(word);if(occurrence)examples.push({...word,occurrence});}
-      if(learner?.sentence){const tokens=[],pattern=/([\p{Script=Han}々]+[ぁ-ゖァ-ヺー]*)\[([^\]]+)\]/gu;let offset=0;for(const m of learner.sentence.matchAll(pattern)){if(m.index>offset)tokens.push({text:learner.sentence.slice(offset,m.index)});tokens.push({text:m[1],reading:m[2]});offset=m.index+m[0].length;}if(offset<learner.sentence.length)tokens.push({text:learner.sentence.slice(offset)});const s={example_ja:tokens.map(t=>t.text).join(''),example_ruby:tokens,example_en:learner.translation,example_source:'Original RiNO example'};const occurrence=globalThis.RinoDictionaryReference?.occurrence(word,s);if(occurrence)examples.unshift({...s,occurrence});}
-      const seen=new Set(),verified=examples.filter(s=>s.occurrence&&!seen.has(s.example_ja)&&seen.add(s.example_ja));
+      const verified=wordExamples(word);
       for(const s of verified)if(!s.senseId){const matches=s.example_sense?senses.filter(sense=>sense.glosses.some(gloss=>key(gloss)===key(s.example_sense))):[];if(matches.length===1)s.senseId=matches[0].id;else if(senses.length===1)s.senseId=senses[0].id;}
       const label=tag=>reference.labels?.[tag] || tag;
       const senseMarkup=(sense,i)=>`<li id="rdict-sense-${i+1}" class="rdict-sense"><p class="rdict-sense-label">${esc((sense.pos || []).map(label).join(' · '))}</p><p class="rdict-gloss">${sense.glosses.map(esc).join('; ')}</p>${[...(sense.misc || []),...(sense.fields || []),...(sense.dialects || [])].length?`<p class="rdict-tags">${[...(sense.misc || []),...(sense.fields || []),...(sense.dialects || [])].map(tag=>`<span>${esc(label(tag))}</span>`).join('')}</p>`:''}${sense.forms?.length?`<p class="rdict-muted">Spelling: <span lang="ja">${sense.forms.map(esc).join(' · ')}</span></p>`:''}${(sense.notes || []).map(note=>`<p class="rdict-muted">${esc(note)}</p>`).join('')}${(sense.related || []).length?`<p class="rdict-crossrefs">Related: ${sense.related.map(link=>action(esc(link),'lookup',link.replace(/・\d+$/,'').split('・')[0],'','rdict-text-link')).join(' ')}</p>`:''}${verified.filter(s=>s.senseId===sense.id).slice(0,3).map(s=>wordExample(s,word)).join('')}</li>`;
@@ -293,10 +318,11 @@
       const spellings=[...new Set(word.alternate_forms || [])].filter(f=>f!==word.word);
       return `<article class="rdict-word-detail" aria-label="Word definition"><header><div><h3 lang="ja" tabindex="-1" id="rdict-entry-title">${heading}</h3>${heading.includes('<rt>') || word.word === word.reading ? '' : `<p lang="ja" class="rdict-muted">${esc(word.reading)}</p>`}<p class="rdict-muted">${esc(type)}${word.level?' · '+esc(word.level):word.common?' · Common word':''}${word.verb_group?' · '+esc(word.verb_group):''}</p></div>${globalThis.speechSynthesis?action('Listen','speak',word.id,'aria-label="Listen to '+esc(word.word)+'"'):''}</header>${learn?`<div class="rdict-learn">${learn}${lessonButtons(word)}</div>`:''}${spellings.length?`<p class="rdict-variants">Also written <span lang="ja">${spellings.map(esc).join(' · ')}</span></p>`:''}${word.other_readings?.length?`<details><summary>Other readings</summary>${word.other_readings.map(r=>`<p><span lang="ja">${esc(r.reading)}</span>${r.forms.length?` · <span lang="ja">${r.forms.map(esc).join(' / ')}</span>`:''}</p>`).join('')}</details>`:''}${learner?`<p>${bilingual(learner.definition)}</p>`:''}${word.context_only?'<p class="rdict-note">This expression comes from a study sentence. Its independent dictionary meaning has not been established.</p>':''}<section class="rdict-definitions"><h4>Dictionary meanings <span class="rdict-muted">${senses.length}</span></h4><ol class="rdict-numbered-senses">${senses.slice(0,6).map(senseMarkup).join('')}</ol>${extra.length?`<details ${extra.some(s=>s.glosses.includes(word._match?.snippet))?'open':''}><summary>More meanings (${extra.length})</summary><ol class="rdict-numbered-senses" start="7">${extra.map((s,i)=>senseMarkup(s,i+6)).join('')}</ol></details>`:''}</section>${learner?.usage || word.example_sense_note?`<p class="rdict-note">${bilingual(learner?.usage || word.example_sense_note)}</p>`:''}${context.length?`<section><h4>Examples in context</h4>${context.slice(0,3).map(s=>wordExample(s,word)).join('')}</section>`:''}${!verified.length?`<p class="rdict-muted">${word.example_ja?'The saved example needs a target-word check before it can be shown here.':'No example sentence is bundled for this word.'}</p>`:''}${table}${kanji.length?`<section class="rdict-word-kanji"><h4>Kanji in this word</h4>${kanji.map(c=>action(`<span lang="ja">${esc(c)}</span> ${esc(index.kanji.get(c).meanings_en.join('; '))}`,'select',c)).join('')}</section>`:''}<details class="rdict-sources"><summary>Word sources &amp; notes</summary>${word.jmdict_id?`<p>JMdict entry ${esc(word.jmdict_id)} · <a href="https://www.edrdg.org/jmdict/j_jmdict.html" target="_blank" rel="noopener noreferrer">EDRDG / James Breen</a> · <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener noreferrer">CC BY-SA 4.0</a>. Sense order, grammatical labels and spelling restrictions are retained from the bundled reference.</p>`:'<p>Bundled RiNO reference and learner explanations.</p>'}<p>Highlighting checks the written form and reading. It does not certify translation or sense accuracy. New RiNO examples await native-speaker review.</p>${word.spelling_notes?.map(n=>`<p><span lang="ja">${esc(n.word)}</span>: ${n.tags.map(label).map(esc).join('; ')}</p>`).join('') || ''}${word.notes?`<p>${bilingual(word.notes)}</p>`:''}</details></article>`;
     }
-    function wordExample(sentence,word){
+    function wordExample(sentence,word,compact=false){
       const occurrence=sentence.occurrence;let offset=0;
       const marked=(sentence.example_ruby || []).map(token=>{const start=offset,end=offset+token.text.length;offset=end;if(end<=occurrence.start||start>=occurrence.end)return ruby(token.text,'',[token]);if(token.reading)return `<mark class="rdict-target">${ruby(token.text,'',[token])}</mark>`;const a=Math.max(0,occurrence.start-start),b=Math.min(token.text.length,occurrence.end-start);return esc(token.text.slice(0,a))+`<mark class="rdict-target">${esc(token.text.slice(a,b))}</mark>`+esc(token.text.slice(b));}).join('');
-      return `<section class="rdict-example"><p lang="ja" class="rdict-sentence">${marked}</p><p>${esc(sentence.example_en)}</p><p class="rdict-form-note"><span lang="ja">${esc(occurrence.surface)}</span> · ${esc(occurrence.form)}${occurrence.surface!==word.word?` of <span lang="ja">${esc(word.word)}</span>`:''}</p>${!sentence.senseId&&sentence.example_sense?`<p class="rdict-muted">Context meaning: ${esc(sentence.example_sense)}</p>`:''}<small>${esc(sentence.example_source || 'Original RiNO example')}${sentence.example_source_url?` · <a href="${safeUrl(sentence.example_source_url)}" target="_blank" rel="noopener noreferrer">Source ↗</a>`:''}${sentence.example_license?' · '+esc(sentence.example_license):''}</small></section>`;
+      const form=compact&&occurrence.surface===word.word?'':`<p class="rdict-form-note"><span lang="ja">${esc(occurrence.surface)}</span> · ${esc(occurrence.form)}${occurrence.surface!==word.word?` of <span lang="ja">${esc(word.word)}</span>`:''}</p>`;
+      return `<section class="rdict-example"><p lang="ja" class="rdict-sentence">${marked}</p><p>${esc(sentence.example_en)}</p>${form}${!sentence.senseId&&sentence.example_sense?`<p class="rdict-muted">Context meaning: ${esc(sentence.example_sense)}</p>`:''}<small>${esc(sentence.example_source || 'Original RiNO example')}${sentence.example_source_url?` · <a href="${safeUrl(sentence.example_source_url)}" target="_blank" rel="noopener noreferrer">Source ↗</a>`:''}${sentence.english_source_url?` · <a href="${safeUrl(sentence.english_source_url)}" target="_blank" rel="noopener noreferrer">Translation source ↗</a>`:''}${sentence.example_license?' · '+esc(sentence.example_license):''}</small></section>`;
     }
     function exampleSentenceMarkup(sentence,note) {
       const context = note?.contexts?.[sentence.target_word];
@@ -560,7 +586,7 @@
       if(workerReady&&state.wordId&&!getWord(state.wordId))worker.postMessage({type:'entry',id:state.wordId});
     }
     navigate(state);
-    return {render,mount,beforeRender,handle,navigate,navigation:() => ({...state}),hasActiveInput:() => !!activeStroke || !!pending || composing,
+    return {render,mount,beforeRender,handle,navigate,wordHelp,navigation:() => ({...state}),hasActiveInput:() => !!activeStroke || !!pending || composing,
       announcement:() => 'Dictionary · all levels' + (state.character ? ' · ' + state.character : ''),
       // Read-only snapshots support regression checks without saving ink to progress.
       drawing:() => ink.map(stroke => stroke.map(point => point.slice()))};
