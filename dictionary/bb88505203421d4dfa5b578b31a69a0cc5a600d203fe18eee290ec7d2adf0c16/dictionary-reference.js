@@ -48,20 +48,31 @@
       offset+=token.text.length;reading+=token.reading || token.text;points.set(offset,reading);
     }
     const candidates=[];
-    for(const spelling of [word.word,...word.alternate_forms || []]) {
-      candidates.push({text:spelling,reading:word.reading,label:spelling===word.word?'dictionary form':'alternate spelling'});
+    // A dictionary-backed word may be written in kana in an otherwise kanji
+    // sentence. This proves a written+reading occurrence, not its intended
+    // sense. Keep single-kana fragments out of this fallback.
+    const spellings=[...new Set([word.word,...word.alternate_forms || [],...(word.jmdict_id&&norm(word.reading).length>=2?[word.reading]:[])])];
+    for(const spelling of spellings) {
+      const kanaAlias=spelling!==word.word&&/^[ぁ-ゖァ-ヶー]+$/.test(spelling);
+      candidates.push({text:spelling,reading:word.reading,label:spelling===word.word?'dictionary form':norm(spelling)===norm(word.reading)?'kana spelling':'alternate spelling',kanaAlias});
       const described=formsAPI?.describe({...word,word:spelling});
-      if(['verb','i-adjective','na-adjective'].includes(described?.kind))for(const section of described.sections || [])for(const row of section.rows || [])if(row.label!=='ます-stem')for(const field of ['plain','polite','form'])if(row[field]?.text)candidates.push({...row[field],label:row.label});
+      if(['verb','i-adjective','na-adjective'].includes(described?.kind))for(const section of described.sections || [])for(const row of section.rows || [])if(row.label!=='ます-stem')for(const field of ['plain','polite','form'])if(row[field]?.text)candidates.push({...row[field],label:row.label,kanaAlias});
     }
-    if(word.example_target)candidates.unshift({...word.example_target,text:word.example_target.surface,label:'conjugated form'});
+    if(word.example_target)candidates.unshift({...word.example_target,text:word.example_target.surface,label:word.example_target.label||'conjugated form'});
+    const normalized=norm(text),folded=normalized.length===text.length,searchText=folded?normalized:text;
     for(const form of candidates.sort((a,b)=>b.text.length-a.text.length)) {
-      let start=text.indexOf(form.text);
-      while(start>=0){const end=start+form.text.length;
-        if(points.has(start)&&points.has(end)){
+      const spelling=folded?norm(form.text):form.text;
+      let start=searchText.indexOf(spelling);
+      while(start>=0){const end=start+spelling.length;
+        const before=text[start-1]||'',after=text.slice(end);
+        const kanaBoundary=!form.kanaAlias||
+          ((!/[ぁ-ゖァ-ヶー]/.test(before)||/[をはがにでとへもやのおご]/.test(before))&&
+           (!/^[ぁ-ゖァ-ヶー]/.test(after)||/^(?:[はがをにへともやのかねよなだでばさ]|じゃ|いる|いま|いな|おく|おき|しま|あげ|くれ|もら)/.test(after)));
+        if(kanaBoundary&&points.has(start)&&points.has(end)){
           const actual=points.get(end).slice(points.get(start).length);
-          if([form.reading,...form.label==='dictionary form'?word.alternate_readings || []:[]].some(r=>norm(r)===norm(actual)))return {start,end,surface:form.text,reading:actual,form:form.label,status:'structural-match'};
+          if([form.reading,...form.label==='dictionary form'?word.alternate_readings || []:[]].some(r=>norm(r)===norm(actual)))return {start,end,surface:text.slice(start,end),reading:actual,form:form.label,status:'structural-match'};
         }
-        start=text.indexOf(form.text,start+1);
+        start=searchText.indexOf(spelling,start+1);
       }
     }
     return null;
