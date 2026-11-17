@@ -63,7 +63,7 @@
     ];
   }
 
-  function verbResult(item, base, group, tags) {
+  function verbResult(item, base, group, tags, productive = false) {
     const notes = [], sources = ['grammar','classes'];
     let stem, negative, past, te, potential, volitional, conditional, imperative, passive, causative, causativePassive, shortCausativePassive;
     let isAru=false, honorific=false;
@@ -113,7 +113,7 @@
       stem=cut(base,1); negative=append(stem,'ない'); past=append(stem,'た'); te=append(stem,'て');
       potential=append(stem,'られる'); volitional=append(stem,'よう');
       conditional=append(stem,'れば'); passive=append(stem,'られる');
-      imperative=append(stem,'ろ');
+      imperative=tags.includes('v1-s') ? stem : append(stem,'ろ');
       causative=append(stem,'させる'); causativePassive=append(stem,'させられる');
     } else {
       const ending=base.text.slice(-1), row=GODAN[ending];
@@ -156,7 +156,12 @@
     ];
     if (negative) conditions.push(useRow('If not · なかったら',cut(negative,1,'かったら')),useRow('If not · なければ',cut(negative,1,'ければ')),useRow('If not · ないなら',append(negative,'なら')),useRow('Even if not · なくても',cut(negative,1,'くても')));
     if (group==='zuru') conditions.push(useRow('If · ば with the じる form',append(stem,'れば'),'The related じる form uses じれば; the ずる form uses ずれば.'));
-    const action = !specialSuru && (ACTION_WORDS.has(dictionary.text) || suruBase&&ACTION_SURU.has(suruBase.text));
+    // Practice can ask for productive morphology on ordinary lexical verbs.
+    // Keep inherent ability/state predicates and special dictionary classes out
+    // of these drills; their voice/desire forms need a sense-specific context.
+    const limited = new Set(['ある','有る','在る','いる','居る','要る','できる','出来る','分かる','わかる','見える','聞こえる','似る','異なる','足りる']);
+    const ordinary = productive && !isAru && !honorific && group !== 'zuru' && !limited.has(dictionary.text);
+    const action = !specialSuru && (ACTION_WORDS.has(dictionary.text) || suruBase&&ACTION_SURU.has(suruBase.text) || ordinary);
     const sections=[section('core','Core forms',rows),section('connecting','Linking & building forms',extra,true),section('conditions','Conditions & concessions',conditions,true,['These are clause patterns. Politeness is normally supplied by the ending of the full sentence.'])];
     const aspect=!specialSuru&&!isAru&&!honorific&&!['いる','居る','おる','要る'].includes(dictionary.text);
     if (aspect) sections.push(section('aspect','Ongoing action & resulting state',derivedRows('ている',append(te,'いる')),true,['ている can describe an ongoing action, a habit, or a state resulting from a change. Its meaning depends on the verb; 開いている means “is open”.']));
@@ -307,7 +312,7 @@
     return result('fixed','No regular conjugation is shown for this use. Read the example for how the word connects to the sentence.');
   }
 
-  function describe(item) {
+  function describe(item, { productive = false } = {}) {
     if (!item||typeof item!=='object') return unavailable('Choose a word to see its forms.');
     const text=str(item.word), reading=kana(item.reading), base=form(text,reading);
     if (!text) return unavailable('A word is needed to show its forms.');
@@ -324,20 +329,20 @@
     const standaloneNoun=tags.some(t=>['n','n-pr','n-p','n-t','n-adv'].includes(t)) || !tags.length&&parts.includes('noun');
     if (['pref','suf','n-pref','n-suf','ctr'].includes(tags[0])&&!group) return fixedResult(base,item,tags);
     if (group==='ichidan'&&verbTags.some(t=>!['v1','v1-s'].includes(t)) || group==='godan'&&verbTags.some(t=>!Object.prototype.hasOwnProperty.call(GODAN_TAGS,t)) || group==='irregular'&&verbTags.some(t=>!['vk','vs','vs-i','vs-s','vz'].includes(t))) return unavailable('The verb group and dictionary class disagree; this entry needs a word-specific check.');
-    if (tags.includes('vk')||group==='irregular'&&['来る','くる'].includes(text)&&reading==='くる') return verbResult(item,base,'kuru',tags);
-    if (tags.includes('vz')) return verbResult(item,base,'zuru',tags);
-    if (tags.includes('vs-s')) return verbResult(item,base,'suru',tags);
+    if (tags.includes('vk')||group==='irregular'&&['来る','くる'].includes(text)&&reading==='くる') return verbResult(item,base,'kuru',tags,productive);
+    if (tags.includes('vz')) return verbResult(item,base,'zuru',tags,productive);
+    if (tags.includes('vs-s')) return verbResult(item,base,'suru',tags,productive);
     const checkedSuruParticiple=text==='一定'&&reading==='いってい'&&tags.includes('vs')&&tags.includes('adj-no');
     const checkedSuruPredicate=text==='匹敵'&&reading==='ひってき'&&tags.includes('vs')&&tags.includes('vi')&&parts.includes('suru_verb');
-    if ((tags.includes('vs')||tags.includes('vs-i')||group==='irregular'&&parts.includes('suru_verb'))&&(text.endsWith('する')||standaloneNoun||checkedSuruParticiple||checkedSuruPredicate)) return verbResult(item,base,'suru',tags);
+    if ((tags.includes('vs')||tags.includes('vs-i')||group==='irregular'&&parts.includes('suru_verb'))&&(text.endsWith('する')||standaloneNoun||checkedSuruParticiple||checkedSuruPredicate)) return verbResult(item,base,'suru',tags,productive);
     if (tags.includes('vs')&&parts.includes('adverb')&&!standaloneNoun) return fixedResult(base,item,tags);
     if (group==='godan'||verbTags.some(t=>t.startsWith('v5'))) {
       if (verbTags.some(t=>!Object.prototype.hasOwnProperty.call(GODAN_TAGS,t))) return unavailable('This entry combines verb classes; choose the specific dictionary use first.');
-      return verbResult(item,base,'godan',tags);
+      return verbResult(item,base,'godan',tags,productive);
     }
     if (group==='ichidan'||tags.includes('v1')||tags.includes('v1-s')) {
       if (verbTags.some(t=>!['v1','v1-s'].includes(t))) return unavailable('This entry combines verb classes; choose the specific dictionary use first.');
-      return verbResult(item,base,'ichidan',tags);
+      return verbResult(item,base,'ichidan',tags,productive);
     }
     if (group&&!(tags.includes('vs')&&parts.includes('adverb'))) return unavailable('This verb needs a word-specific conjugation check.');
     if (tags.includes('adj-pn')) return fixedResult(base,item,tags);
