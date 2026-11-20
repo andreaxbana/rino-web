@@ -593,7 +593,7 @@
       if(workerReady&&state.wordId&&!getWord(state.wordId))worker.postMessage({type:'entry',id:state.wordId});
     }
     navigate(state);
-    return {render,mount,beforeRender,handle,navigate,wordHelp,navigation:() => ({...state}),hasActiveInput:() => !!activeStroke || !!pending || composing,
+    return {render,mount,beforeRender,handle,navigate,wordHelp,isCommonSpelling:index.reference?.isCommonSpelling,navigation:() => ({...state}),hasActiveInput:() => !!activeStroke || !!pending || composing,
       announcement:() => 'Dictionary · all levels' + (state.character ? ' · ' + state.character : ''),
       // Read-only snapshots support regression checks without saving ink to progress.
       drawing:() => ink.map(stroke => stroke.map(point => point.slice()))};

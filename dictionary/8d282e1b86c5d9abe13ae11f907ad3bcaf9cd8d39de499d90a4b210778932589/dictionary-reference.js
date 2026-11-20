@@ -12,6 +12,7 @@
   const readingId = reading => {let hash=14695981039346656037n;for(const c of reading){hash^=BigInt(c.codePointAt(0));hash=BigInt.asUintN(64,hash*1099511628211n);}return hash.toString(16);};
   const pair = (word,reading) => norm(word) + '\0' + norm(reading);
   const allowedForms = (entry,reading) => reading[2] ? [] : entry[1].filter(form => !reading[1]?.length || reading[1].includes(form[0]));
+  const hasPriority = tags => tags?.some(tag => /^(news1|ichi1|spec1|gai1)$/.test(tag));
   function expand(entry,reading = entry[2][0]) {
     const forms = allowedForms(entry,reading), spellings = forms.map(form => form[0]);
     const senses = entry[3].filter(sense => (!sense[4]?.length || sense[4].includes(reading[0])) && (!sense[3]?.length || sense[3].some(form => spellings.includes(form)))).map(sense => ({
@@ -23,7 +24,7 @@
       word:spellings[0] || reading[0],reading:reading[0],alternate_forms:spellings.slice(1),senses,glosses,meaning_en:glosses[0] || '',dictionary_pos:pos,
       parts_of_speech:pos.some(p=>p.startsWith('v'))?['verb']:pos.some(p=>p.startsWith('adj'))?['adjective']:pos.includes('n')?['noun']:[],
       verb_group:pos.includes('v1')?'ichidan':pos.some(p=>p.startsWith('v5'))?'godan':pos.some(p=>p==='vk'||p.startsWith('vs'))?'irregular':undefined,
-      common:forms.some(f=>f[2]?.some(p=>/^(news1|ichi1|spec1|gai1)$/.test(p))) || !!reading[4]?.some(p=>/^(news1|ichi1|spec1|gai1)$/.test(p)),
+      common:forms.some(form => hasPriority(form[2])) || !!hasPriority(reading[4]),
       spelling_notes:forms.filter(f=>f[1]?.length).map(f=>({word:f[0],tags:f[1]})),reading_notes:reading[3] || [],
       other_readings:entry[2].filter(r=>r!==reading).map(r=>({reading:r[0],forms:allowedForms(entry,r).map(f=>f[0])})),source:'JMdict / EDRDG'};
   }
@@ -35,7 +36,17 @@
       for(const form of [word.word,...word.alternate_forms]) {const k=pair(form,word.reading);if(!byPair.has(k))byPair.set(k,[]);byPair.get(k).push(word);}
     }
     const resolve = item => byIdentity.get(identity(item.jmdict_id,item.reading)) || (byPair.get(pair(item.word,item.reading)) || []).find(word=>!item.jmdict_id || word.jmdict_id===String(item.jmdict_id));
-    return {words,byIdentity,byPair,resolve,labels:source.labels || {},source:source.source};
+    let spellingsById;
+    function isCommonSpelling({word,reading,jmdict_id}) {
+      const matches = byPair.get(pair(word,reading)) || [];
+      const match = jmdict_id ? matches.find(entry => entry.jmdict_id === String(jmdict_id))
+        : matches.length === 1 ? matches[0] : null;
+      if (!match) return false;
+      // A common flag on one spelling must not promote its rare variants.
+      spellingsById ??= new Map(source.entries.map(entry => [entry[0],entry[1]]));
+      return spellingsById.get(match.jmdict_id).some(([form,,tags]) => norm(form) === norm(word) && hasPriority(tags));
+    }
+    return {words,byIdentity,byPair,resolve,isCommonSpelling,labels:source.labels || {},source:source.source};
   }
   // Evidence is an exact surface + reading span, including conjugated forms.
   // A structural match is not a claim of human linguistic review.
