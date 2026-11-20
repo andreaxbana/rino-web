@@ -39,12 +39,12 @@
     },
     {
       "path": "recognition/reference-shards.json",
-      "sha256": "c69a4ab6413de6751d55c89f4202b2d72de088333a0538fc21dc5e9eb2c8dae8",
-      "bytes": 30501
+      "sha256": "0bbb58b8e596e6dd1576e0b358155c0f20b4019bf4681947ec4855e1b9715d32",
+      "bytes": 30511
     },
     {
       "path": "recognition/reference-templates-meta.json",
-      "sha256": "f0e06cf83a972c50d76e91f2a0ce9d92c0b62b1d21f4a5d1916fa702e924e81a",
+      "sha256": "e7d468fa0f5ed157b7398c49d7f2cd7e55cac5caf582e0b26cc6c6433e9fa6ef",
       "bytes": 240
     },
     {
@@ -54,8 +54,8 @@
     },
     {
       "path": "recognition/reference-stroke-counts.json",
-      "sha256": "885e296d466b7219f246f59b85150798ce2c07c33b9c5c8e9527e42fb0ad7d30",
-      "bytes": 37710
+      "sha256": "082bf767fc849feb33185035a89049caac0f7d9a6326c234fd63abf93d9dab90",
+      "bytes": 37724
     },
     {
       "path": "recognition/ATTRIBUTION.txt",
@@ -264,8 +264,8 @@
     },
     {
       "path": "recognition/reference/08.bin.gz",
-      "sha256": "2d801625640eab9b3b9ca3e54a9c356e421082ab395b9d133a2095d5edd03c56",
-      "bytes": 365530
+      "sha256": "8e0c6dd0a65e996c50196547a57ae204d840bbea122f92e9388f9a05de4b6461",
+      "bytes": 367444
     },
     {
       "path": "recognition/reference/09.bin.gz",
