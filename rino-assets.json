@@ -151,6 +151,406 @@
       "path": "rino/correct-fuji.webp",
       "sha256": "40dc2917427e00b83d2a11549bad8b8064e89e622af9728ce0782b5dc03374f2",
       "bytes": 82352
+    },
+    {
+      "path": "rino/manga/lantern-01.webp",
+      "sha256": "4f70fd74188749c3e741127b69d98c217972ea2ff5cb5acea208d54ab54f8901",
+      "bytes": 105956
+    },
+    {
+      "path": "rino/manga/lantern-02.webp",
+      "sha256": "084703e79d388df94a3ee440da1c3604b2cd457bd9b5a7f52e132d08c53c85b4",
+      "bytes": 91056
+    },
+    {
+      "path": "rino/manga/lantern-03.webp",
+      "sha256": "d997e2c0425ea93765feb637c8b091a77fc027296c00e75c70d3750275cf2dc5",
+      "bytes": 65616
+    },
+    {
+      "path": "rino/manga/lantern-04.webp",
+      "sha256": "3e467a274554ff75c81744908d040dbceb4befd82da67af16395ae46ce91f3f1",
+      "bytes": 105588
+    },
+    {
+      "path": "rino/manga/lantern-05.webp",
+      "sha256": "db3327adace484d545b4b83c75dc9651be4a51a8c4b23d265a951c4c1b3f6d36",
+      "bytes": 87384
+    },
+    {
+      "path": "rino/manga/lantern-06.webp",
+      "sha256": "e3d3fbd5b12bf461d0bf2d48556df7e800e5a233b7a0a1aa4214178a434d4447",
+      "bytes": 102492
+    },
+    {
+      "path": "rino/manga/lantern-07.webp",
+      "sha256": "19bcf3b1fac7e92a47f5988fc02c252ef4e596be4546e578a24ad53a328c0dcf",
+      "bytes": 105662
+    },
+    {
+      "path": "rino/manga/lantern-08.webp",
+      "sha256": "4761ccc631d0e9b26a3b2779da7fc1b942c9f0a3c690770ebefbf1ad6a9b2707",
+      "bytes": 124878
+    },
+    {
+      "path": "rino/manga/lantern-09.webp",
+      "sha256": "52fd608cb2e31daa6ab2dcc2c0e89cc640bfa548995df259579628f2df4c3a45",
+      "bytes": 124570
+    },
+    {
+      "path": "rino/manga/lantern-10.webp",
+      "sha256": "aeec7080b7b5550cf2fbc277844d374c1c6fe4b64a8fbf1fe00505b60cd5d612",
+      "bytes": 119880
+    },
+    {
+      "path": "rino/manga/lantern-11.webp",
+      "sha256": "3e4b1b7370cdf461b7eac4c7f47eea02097dc30d8650f9110aa04f249c71be08",
+      "bytes": 111950
+    },
+    {
+      "path": "rino/manga/lantern-12.webp",
+      "sha256": "e75925e50942b1c46583e8c851f51f4e8fa7cc300fce0bf863a2de00a1429ed4",
+      "bytes": 114146
+    },
+    {
+      "path": "rino/manga/lantern-13.webp",
+      "sha256": "5fbcd6c52a41d75de8cbb5d77567689b815685143a8eac2bd1e364b1c8f45ff6",
+      "bytes": 108694
+    },
+    {
+      "path": "rino/manga/lantern-14.webp",
+      "sha256": "6b50f8a0978e3a1c06cadbbfbb5b32612cf852a8657cf3b8f8607e7340086c23",
+      "bytes": 97364
+    },
+    {
+      "path": "rino/manga/lantern-15.webp",
+      "sha256": "98a58db4281ece5d6181e17a2678d2532b1b2dc541b03c1c5e6e0bc9dc21a59f",
+      "bytes": 92684
+    },
+    {
+      "path": "rino/manga/lantern-16.webp",
+      "sha256": "23d6900e8059c72914fa53e62558a0742c9cf189ddfbbb710ebf121d234de010",
+      "bytes": 110878
+    },
+    {
+      "path": "rino/manga/lantern-17.webp",
+      "sha256": "6e824ba675be2120cc4f09af67906969cbfc594850a69e1b1ce133d87de86873",
+      "bytes": 118190
+    },
+    {
+      "path": "rino/manga/lantern-18.webp",
+      "sha256": "23c9b777d2275fcc848879d374d1667de276304f7021a5b509d1141f6f72257c",
+      "bytes": 121914
+    },
+    {
+      "path": "rino/manga/lantern-19.webp",
+      "sha256": "00950156b3d6ff2ee5b72ca379e235d19ba250d7c484c88896e0e14f3b5804c3",
+      "bytes": 123494
+    },
+    {
+      "path": "rino/manga/lantern-20.webp",
+      "sha256": "756f1816dec0026d90a5bd455a579a62f65251918f8edd538854b699c9ea5b43",
+      "bytes": 113134
+    },
+    {
+      "path": "rino/manga/office-01.webp",
+      "sha256": "90850922695e664230d910d6fb2408cb9a1f6f6498256cdb63fd7c1d47623f9f",
+      "bytes": 193472
+    },
+    {
+      "path": "rino/manga/office-02.webp",
+      "sha256": "387226e1cab3a9be8e1b7e19733c0163779d8cac48c7b033a2597f60be58bc38",
+      "bytes": 123656
+    },
+    {
+      "path": "rino/manga/office-03.webp",
+      "sha256": "8ad5c9c922065ee2dead484db6c5b14275b0a02e3685814417f28ee7595a0ee6",
+      "bytes": 139116
+    },
+    {
+      "path": "rino/manga/office-04.webp",
+      "sha256": "48089969b00c6d8042b120c2d72b1d4923402ea09ebde81600cc3f08db374e08",
+      "bytes": 156730
+    },
+    {
+      "path": "rino/manga/office-05.webp",
+      "sha256": "074a6b91cf15a0e9bf5be4524e90b4cceb2a08ac1f05b08a2bc395d0dd5b047d",
+      "bytes": 175714
+    },
+    {
+      "path": "rino/manga/office-06.webp",
+      "sha256": "e4e1188984ed8077c54b920c017fb4be3be18f478763c0d67a854f2f3496ef13",
+      "bytes": 163688
+    },
+    {
+      "path": "rino/manga/office-07.webp",
+      "sha256": "9fc7bd5744b55ec10e8fc7de95252eb0ee6b1dc9c446e9ca56f19260cf3a0713",
+      "bytes": 170818
+    },
+    {
+      "path": "rino/manga/office-08.webp",
+      "sha256": "370fb75ba56d87e87a099bc110050cbe2721d977efea06b92fdfe55ddb57158c",
+      "bytes": 148848
+    },
+    {
+      "path": "rino/manga/office-09.webp",
+      "sha256": "c08fad08c031afbc0d59b7db8753ac04201d6202f42dbb18107991534dc82ad0",
+      "bytes": 202964
+    },
+    {
+      "path": "rino/manga/office-10.webp",
+      "sha256": "8aa4cea2208ae3d02edfe254f695d4e720a333e1a54050526a303e0db7c7f8a8",
+      "bytes": 151058
+    },
+    {
+      "path": "rino/manga/office-11.webp",
+      "sha256": "4e02dbcc2c22eabbc3b76d5e59d3ac14bea0674896f2ee09032749f1a67dc073",
+      "bytes": 170326
+    },
+    {
+      "path": "rino/manga/office-12.webp",
+      "sha256": "4c12a941bf424fd144f8ef43fab94528d7038681f62a52fbe09f2d8531413f9a",
+      "bytes": 156310
+    },
+    {
+      "path": "rino/manga/office-13.webp",
+      "sha256": "7f37da114f7d5174cbc61efa2dfbba90242d7ebb4b5278879cbcac9dc18ab1f1",
+      "bytes": 153398
+    },
+    {
+      "path": "rino/manga/office-14.webp",
+      "sha256": "aec73a3246a35cca4d347918457ebe9209268eca4a42aaf320ab4f9616a68ab2",
+      "bytes": 164614
+    },
+    {
+      "path": "rino/manga/office-15.webp",
+      "sha256": "c39b531572e334131151e64995581181c3fcbfd48894fc3686023d8e54a3fc4b",
+      "bytes": 168768
+    },
+    {
+      "path": "rino/manga/office-16.webp",
+      "sha256": "10fb4a659a18283155af8791da8e23d33ab2e892887114cbd2f1477d6cdf22b4",
+      "bytes": 171904
+    },
+    {
+      "path": "rino/manga/office-17.webp",
+      "sha256": "b6030f782ace9d2b1be1a6824b0e9cbb884bb5687514cde1d0ea9830fbe2350f",
+      "bytes": 167992
+    },
+    {
+      "path": "rino/manga/office-18.webp",
+      "sha256": "ce43087aaa197a088b2ef735a8fb118378a06e402fc3b7b538cfed179c030945",
+      "bytes": 143644
+    },
+    {
+      "path": "rino/manga/office-19.webp",
+      "sha256": "2c94c4f8326077960c426593df3b3188112f81c5798e0752969e33f2b9d36b0b",
+      "bytes": 137124
+    },
+    {
+      "path": "rino/manga/office-20.webp",
+      "sha256": "8e337f486ad17b74321e05869810a40c0fef392777a19d9af4e36e98105e769d",
+      "bytes": 168392
+    },
+    {
+      "path": "rino/manga/bowl-01.webp",
+      "sha256": "7429f124af1faca579982bbce68eadc5d6bd00e3a09250759699459c9577dd64",
+      "bytes": 161438
+    },
+    {
+      "path": "rino/manga/bowl-02.webp",
+      "sha256": "b0a4b7919be8875894ee762f5cdc24af3bf3d951b6c9086d41600f78cc4e6318",
+      "bytes": 122492
+    },
+    {
+      "path": "rino/manga/bowl-03.webp",
+      "sha256": "abf4012664a9ef194050a4ffdfc77613a602c0a1fb1d3c9962a2a4b7382bef66",
+      "bytes": 140232
+    },
+    {
+      "path": "rino/manga/bowl-04.webp",
+      "sha256": "2dc0c4adcb8053478f600e6177e3f90c7d149ad8c549cd73452e854132c078f1",
+      "bytes": 130706
+    },
+    {
+      "path": "rino/manga/bowl-05.webp",
+      "sha256": "1299754b1438c54f6ca6f1239a03b2c4e9d5dd021d791648c776323dc2b7e962",
+      "bytes": 143490
+    },
+    {
+      "path": "rino/manga/bowl-06.webp",
+      "sha256": "33a9cdb76f4f43de721ba7c31ad3f6923de583487d0b082b74a3486ef804462f",
+      "bytes": 157292
+    },
+    {
+      "path": "rino/manga/bowl-07.webp",
+      "sha256": "20939ae59e368d6e916d106548f676fa17244443ee121d4a9ea50b493a1a4312",
+      "bytes": 111330
+    },
+    {
+      "path": "rino/manga/bowl-08.webp",
+      "sha256": "ee0f0c8b8b8d208a538c4fb749ee67cdcc07200e7ded56836c09c0a6d2122711",
+      "bytes": 130868
+    },
+    {
+      "path": "rino/manga/bowl-09.webp",
+      "sha256": "c03dd2a78a917fd4da4821c90a56440ac23a3e717f207ab78602ab25694410a5",
+      "bytes": 183458
+    },
+    {
+      "path": "rino/manga/bowl-10.webp",
+      "sha256": "4ffa9abf76df5d974702e74d2a1dec56fd9679496546a43fdfa1b6b8b9c09696",
+      "bytes": 201390
+    },
+    {
+      "path": "rino/manga/bowl-11.webp",
+      "sha256": "f12a01ef624eeac3090d1bc384b0a41a3bc7f49c3fc49dbe1683dfaf85fe0a12",
+      "bytes": 201848
+    },
+    {
+      "path": "rino/manga/bowl-12.webp",
+      "sha256": "ae53bef301c79e78ca33e846949c39af11d444313a64b791250dc9916490a3cb",
+      "bytes": 170058
+    },
+    {
+      "path": "rino/manga/bowl-13.webp",
+      "sha256": "806ac9b49c4579d1095d43acb8fa93d14270f3585e772e6402210d349255eddd",
+      "bytes": 203642
+    },
+    {
+      "path": "rino/manga/bowl-14.webp",
+      "sha256": "d9e5181437d0af042f967d240e91b81c0c6d035ad88dd5e7a101eae528e637b1",
+      "bytes": 204810
+    },
+    {
+      "path": "rino/manga/bowl-15.webp",
+      "sha256": "62899b389174ffb119c19e526674ec6fe87d50c36316f3ddb4d45b68ac6b6c8c",
+      "bytes": 214274
+    },
+    {
+      "path": "rino/manga/bowl-16.webp",
+      "sha256": "43b001621e7e98cdd31c3a989de5137d33a8fd82840f7be98628f637616d9fc9",
+      "bytes": 160536
+    },
+    {
+      "path": "rino/manga/bowl-17.webp",
+      "sha256": "a77fc08fe061feb0572f80a7961bdb63a45a5afa27de82370a296f00ef863f2d",
+      "bytes": 179808
+    },
+    {
+      "path": "rino/manga/bowl-18.webp",
+      "sha256": "67e6a556e3b39480cd7743ee623eaa0edefe17ebcc524bfa197e2b1bf07f1e25",
+      "bytes": 184972
+    },
+    {
+      "path": "rino/manga/bowl-19.webp",
+      "sha256": "616d9c2b4ab576988c49ef786c1d5e649f825d75b0f37d10b7742d14d8ebb8ef",
+      "bytes": 165570
+    },
+    {
+      "path": "rino/manga/bowl-20.webp",
+      "sha256": "3e2a356b11ceab0f30e74ce8f20792aeaf20773726a634cc4d9f569a9074d4f6",
+      "bytes": 175900
+    },
+    {
+      "path": "rino/manga/verse-01.webp",
+      "sha256": "4f81cd668e589ce6d18b2eab08af5f8b8bc4e34b5e96f0b92ad8710467be9f41",
+      "bytes": 172682
+    },
+    {
+      "path": "rino/manga/verse-02.webp",
+      "sha256": "f38342999a756d8e7641d728a80288be30761c3dea40d69166e26e9493134cbe",
+      "bytes": 143750
+    },
+    {
+      "path": "rino/manga/verse-03.webp",
+      "sha256": "f3dbac1cf3321ae538e8942a572d2a087c807e2746104178f282ea612b28528e",
+      "bytes": 94690
+    },
+    {
+      "path": "rino/manga/verse-04.webp",
+      "sha256": "b7817e5fc8053e6f62813e40a5ec169d72219a34d465663438c9c47963731966",
+      "bytes": 139110
+    },
+    {
+      "path": "rino/manga/verse-05.webp",
+      "sha256": "0d931b561b29431c081090e4051511b8b17c8f3a41cc46ffd0571b311fe7a173",
+      "bytes": 162840
+    },
+    {
+      "path": "rino/manga/verse-06.webp",
+      "sha256": "18290490c664e81e67a60d933e3b132bbc1404ea9696b81aa19f71aba33e1873",
+      "bytes": 159750
+    },
+    {
+      "path": "rino/manga/verse-07.webp",
+      "sha256": "a399b3734b0db2b3f3432ac86ea96a48c2c224f056aba6dd841fc3240d558382",
+      "bytes": 145236
+    },
+    {
+      "path": "rino/manga/verse-08.webp",
+      "sha256": "e70499aaaf99300b313b3f87a5a8b4c8b1250cbff347ea9811127bbd6c7c8797",
+      "bytes": 92996
+    },
+    {
+      "path": "rino/manga/verse-09.webp",
+      "sha256": "270d8d0e3572289277bb56822388f0ac140c03dae0c9e698a3912b5e6c767453",
+      "bytes": 177556
+    },
+    {
+      "path": "rino/manga/verse-10.webp",
+      "sha256": "437c24976dd9ed1edd9c5aa83d9a193a01e0393127d8818ef9e7edacf2701521",
+      "bytes": 173986
+    },
+    {
+      "path": "rino/manga/verse-11.webp",
+      "sha256": "1d1291fca01333dfed7e9b3a838f06d3085842ae4028467947ea74f074c220df",
+      "bytes": 128506
+    },
+    {
+      "path": "rino/manga/verse-12.webp",
+      "sha256": "958ae4150bede8559295344f701f03fafbae65d406b513cbc71ee935976e6fad",
+      "bytes": 176454
+    },
+    {
+      "path": "rino/manga/verse-13.webp",
+      "sha256": "1835d89458011e3ec7cc7256284b1fa0610656a09521a05332a98a29eac625f1",
+      "bytes": 168642
+    },
+    {
+      "path": "rino/manga/verse-14.webp",
+      "sha256": "44f7b04174631de31c3507923996b5f546f94171f9fee0b5cfb3c20baeac1b12",
+      "bytes": 161958
+    },
+    {
+      "path": "rino/manga/verse-15.webp",
+      "sha256": "c2edc309d3f14331b95561c573ab18db1f09bbdff673ffba7b866f17a2c65913",
+      "bytes": 171876
+    },
+    {
+      "path": "rino/manga/verse-16.webp",
+      "sha256": "984af0eddc480d4726099978375147ef780d7fb9df89f30d8f1216093c6ef26f",
+      "bytes": 150430
+    },
+    {
+      "path": "rino/manga/verse-17.webp",
+      "sha256": "4d6a2a3a794c64b008f20d0af39cba1385efa6f507cfb7b0468747a0762d6d47",
+      "bytes": 170172
+    },
+    {
+      "path": "rino/manga/verse-18.webp",
+      "sha256": "f408a796e419ee0d51cb6e216f90de81b8aac8282374c86e9f07379bd3dbe1b8",
+      "bytes": 147990
+    },
+    {
+      "path": "rino/manga/verse-19.webp",
+      "sha256": "e91b8df1a4704d419f0422f3138876e3041e5682ad90e6a0c46a726bde95c4dc",
+      "bytes": 143834
+    },
+    {
+      "path": "rino/manga/verse-20.webp",
+      "sha256": "df879b3a93ea1360e3fc84e0ceda29807865050b5b9dd196b2b20c82f7ecb191",
+      "bytes": 77568
     }
   ]
 }
