@@ -56,12 +56,16 @@
       .replace(/ou/g,'oo').replace(/ei/g,'ee');
     return [...new Set([canonical(text),canonical(text.replace(/([aeiou])-/g,'$1$1'))])].filter(Boolean);
   }
-  const normalize = input => ({
+  const normalize = input => {
+    const finder = globalThis.RinoRadicalFinder?.origin(input?.finder);
+    return {
     character: han(input?.character) ? input.character : null,
     view: ['meaning','words','writing'].includes(input?.view) ? input.view : 'meaning',
     wordId: typeof input?.wordId === 'string' ? input.wordId.slice(0,120) : null,
-    query: typeof input?.query === 'string' ? input.query.slice(0,120) : ''
-  });
+    query: typeof input?.query === 'string' ? input.query.slice(0,120) : '',
+    ...(finder ? {finder} : {})
+    };
+  };
   function englishMatch(item,query) {
     const terms=key(query).trim().split(/\s+/).filter(Boolean);
     if(!terms.length)return null;
@@ -186,7 +190,7 @@
     }
     return {kanji,words,catalogWords,byCharacter,preferred,search,pairs,reference:ref,register,aliases};
   }
-  function create({root,data,resources,notes = {},reference = {},saved,esc,button,bilingual = esc,readingWords = globalThis.KotobaKanjiReadingWords?.create(data),workspaceStorage = sessionStorage(),onChange = () => {},onLearn = () => {},lessonButtons = () => '',renderAnime = () => ''}) {
+  function create({root,data,resources,notes = {},reference = {},saved,esc,button,bilingual = esc,readingWords = globalThis.KotobaKanjiReadingWords?.create(data),workspaceStorage = sessionStorage(),onChange = () => {},onLearn = () => {},lessonButtons = () => '',renderAnime = () => '',renderFinder = () => ''}) {
     const index = createIndex(data,notes,reference);
     let state = normalize(saved), ink = [], activeStroke = null, matches = [], searchWords = [], message = 'Draw one kanji, or search by kanji, kana, romaji or English.';
     let host = null, pad = null, padController = null, pending = null, requestVersion = 0, strokeLesson = null, wordPage = 0, speaking = null;
@@ -222,7 +226,7 @@
     function saveWorkspace() {
       try { workspaceStorage?.setItem(WORKSPACE_KEY,JSON.stringify({version:1,query:state.query,ink,matches,words:searchWords.slice(0,8).map(word => word.id),mode:searchMode,page:searchPage})); } catch {}
     }
-    const changed = () => { saveWorkspace(); onChange(); };
+    const changed = options => { saveWorkspace(); onChange(options); };
     function relatedWords(character) {
       const existing = index.byCharacter.get(character) || [], result = [], included = new Set();
       for (const id of index.preferred.get(character) || []) { const item = index.words.get(id); if (item) { result.push(item); included.add(id); } }
@@ -367,7 +371,7 @@
       const pageSize = WORD_PAGE_SIZE;
       const pages = Math.max(1,Math.ceil(words.length / pageSize));
       wordPage = Math.min(Math.max(0,wordPage),pages - 1);
-      return `<div><h3>Words containing <span lang="ja">${esc(k.character)}</span> · ${words.length}</h3><div class="rdict-word-list" role="group" aria-label="Choose a vocabulary entry">${words.slice(wordPage*pageSize,wordPage*pageSize+pageSize).map(item=>action(`<span lang="ja">${ruby(item.word,item.reading,item.word_ruby)}</span><span>${esc(item.meaning_en)}</span>`,'search-word',item.id,'','rdict-word')).join('') || '<p>No related words are bundled yet.</p>'}</div>${pagination('word-page',wordPage,words.length,pageSize,'Vocabulary')}</div>`;
+      return `<div><h3>Words containing <span lang="ja">${esc(k.character)}</span> · ${words.length}</h3><div class="rdict-word-list" role="group" aria-label="Choose a vocabulary entry">${words.slice(wordPage*pageSize,wordPage*pageSize+pageSize).map(item=>action(`<span lang="ja">${ruby(item.word,item.reading,item.word_ruby)}</span><span>${esc(item.meaning_en)}</span>`,state.finder?'word':'search-word',item.id,'','rdict-word')).join('') || '<p>No related words are bundled yet.</p>'}</div>${pagination('word-page',wordPage,words.length,pageSize,'Vocabulary')}</div>`;
     }
     function writingMarkup(k,note) {
       const radical = k.radical;
@@ -383,7 +387,7 @@
       if(state.wordId&&state.view==='words'){
         const related=state.character?relatedWords(state.character).find(w=>w.id===state.wordId):null;
         const word=related || getWord(state.wordId);
-        return `<section class="rdict-entry">${word?wordDetail(word):`<p role="status">${referenceFailed?'This entry needs the full reference, which is unavailable. Reconnect and reopen Dictionary, or return to the available results.':'Loading this reference entry…'}</p>`}</section>`;
+        return `<section class="rdict-entry">${state.finder?renderFinder(state):''}${word?wordDetail(word):`<p role="status">${referenceFailed?'This entry needs the full reference, which is unavailable. Reconnect and reopen Dictionary, or return to the available results.':'Loading this reference entry…'}</p>`}</section>`;
       }
       if (!state.character) {
         const word = getWord(state.wordId);
@@ -391,7 +395,7 @@
       }
       if (!k) return `<section class="rdict-empty"><h2 lang="ja">${esc(state.character)}</h2><p>This character’s entry is not in RiNO’s offline catalogue yet.</p><a href="https://jisho.org/search/${encodeURIComponent(state.character + ' #kanji')}" target="_blank" rel="noopener noreferrer">Open a dictionary reference ↗</a></section>`;
       const note = noteFor(k.character), words = relatedWords(k.character);
-      return `<article class="rdict-entry"><header class="rdict-entry-heading"><span class="rdict-character" lang="ja">${esc(k.character)}</span><div><h2>${esc(note?.meaning || k.meanings_en.join('; '))}</h2><p class="rdict-muted">${esc(k.level)} · ${k.stroke_count} strokes${k.radical ? ' · radical ' + esc(k.radical.form || k.radical.character) : ''}</p><div class="rdict-learn">${action('Open in Learn','learn',k.id)}${lessonButtons(k)}</div></div></header><nav class="rdict-entry-nav" aria-label="Dictionary entry sections">${[['meaning','Meaning'],['words','Words'],['writing','Writing']].map(([value,label]) => action(label,'view',value,`aria-pressed="${state.view === value}"`)).join('')}</nav><div id="rdict-entry-body">${state.view === 'words' ? wordsMarkup(k,words) : state.view === 'writing' ? writingMarkup(k,note) : meaningMarkup(k,note,words)}</div></article>`;
+      return `<article class="rdict-entry"><header class="rdict-entry-heading"><span class="rdict-character" lang="ja">${esc(k.character)}</span><div><h2 id="rdict-entry-title" tabindex="-1">${esc(note?.meaning || k.meanings_en.join('; '))}</h2><p class="rdict-muted">${esc(k.level)} · ${k.stroke_count} strokes${k.radical ? ' · radical ' + esc(k.radical.form || k.radical.character) : ''}</p><div class="rdict-learn">${action('Open in Learn','learn',k.id)}${lessonButtons(k)}</div></div></header>${state.finder?renderFinder(state):''}<nav class="rdict-entry-nav" aria-label="Dictionary entry sections">${[['meaning','Meaning'],['words','Words'],['writing','Writing']].map(([value,label]) => action(label,'view',value,`aria-pressed="${state.view === value}"`)).join('')}</nav><div id="rdict-entry-body">${state.view === 'words' ? wordsMarkup(k,words) : state.view === 'writing' ? writingMarkup(k,note) : meaningMarkup(k,note,words)}</div></article>`;
     }
     function render() {
       return `<section class="rdict-app" data-entry-open="${entryOpen}"><header class="rdict-heading"><h1 id="rdict-title" tabindex="-1">Dictionary</h1><p>Words, meanings and examples · Kanji readings and writing</p></header><section class="rdict-lookup" aria-label="Dictionary lookup"><form id="rdict-search-form" role="search"><label for="rdict-search">Search Japanese, English or romaji</label><div><input type="search" id="rdict-search" maxlength="120" value="${esc(searchDraft)}" autocomplete="off" spellcheck="false" placeholder="学校 · 食べました · gakkou · water">${action('Search','search','','','rdict-search-submit')}</div></form><div class="rdict-lookup-options"><div class="rdict-search-modes" role="group" aria-label="Search language">${[['auto','Auto'],['japanese','Japanese'],['english','English'],['romaji','Romaji']].map(([mode,label])=>action(label,'mode',mode,`aria-pressed="${searchMode===mode}"`)).join('')}</div><details class="rdict-handwriting" ${handwritingOpen?'open':''}><summary>Draw a kanji</summary><div class="rdict-handwriting-body"><div class="rdict-pad-wrap"><svg id="rdict-pad" viewBox="0 0 109 109" role="img" aria-label="Kanji drawing area"><path class="rdict-guides" d="M54.5 4V105M4 54.5H105"/><text id="rdict-selected-glyph" class="rdict-selected-glyph" x="54.5" y="51" text-anchor="middle" dominant-baseline="central" lang="ja">${!ink.length&&state.character?esc(state.character):''}</text><g id="rdict-ink"></g></svg><div class="rdict-tools">${action('Undo','undo')}${action('Clear','clear')}</div></div>${action('Find matches','find','','','rdict-primary')}</div></details></div><p id="rdict-status" class="rdict-status" role="status" aria-live="polite">${esc(message)}</p><p class="rdict-reference-status" id="rdict-reference-status">${esc(referenceStatus)}</p></section><div class="rdict-workspace"><aside class="rdict-results" aria-label="Dictionary results"><div id="rdict-word-matches">${searchWordMarkup()}</div><div class="rdict-matchbar"><h2 class="rdict-match-heading">Kanji <span id="rdict-kanji-total">${matches.length}</span></h2><div id="rdict-matches">${candidateMarkup()}</div></div></aside><div class="rdict-detail-pane">${action('Back to results','back','','','rdict-back')}<div id="rdict-entry">${entryMarkup()}</div></div></div></section>`;
@@ -512,6 +516,7 @@
     }
     function select(character) {
       if (!han(character)) return;
+      delete state.finder;
       stopSpeaking(); state.character = character; state.wordId = null; state.view='meaning';wordPage = 0;entryOpen=true;
       patchMatches(); patchEntry(); paint(); announce('Opened ' + character + (ink.length ? '. Your drawing is kept.' : '. Draw or search to look up another kanji.')); changed();
       revealEntry();
@@ -519,7 +524,7 @@
     function selectWord(id,fromSearch = false) {
       const word = getWord(id); if (!word) return;
       stopSpeaking();
-      if (fromSearch) { state.character = null; wordPage = 0; }
+      if (fromSearch) { state.character = null; delete state.finder; wordPage = 0; }
       if (state.character) {
         const words = relatedWords(state.character);
         wordPage = Math.floor(Math.max(0,words.findIndex(item => item.id === id)) / WORD_PAGE_SIZE);
@@ -550,6 +555,10 @@
       else if(name==='dict-back'){entryOpen=false;patchMatches();host?.querySelector('[data-action="dict-search-word"][aria-pressed="true"]')?.focus();}
       else if(name==='dict-result-page'&&!searchBusy&&['next','previous'].includes(value)){searchPage=Math.max(0,Math.min(Math.ceil(wordTotal/WORD_PAGE_SIZE)-1,searchPage+(value==='next'?1:-1)));runSearch(undefined,true);saveWorkspace();}
       else if(name==='dict-kanji-page'&&['next','previous'].includes(value)){kanjiPage=Math.max(0,Math.min(Math.ceil(matches.length/12)-1,kanjiPage+(value==='next'?1:-1)));patchMatches();}
+      else if (name === 'dict-finder-compare' && state.finder) {
+        state.finder = {...state.finder,compare:!state.finder.compare};
+        patchEntry(); changed({replace:true});
+      }
       else if (name === 'dict-select') select(value);
       else if (name === 'dict-word' || name === 'dict-search-word') selectWord(value,name === 'dict-search-word');
       else if (name === 'dict-speak') speak(value);
@@ -567,16 +576,17 @@
       }
       return true;
     }
-    function navigate(input) {
+    function navigate(input,{openEntry=false}={}) {
       captureInput(); stopSpeaking();
       const next = normalize(input);
       const previousQuery = state.query;
-      const sameView = navigationInitialized && Object.keys(next).every(name => next[name] === state[name]);
+      const sameView = navigationInitialized && ['character','wordId','view','query'].every(name => next[name] === state[name]) && JSON.stringify(next.finder)===JSON.stringify(state.finder);
       navigationInitialized = true;
       state = next;
       if(previousQuery!==state.query)pendingPage=null;
       if(state.wordId&&index.aliases.has(state.wordId))state.wordId=index.aliases.get(state.wordId);
       if (!sameView) { searchDraft = state.query; draftSelection = null; draftFocused = false; composing = false; draftReset = true; wordPage = 0;entryOpen=!!(state.wordId||state.character);if(previousQuery!==state.query){searchPage=0;kanjiPage=0;} }
+      if(openEntry && (state.character||state.wordId))entryOpen=true;
       const words = state.character ? relatedWords(state.character) : [];
       if (state.wordId && !getWord(state.wordId) && !(reference.extended&&state.wordId.startsWith('jm:'))) state.wordId = null;
       if (!sameView && state.wordId) wordPage = Math.floor(Math.max(0,words.findIndex(item => item.id === state.wordId)) / WORD_PAGE_SIZE);
