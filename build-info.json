@@ -1,8 +1,8 @@
 {
-  "build_id": "k1-e96bed8f1944db19",
-  "source_sha256": "e96bed8f1944db19d144a77ac8b93967a37c04b38e11c104b4180f9427f82891",
-  "fragment_sha256": "924f39f245383da67d72e510e35215f08f53449d9bc082e9a71ecc01b357b8ae",
-  "standalone_sha256": "9f99248a95b0ce6ae0df7a67740a425feba1e7eda455f8620565815f1b482450",
+  "build_id": "k1-bd843f11559d3aa0",
+  "source_sha256": "bd843f11559d3aa070c4f089642f474da675baabf66084756b7e9b2c4ea0d1c6",
+  "fragment_sha256": "bd9e34470f90d10da874b3e918b3e895e3705df44bc883fdd3253b895e0236c7",
+  "standalone_sha256": "9a13c55d789b2247d712379bdd4a3b0a1e74918f5a17c3fbc9e198f06e6ba7a6",
   "recognition": {
     "entry": "./recognition/offline-recognizer.mjs",
     "id": "kotoba-offline-trained-ensemble",
@@ -299,8 +299,8 @@
   },
   "offline": {
     "workerPath": "rino-offline-sw.js",
-    "workerSha256": "c46e910f610ca5c58ede5b9da30e7f4175b6938ab00f6368f550b2e395592d17",
+    "workerSha256": "e18005514cd8109288d6cb2c188d953d90776e4de8254ba0100fb34d7c94eb46",
     "workerBytes": 47340,
-    "shellSha256": "9f99248a95b0ce6ae0df7a67740a425feba1e7eda455f8620565815f1b482450"
+    "shellSha256": "9a13c55d789b2247d712379bdd4a3b0a1e74918f5a17c3fbc9e198f06e6ba7a6"
   }
 }
