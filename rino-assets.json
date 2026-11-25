@@ -681,6 +681,21 @@
       "path": "rino/kitchen/wash.wav",
       "sha256": "c63e3b3465854c0e70b7b8c37d9a11096ed7102cb22c06a5b231ebf3f0b1ed6e",
       "bytes": 102956
+    },
+    {
+      "path": "rino/kitchen/episode-v2.mjs",
+      "sha256": "ae76afc801995fef525a897610a023d1b4a688a231eb5be7e45da6b150cbd0fe",
+      "bytes": 21712
+    },
+    {
+      "path": "rino/kitchen/kitchen-data-v2.mjs",
+      "sha256": "5024255e46a5fb8d1b06614078ce7bffd989c753495df584416eaba6aa39d21d",
+      "bytes": 5004
+    },
+    {
+      "path": "rino/kitchen/kitchen-v2.css",
+      "sha256": "ec1e8c98223a48b82cb38ff8422a594d0fa4928effd73820e2dfd6c8a111e306",
+      "bytes": 12734
     }
   ]
 }
