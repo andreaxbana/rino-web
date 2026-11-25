@@ -551,6 +551,136 @@
       "path": "rino/manga/verse-20.webp",
       "sha256": "df879b3a93ea1360e3fc84e0ceda29807865050b5b9dd196b2b20c82f7ecb191",
       "bytes": 77568
+    },
+    {
+      "path": "rino/kitchen/bread.wav",
+      "sha256": "ddcbaf28b039d9f35de6023bb45ccc41937e05ac48c2d1c6ca8ce88b8a41d7af",
+      "bytes": 57516
+    },
+    {
+      "path": "rino/kitchen/bread.webp",
+      "sha256": "2f7ecfbf9f06ff04cb91355a6e80a3dbd7b39b959f9e94f210cdd70efd08529e",
+      "bytes": 37318
+    },
+    {
+      "path": "rino/kitchen/credits.txt",
+      "sha256": "e1b4ad00230a9f64f96cd277bbc1dd958506949227cad23d1ce71c01d823b6fd",
+      "bytes": 1181
+    },
+    {
+      "path": "rino/kitchen/cup.wav",
+      "sha256": "3a559c5ae88243b424741a17bf83ab5c1ece5bd6f25cd680e3aafdca2aaa4f17",
+      "bytes": 91692
+    },
+    {
+      "path": "rino/kitchen/cup.webp",
+      "sha256": "038ce59eff47a577b9e162493ce6035480f743bbb9d0069e03c8ed0106cb8d6b",
+      "bytes": 27390
+    },
+    {
+      "path": "rino/kitchen/episode.mjs",
+      "sha256": "16b9384aac0d421a0137a807a4eef30cc39bfb2e1eb67b56f1b8f90815e103bf",
+      "bytes": 18625
+    },
+    {
+      "path": "rino/kitchen/fridge-open.webp",
+      "sha256": "7de880b9a0f167c59229491fb09fb4a38f8603eb0654422ca3aa70e3e593850b",
+      "bytes": 51242
+    },
+    {
+      "path": "rino/kitchen/fridge.wav",
+      "sha256": "8a9adab2da555aaebeba219c646c0d14cfba838cb8a3e59c0b36e10e0bcedb20",
+      "bytes": 135724
+    },
+    {
+      "path": "rino/kitchen/fridge.webp",
+      "sha256": "a90f32097a5c7baa56e7c85f25ea85127ff312407b2c2d11a50ea708fc64c72f",
+      "bytes": 31244
+    },
+    {
+      "path": "rino/kitchen/kitchen-audio.mjs",
+      "sha256": "a250f010927ce445ed8649d698d824972f6f5967b211919f9a9bf2288303d715",
+      "bytes": 2439
+    },
+    {
+      "path": "rino/kitchen/kitchen-data.mjs",
+      "sha256": "ebebac335066efd622a62b22ac356e0631abc2d3a31b27b2326e5e53cc390915",
+      "bytes": 4564
+    },
+    {
+      "path": "rino/kitchen/kitchen.css",
+      "sha256": "8c7cc62aa92b6d087b9597a898f701d1f3c380e25a420c387704c6c9f69a67ec",
+      "bytes": 11070
+    },
+    {
+      "path": "rino/kitchen/kitchen.webp",
+      "sha256": "7d212373f635d703ec9f24ec84c4e84eb00d99e4502493a823015922b2694000",
+      "bytes": 209148
+    },
+    {
+      "path": "rino/kitchen/kitten.webp",
+      "sha256": "699337cc418e7cd3e6e71b24c5c2ab342a21feefcdc42d0179b51eb871cd0b66",
+      "bytes": 24466
+    },
+    {
+      "path": "rino/kitchen/milk.wav",
+      "sha256": "7afc884f9d2b5c6fb55fe69621a6f1640e9346d52d3797c9fa7ea9204cc1500b",
+      "bytes": 124716
+    },
+    {
+      "path": "rino/kitchen/milk.webp",
+      "sha256": "8c58054c76ef617f3ce9c71c106391ea4020aeaa3d1717f7feeb30e9d4fab556",
+      "bytes": 20394
+    },
+    {
+      "path": "rino/kitchen/open.wav",
+      "sha256": "d91a2b5ec91aa325d4239b54015915a4cb2ea986644fdc1dcb49a3af4d338595",
+      "bytes": 101932
+    },
+    {
+      "path": "rino/kitchen/plate.wav",
+      "sha256": "8a6c6d1b1a1052176adf56e2fb875198db601903ab3e8d60bdf0f9bdb6810b4a",
+      "bytes": 98348
+    },
+    {
+      "path": "rino/kitchen/plate.webp",
+      "sha256": "6e80379015af07facbbc7c9e86e405dcd01c9a6408c66656d57b4a6b7fd66311",
+      "bytes": 36972
+    },
+    {
+      "path": "rino/kitchen/rino-open.webp",
+      "sha256": "df93d52dd695327aebda39e5be0e8eeb1a840f234aba43325bf8aceab7cf4f3d",
+      "bytes": 34528
+    },
+    {
+      "path": "rino/kitchen/rino-serve.webp",
+      "sha256": "a299758136923e7e3b61f3cb39c289af83712c74513824670a8ee3409c391c44",
+      "bytes": 38480
+    },
+    {
+      "path": "rino/kitchen/rino-wash.webp",
+      "sha256": "c730199339b365e702dffe1b30ede5415b64acd8726fb338ef77ab2361c044dc",
+      "bytes": 41074
+    },
+    {
+      "path": "rino/kitchen/sparrow.webp",
+      "sha256": "3abde88bc3c8cf40de4a1cb21ae8405cd37f072e4cc677fa171e7cec824025bd",
+      "bytes": 31764
+    },
+    {
+      "path": "rino/kitchen/table-detail.webp",
+      "sha256": "cbc56808b9bc532a2727215f019b42e126e2ece024f82200564bd4cd9f44c829",
+      "bytes": 11166
+    },
+    {
+      "path": "rino/kitchen/table.wav",
+      "sha256": "59163a3ff17d3515299ea6c9e1eb2b73e99874a4e95d7c5427ce785c8bf50f44",
+      "bytes": 112940
+    },
+    {
+      "path": "rino/kitchen/wash.wav",
+      "sha256": "c63e3b3465854c0e70b7b8c37d9a11096ed7102cb22c06a5b231ebf3f0b1ed6e",
+      "bytes": 102956
     }
   ]
 }
