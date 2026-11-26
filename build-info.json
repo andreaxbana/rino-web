@@ -1,8 +1,8 @@
 {
-  "build_id": "k1-98d987bf70348356",
-  "source_sha256": "98d987bf70348356279fba020b510ae64f29e8a62c4c56f91d99fd7e86621e01",
-  "fragment_sha256": "351c32266b8ba5bb84543f4792fb17843da1c8da32c39881c88f228fb6903f4c",
-  "standalone_sha256": "29db2458919cdc061424ef6c9eab747b9b3f113c3979ab027f7fd9f265bc8d69",
+  "build_id": "k1-97d75e953b24d1c9",
+  "source_sha256": "97d75e953b24d1c9a66dc850d648616642b1b704c33509b00d839be4572d695a",
+  "fragment_sha256": "11508384d30459bab384dea1f5c3efa475aa671065ae0a33973c743d4fe14214",
+  "standalone_sha256": "af0fd124b72570970755f08c35837bf78d6ad061222da6bc6fdb037030d3af7e",
   "recognition": {
     "entry": "./recognition/offline-recognizer.mjs",
     "id": "kotoba-offline-trained-ensemble",
@@ -14,17 +14,17 @@
   "rino": {
     "id": "rino-study-world",
     "version": 1,
-    "assetsSha256": "d162c91548db98273500516fcfba9453886e31d07c2c15910c03d92cf023866e",
-    "bytes": 25693672
+    "assetsSha256": "72aa8e689705940654954d06088044735373941f9ebbcdccefc0a6c26cceb0b3",
+    "bytes": 25721938
   },
   "dictionary": {
-    "assetsSha256": "10fc564cf978c89e53e956db5756a921c99180696a0d2fb204939cedcff5a575",
+    "assetsSha256": "2bb522f08017756f5da3931835b0df6e7208b429864c5320efcf93926a2b80b6",
     "sourceSha256": "3846524394e7b149f88f1cf09d9d6b10aa0b0e05267cd180bfb5eea31873952b",
     "entries": 218920,
-    "coreEntries": 24092,
-    "workerPath": "dictionary/47d9e0a7d89781d2420cc2c945eaf5992ab4c536dc3047d10ee20189a2b720ff/dictionary-worker.js",
+    "coreEntries": 26007,
+    "workerPath": "dictionary/e71315d262589dd50a20b1e40e4c1455140dec99c87022d76501af845d2a9d8d/dictionary-worker.js",
     "reference": {
-      "path": "dictionary/47d9e0a7d89781d2420cc2c945eaf5992ab4c536dc3047d10ee20189a2b720ff/reference.json.gz",
+      "path": "dictionary/e71315d262589dd50a20b1e40e4c1455140dec99c87022d76501af845d2a9d8d/reference.json.gz",
       "bytes": 9402307,
       "sha256": "50baa00c1dd80172cf37c67bee951133fa9e3420d5f024b1e13f45e3b8e24fa4"
     },
@@ -299,8 +299,8 @@
   },
   "offline": {
     "workerPath": "rino-offline-sw.js",
-    "workerSha256": "7320c87e39ff3df2768199ef376f00db01582e96e5a1517e78321c616a861f9d",
-    "workerBytes": 92554,
-    "shellSha256": "29db2458919cdc061424ef6c9eab747b9b3f113c3979ab027f7fd9f265bc8d69"
+    "workerSha256": "d62e962493f4d629ca5e83915f0ff621f979326258ca3f792d4638e05b29d712",
+    "workerBytes": 92808,
+    "shellSha256": "af0fd124b72570970755f08c35837bf78d6ad061222da6bc6fdb037030d3af7e"
   }
 }

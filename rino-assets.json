@@ -1018,6 +1018,16 @@
       "bytes": 262170
     },
     {
+      "path": "rino/field/scene-quiz.mjs",
+      "sha256": "5ead3329e31efefced4e3831bcd01df5ea85f092ce05b2317cb3a0e4a7713770",
+      "bytes": 26893
+    },
+    {
+      "path": "rino/field/scene-quiz.css",
+      "sha256": "48c114c84e9ba8c8333126d4eced8b8aecbf21c92db761be85494659ce5c34ea",
+      "bytes": 1373
+    },
+    {
       "path": "rino/field/spoon.webp",
       "sha256": "621eacb17912fb08acb8cb99630605bb5b539d50686c9f7d966c2296ad409710",
       "bytes": 11178

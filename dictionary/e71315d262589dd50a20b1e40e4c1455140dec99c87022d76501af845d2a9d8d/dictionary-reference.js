@@ -31,6 +31,31 @@
       spelling_notes:forms.filter(f=>f[1]?.length).map(f=>({word:f[0],tags:f[1]})),reading_notes:reading[3] || [],
       other_readings:entry[2].filter(r=>r!==reading).map(r=>({reading:r[0],forms:allowedForms(entry,r).map(f=>f[0])})),source:'JMdict / EDRDG'};
   }
+  function pairEvidence(entry,form,reading) {
+    if (!form || !reading || reading[2] || (reading[1]?.length && !reading[1].includes(form[0]))) return null;
+    if (form[1]?.includes('sK') || reading[3]?.includes('sk')) return null;
+    const senses = entry[3].filter(sense => (!sense[3]?.length || sense[3].includes(form[0])) &&
+      (!sense[4]?.length || sense[4].includes(reading[0])));
+    if (!senses.length) return null;
+    const current = senses.filter(sense => !sense[5]?.some(tag => /^(arch|dated|obs|rare)$/.test(tag)));
+    const sense = current[0] || senses[0];
+    const usuallyKana = (current.length ? current : senses).every(s => s[5]?.includes('uk'));
+    const tags = [...form[1] || [], ...reading[3] || []];
+    const labels = {iK:'Irregular spelling',io:'Irregular kana ending',oK:'Outdated spelling',rK:'Rare spelling',
+      ik:'Irregular reading',ok:'Outdated reading',rk:'Rare reading',arch:'Archaic',dated:'Dated',obs:'Obsolete',rare:'Rare usage',poet:'Poetic usage'};
+    const notes = [...new Set([...tags,...sense[5] || []].map(tag => labels[tag]).filter(Boolean))];
+    if (usuallyKana) notes.push('Usually written in kana');
+    const wholeWordReading = tags.includes('gikun') || tags.includes('ateji');
+    // JMdict records priorities on both the spelling and the pronunciation.
+    // Only a shared mark is evidence for the particular pair shown in Learn.
+    const shared = (form[2] || []).filter(tag => reading[4]?.includes(tag));
+    const general = shared.some(tag => /^(ichi1|gai1|spec[12])$/.test(tag));
+    const band = frequencyBand(shared);
+    const marked = (general || shared.includes('news1')) && current.length &&
+      !tags.some(tag => labels[tag]) && (!usuallyKana || band !== unranked);
+    const priority = marked ? {entryId:entry[0],general,usuallyKana,frequencyBand:band,spellingBand:frequencyBand(form[2]),wholeWordReading} : null;
+    return {meaning_en:sense[1][0],dictionary_pos:[...new Set(senses.flatMap(s => s[2] || []))],note:notes.join(' · '),priority,wholeWordReading};
+  }
   function create(source = {}) {
     const words=[], byIdentity=new Map(), byPair=new Map();
     for(const entry of source.entries || []) for(const reading of entry[2]) {
@@ -52,29 +77,15 @@
       // A common flag on one spelling must not promote its rare variants.
       return sourceEntry(item)?.[1].some(([form,,tags]) => norm(form) === norm(item.word) && hasPriority(tags)) || false;
     }
-    function commonWordPriority(item) {
+    function readingEvidence(item) {
       const entry = sourceEntry(item);
       if (!entry) return null;
       const form = entry[1].find(([text]) => text === item.word);
       const reading = entry[2].find(([text]) => text === item.reading);
-      if (!form || !reading || reading[2] || (reading[1]?.length && !reading[1].includes(item.word))) return null;
-      if (form[1]?.some(tag => /^(iK|io|oK|rK|sK)$/.test(tag)) || reading[3]?.some(tag => /^(ik|ok|rk|sk)$/.test(tag))) return null;
-      // JMdict records priorities on both the spelling and the pronunciation.
-      // Only a shared mark is evidence for the particular pair shown in Learn.
-      const shared = (form[2] || []).filter(tag => reading[4]?.includes(tag));
-      const general = shared.some(tag => /^(ichi1|gai1|spec[12])$/.test(tag));
-      if (!general && !shared.includes('news1')) return null;
-      const currentSenses = entry[3].filter(([, , , forms, readings, misc]) =>
-        (!forms?.length || forms.includes(item.word)) && (!readings?.length || readings.includes(item.reading)) &&
-        !misc?.some(tag => /^(arch|dated|obs|rare)$/.test(tag)));
-      if (!currentSenses.length) return null;
-      const usuallyKana = currentSenses.every(sense => sense[5]?.includes('uk'));
-      const band = frequencyBand(shared);
-      if (usuallyKana && band === unranked) return null;
-      return {entryId:entry[0],general,usuallyKana,frequencyBand:band,spellingBand:frequencyBand(form[2]),
-        wholeWordReading:reading[3]?.includes('gikun') || false};
+      return pairEvidence(entry,form,reading);
     }
-    return {words,byIdentity,byPair,resolve,isCommonSpelling,commonWordPriority,labels:source.labels || {},source:source.source};
+    const commonWordPriority = item => readingEvidence(item)?.priority || null;
+    return {words,byIdentity,byPair,resolve,isCommonSpelling,commonWordPriority,readingEvidence,labels:source.labels || {},source:source.source};
   }
   // Evidence is an exact surface + reading span, including conjugated forms.
   // A structural match is not a claim of human linguistic review.
@@ -116,5 +127,5 @@
     }
     return null;
   }
-  globalThis.RinoDictionaryReference=Object.freeze({norm,pair,identity,readingId,expand,create,occurrence,allowedForms});
+  globalThis.RinoDictionaryReference=Object.freeze({norm,pair,identity,readingId,expand,create,occurrence,allowedForms,pairEvidence});
 })();

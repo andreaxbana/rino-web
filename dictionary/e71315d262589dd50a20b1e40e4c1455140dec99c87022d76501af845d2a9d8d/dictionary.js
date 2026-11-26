@@ -192,6 +192,11 @@
   }
   function create({root,data,resources,notes = {},reference = {},saved,esc,button,bilingual = esc,readingWords = globalThis.KotobaKanjiReadingWords?.create(data),workspaceStorage = sessionStorage(),onChange = () => {},onLearn = () => {},lessonButtons = () => '',renderAnime = () => '',renderFinder = () => ''}) {
     const index = createIndex(data,notes,reference);
+    const choicesByWord = new Map();
+    for (const group of reference.wordChoices || []) for (const member of group.members) {
+      if (!choicesByWord.has(member)) choicesByWord.set(member,[]);
+      choicesByWord.get(member).push(group);
+    }
     let state = normalize(saved), ink = [], activeStroke = null, matches = [], searchWords = [], message = 'Draw one kanji, or search by kanji, kana, romaji or English.';
     let host = null, pad = null, padController = null, pending = null, requestVersion = 0, strokeLesson = null, wordPage = 0, speaking = null;
     let searchDraft = state.query, draftSelection = null, draftFocused = false, composing = false, draftReset = false, navigationInitialized = false;
@@ -280,24 +285,57 @@
       const seen=new Set();
       return examples.filter(s=>s.occurrence&&!seen.has(s.example_ja)&&seen.add(s.example_ja));
     }
-    function wordHelp({word,reading,id,level,meaning_en}) {
+    function helpEntry({word,reading,id,jmdict_id,meaning_en}) {
       const match=index.words.get(id);
-      const exact=match&&key(match.reading)===key(reading)&&[match.word,...match.alternate_forms || []].some(form=>key(form)===key(word));
+      const exact=match&&(!jmdict_id||String(match.jmdict_id)===String(jmdict_id))&&key(match.reading)===key(reading)&&[match.word,...match.alternate_forms || []].some(form=>key(form)===key(word));
+      if(exact)return match;
       const pair=index.words.get(index.pairs.get(key(word)+'\0'+key(reading)));
       const ref=index.reference?.byPair.get(globalThis.RinoDictionaryReference.pair(word,reading)) || [];
-      const glossMatches=ref.filter(entry=>entry.glosses.some(gloss=>key(gloss)===key(meaning_en)));
-      const unique=ref.length===1?ref[0]:glossMatches.length===1?glossMatches[0]:null;
-      const entry=exact?match:unique?(pair?.reference_key===unique.reference_key?pair:unique):!ref.length&&pair&&key(pair.reading)===key(reading)?pair:null;
+      const glossHints=new Set((meaning_en || '').split(';').map(gloss=>key(gloss.trim())).filter(Boolean));
+      const glossMatches=ref.filter(entry=>entry.glosses.some(gloss=>glossHints.has(key(gloss))));
+      const unique=jmdict_id?ref.find(entry=>entry.jmdict_id===String(jmdict_id)):ref.length===1?ref[0]:glossMatches.length===1?glossMatches[0]:null;
+      return unique?(pair?.reference_key===unique.reference_key?pair:unique):!jmdict_id&&!ref.length&&pair&&key(pair.reading)===key(reading)?pair:null;
+    }
+    function commonWordChoices(words) {
+      const seen = new Set(), shared = new Set(), members = new Set();
+      for (const word of words) {
+        const member = word.word + '\0' + helpEntry(word)?.reference_key;
+        if (members.has(member)) continue;
+        members.add(member);
+        for (const group of choicesByWord.get(member) || []) {
+          if (seen.has(group)) shared.add(group);
+          seen.add(group);
+        }
+      }
+      return [...shared].map(group => group.note);
+    }
+    function wordHelp(item) {
+      const {word,reading,level,meaning_en}=item, entry=helpEntry(item);
+      const wordChoices=(choicesByWord.get(word+'\0'+entry?.reference_key) || []).map(group=>group.note);
       const guidance=notes.wordUsage?.[entry?.reference_key];
       const editorial=reference.examples?.[entry?.reference_key];
       const examples=guidance&&editorial?.length?editorial:entry?wordExamples({...entry,learner_examples:editorial || entry.learner_examples}):[];
-      const senses=entry?.senses?.filter(sense=>!sense.forms?.length||sense.forms.includes(word));
+      const senses=entry?.senses?.filter(sense=>!sense.forms?.length||sense.forms.includes(word)) || [];
+      // The compact panel opens from a particular gloss. Prefer examples
+      // tagged for that sense before falling back to general word contexts.
+      const glossKey=text=>key(text.replace(/\([^()]*\)/g,'').trim());
+      const hints=new Set((meaning_en || '').split(';').map(glossKey).filter(Boolean));
+      const matched=senses.filter(s=>s.glosses.some(gloss=>hints.has(glossKey(gloss))));
+      const senseIds=new Set(matched.map(s=>s.id));
+      const matchingExamples=examples.filter(s=>senseIds.has(s.senseId));
+      const displayExamples=matchingExamples.length?matchingExamples:examples;
+      // A dictionary entry can share senses and readings across spellings.
+      // Keep its conjugated examples, but lead with the kanji the learner tapped.
+      const writtenKanji=text=>text.replace(/[^\p{Script=Han}々]/gu,'');
+      const kanji=wordChoices.length && writtenKanji(word);
+      const preferred=kanji && displayExamples.filter(s=>writtenKanji(s.occurrence.surface)===kanji);
+      const ordered=preferred?.length?[...preferred,...displayExamples.filter(s=>!preferred.includes(s))]:displayExamples;
       const type=readingWords?.partOfSpeech({...entry,word,reading});
       return {word,reading,level:level || entry?.level,type:guidance?.type || entry?.learner?.pos || (type?.short==='?'?'':type?.full),
         definition:guidance?.definition || entry?.learner?.definition,
-        senses:senses?.length?senses.map(sense=>sense.glosses.slice(0,3).join(', ')):[meaning_en || entry?.meaning_en],
-        usage:guidance?.usage || entry?.learner?.usage || entry?.example_sense_note,compare:guidance?.compare,
-        examples:examples.filter(sentence=>sentence.example_en).slice(0,2).map(sentence=>wordExample(sentence,entry,true)),
+        senses:senses.length?[...matched,...senses.filter(s=>!senseIds.has(s.id))].map(s=>s.glosses.slice(0,3).join(', ')):[meaning_en || entry?.meaning_en],
+        usage:guidance?.usage || entry?.learner?.usage || entry?.example_sense_note,compare:guidance?.compare,wordChoices,
+        examples:ordered.filter(sentence=>sentence.example_en).slice(0,2).map(sentence=>wordExample(sentence,entry,true)),
         dictionaryId:entry&&index.words.has(entry.id)?entry.id:''};
     }
     function wordDetail(word) {
@@ -604,8 +642,27 @@
     }
     navigate(state);
     const referenceWordsForKanji = character => (index.byCharacter.get(character) || []).filter(word => word.reference_key && !word.level);
+    function kunReadingCandidates(character) {
+      const ref = index.reference, result = [], seen = new Set();
+      if (!ref) return result;
+      for (const item of index.byCharacter.get(character) || []) {
+        for (const spelling of [item.word,...item.alternate_forms || []]) {
+          if (!spelling.includes(character)) continue;
+          const pair = globalThis.RinoDictionaryReference.pair(spelling,item.reading);
+          for (const entry of ref.byPair.get(pair) || []) {
+            const id = spelling + '\0' + entry.reference_key;
+            if (seen.has(id)) continue;
+            seen.add(id);
+            const word = spelling === entry.word ? entry : {...entry,word:spelling};
+            const evidence = ref.readingEvidence(word);
+            if (evidence && !evidence.wholeWordReading) result.push({word,evidence});
+          }
+        }
+      }
+      return result;
+    }
     return {render,mount,beforeRender,handle,navigate,wordHelp,isCommonSpelling:index.reference?.isCommonSpelling,
-      commonWordPriority:index.reference?.commonWordPriority,referenceWordsForKanji,navigation:() => ({...state}),hasActiveInput:() => !!activeStroke || !!pending || composing,
+      commonWordPriority:index.reference?.commonWordPriority,referenceWordsForKanji,kunReadingCandidates,commonWordChoices,navigation:() => ({...state}),hasActiveInput:() => !!activeStroke || !!pending || composing,
       announcement:() => 'Dictionary · all levels' + (state.character ? ' · ' + state.character : ''),
       // Read-only snapshots support regression checks without saving ink to progress.
       drawing:() => ink.map(stroke => stroke.map(point => point.slice()))};

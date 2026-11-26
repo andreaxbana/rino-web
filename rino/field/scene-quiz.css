@@ -1,0 +1,33 @@
+#jp-study-app .fs-activity-bar {
+  display: grid;
+  grid-template-columns: max-content minmax(0, 1fr);
+  gap: 8px;
+  align-items: start;
+  margin-bottom: 10px;
+}
+#jp-study-app .fs-activity-picker { grid-area: auto; }
+#jp-study-app .fs-activity-bar .fs-bank { margin: 0; }
+#jp-study-app .fs-word-card {
+  display: grid;
+  grid-template-columns: clamp(68px, 7vw, 96px) minmax(0, 1fr);
+  align-items: center;
+  gap: clamp(10px, 1.25vw, 18px);
+}
+#jp-study-app .fs-word-card > .fs-thumb {
+  width: 100%;
+  aspect-ratio: 1;
+  border-radius: 10px;
+}
+#jp-study-app .fs-word-card > .bk-study { min-width: 0; min-height: 0; }
+#jp-study-app .fs-word-card .bk-word { line-height: 1.5; }
+#jp-study-app .fs-word-card + .bk-controls ~ .bk-feedback:empty { display: none; }
+#jp-study-app .bk-answers .fs-wrong-choice { border-color: #a02a35; color: #88222d; }
+#jp-study-app[data-theme="dark"] .bk-answers .fs-wrong-choice { border-color: #eb94a0; color: #ffd6dc; }
+@media (max-width: 680px) {
+  #jp-study-app .fs-activity-bar { gap: 6px; margin-bottom: 6px; }
+  #jp-study-app .fs-activity-picker .game-button { min-width: 0; padding-inline: 9px; }
+  #jp-study-app .fs-activity-bar:has(.fs-bank-grid:not([hidden])) { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 450px) {
+  #jp-study-app .fs-activity-bar .fs-bank-toggle { flex-wrap: wrap; gap: 0 5px; padding: 4px 8px; }
+}
