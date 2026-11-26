@@ -1,0 +1,80 @@
+#jp-study-app .hs-stories{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:10px 0 0}
+#jp-study-app .hs-story{min-width:0;display:flex;align-items:center;justify-content:flex-start;gap:9px;min-height:49px;padding:5px 12px;text-align:left;line-height:1.15;background:var(--jp-panel);color:var(--jp-text);border:1px solid var(--jp-line)}
+#jp-study-app .hs-story img{width:36px;height:36px;object-fit:contain;flex:none}
+#jp-study-app .hs-short-title{display:none}
+#jp-study-app .hs-header.bk-setup-header{grid-template-columns:minmax(0,1fr) auto auto auto;grid-template-areas:"title picker start voice"}
+#jp-study-app .hs-start{grid-area:start;justify-self:end;min-height:44px}
+#jp-study-app .hs-story[aria-pressed="true"],#jp-study-app .hs-map-room[aria-pressed="true"]{background:var(--jp-selection);border-color:var(--jp-selection-line);font-weight:700}
+#jp-study-app .hs-layout{grid-template-columns:minmax(0,1.8fr) minmax(255px,.86fr)}
+#jp-study-app .hs-scene{min-width:0;border:1px solid var(--jp-line);border-radius:19px;overflow:hidden;background:var(--jp-panel)}
+#jp-study-app .hs-scene-head{display:flex;align-items:center;justify-content:space-between;gap:6px;min-height:46px;padding:0 8px 0 13px}
+#jp-study-app .hs-scene-head>div{display:flex;align-items:center;gap:4px}
+#jp-study-app .hs-scene-head strong{font-size:1rem;line-height:1.15}
+#jp-study-app .hs-scene-head strong:focus{outline:none}
+#jp-study-app .hs-scene-head .game-button{min-height:44px;line-height:1.15;padding:4px 9px;font-size:.83rem;border:1px solid transparent;background:transparent;color:var(--jp-text)}
+#jp-study-app .hs-scene-head .game-button:focus-visible{outline:2px solid var(--jp-text);outline-offset:-4px}
+#jp-study-app .hs-board{width:100%;aspect-ratio:3/2;border-radius:0;overflow:hidden;background:#8e755c;box-shadow:none}
+#jp-study-app .hs-background{display:block;width:100%;height:100%;object-fit:fill;pointer-events:none;user-select:none}
+#jp-study-app .hs-arriving .hs-background{animation:hs-enter .25s ease-out}
+#jp-study-app .hs-board[data-story="rain"] .hs-background{filter:saturate(.85) brightness(.93)}
+#jp-study-app .hs-rain{position:absolute;top:8%;left:53%;width:19%;height:12%;overflow:hidden;pointer-events:none;background:repeating-linear-gradient(105deg,transparent 0 7px,#dcefff73 8px,transparent 9px 15px);background-size:34px 29px;animation:hs-rain .9s linear infinite}
+#jp-study-app [data-place="sitting"] .hs-rain{left:37%;top:9%;width:25%;height:15%}
+#jp-study-app [data-place="study"] .hs-rain{left:24%;top:0;width:47%;height:9%}
+@keyframes hs-enter{from{opacity:.7;transform:scale(1.025)}}
+@keyframes hs-rain{to{background-position:0 29px}}
+#jp-study-app .hs-board .hs-item,#jp-study-app .hs-board .hs-opening,#jp-study-app .hs-board .hs-motion{position:absolute;left:var(--x);top:var(--y);width:var(--w);height:var(--h);transform:translate(-50%,-50%);z-index:2;display:grid;place-items:center;overflow:visible}
+#jp-study-app .hs-board div.hs-item,#jp-study-app .hs-board div.hs-motion{pointer-events:none}
+#jp-study-app .hs-item>img,#jp-study-app .hs-player img,#jp-study-app .hs-ending img{width:100%;height:100%;object-fit:contain;pointer-events:none;filter:drop-shadow(1px 2px 2px #36271754)}
+#jp-study-app .hs-board .hs-item:focus-visible,#jp-study-app .hs-board .hs-opening:focus-visible,#jp-study-app .hs-board .hs-motion:focus-visible,#jp-study-app .hs-door:focus-visible{outline:3px solid #382d25;outline-offset:0;box-shadow:0 0 0 5px #fff5d4}
+#jp-study-app .hs-item.hs-target{outline:2px dashed #fff6cf;background:#ffedac35;box-shadow:0 0 0 3px #704e2cb0;border-radius:10px}
+#jp-study-app .hs-mark{pointer-events:none;box-sizing:border-box;display:grid;place-items:center;border-radius:50%;border:2px solid #fff8df;background:#ffdc78;color:#36291e;box-shadow:0 1px 4px #39291d99;font:bold 17px/1 system-ui,sans-serif}
+#jp-study-app .hs-mark.noun-mark{position:absolute;bottom:4%;right:7%;width:13px;height:13px;background:#dfa12b}
+#jp-study-app .embedded .hs-mark.noun-mark{bottom:40%;right:42%}
+#jp-study-app .hs-mark.open-mark,#jp-study-app .hs-mark.play-mark{width:29px;height:29px}
+#jp-study-app .hs-mark.play-mark{z-index:3;font-size:11px;background:#fff0af}
+#jp-study-app .hs-board .hs-door{position:absolute;z-index:5;top:var(--y);transform:translateY(-50%);display:grid;place-items:center;padding:3px 10px;min-height:44px;min-width:44px;border-radius:13px;background:#fff3d8ed;color:#342d26;border:1px solid #997641;font:700 clamp(10px,1.1vw,14px)/1.1 system-ui,sans-serif;box-shadow:0 2px 4px #44322050}
+#jp-study-app .hs-door.left{left:1%}
+#jp-study-app .hs-door.right{right:1%}
+#jp-study-app .hs-label{position:absolute;z-index:4;bottom:-3px;left:50%;transform:translateX(-50%);padding:2px 5px;white-space:nowrap;font:700 clamp(10px,1.35vw,16px)/1.2 system-ui,sans-serif;color:#392d24;border:1px solid #97723a;background:#fff6dd;border-radius:7px;box-shadow:0 2px 4px #593a2630;pointer-events:none}
+#jp-study-app .hs-motion .hs-label{bottom:-6px}
+#jp-study-app .hs-board .hs-motion{z-index:3}
+#jp-study-app .hs-player{position:absolute;inset:-12% -10%;pointer-events:none;transform-origin:50% 85%}
+#jp-study-app .hs-player~.play-mark{align-self:end;justify-self:end}
+#jp-study-app .hs-peek{position:absolute;bottom:60%;left:63%;width:110%;aspect-ratio:3/2;border:2px solid #fff2cd;border-radius:10px;overflow:hidden;box-shadow:0 3px 6px #432d2280;pointer-events:none;animation:hs-opening 2s ease-out both}
+#jp-study-app .hs-peek img{width:100%;height:100%;object-fit:cover}
+#jp-study-app .act-open{animation:hs-reach 1s ease-in-out alternate 3}
+#jp-study-app .act-wash{animation:hs-wash .45s ease-in-out alternate 7}
+#jp-study-app .act-read{animation:hs-read 1.25s ease-in-out alternate 3}
+#jp-study-app .act-write{animation:hs-write .5s ease-in-out alternate 7}
+#jp-study-app .hs-ending{position:absolute;inset:36% 27% 15%;display:flex;align-items:end;justify-content:center;z-index:5;pointer-events:none;animation:hs-arrive .4s ease-out}
+#jp-study-app .hs-ending img{max-width:60%}
+#jp-study-app .hs-ending img+img{max-width:36%;height:70%}
+#jp-study-app .hs-ending.end-letter{inset:56% 27% 13%}
+#jp-study-app .hs-map{position:absolute;z-index:9;right:6px;top:6px;display:grid;gap:4px;padding:5px;border:1px solid var(--jp-line);border-radius:13px;background:var(--jp-panel);box-shadow:0 6px 16px #2d241f50}
+#jp-study-app .hs-map .hs-map-room{display:flex;align-items:center;gap:9px;min-height:44px;padding:3px 8px;color:var(--jp-text);border:1px solid var(--jp-line);background:var(--jp-panel);font-size:.88rem}
+#jp-study-app .hs-map .hs-map-room[aria-pressed="true"]{background:var(--jp-selection);border-color:var(--jp-selection-line)}
+#jp-study-app .hs-map-room img{width:42px;height:32px;object-fit:cover;border-radius:6px}
+#jp-study-app .hs-seek{display:flex;align-items:center;gap:4px 10px;flex-wrap:wrap;padding:8px 0;font-size:.91rem;color:var(--jp-muted)}
+#jp-study-app .hs-seek strong{color:var(--jp-text)}
+#jp-study-app .hs-seek .game-button{min-height:44px}
+#jp-study-app[data-theme="dark"] .hs-door,#jp-study-app[data-theme="dark"] .hs-label{background:#42382de8;color:#fff2da;border-color:#ad8b58}
+@keyframes hs-opening{0%,24%{opacity:0;scale:.5}60%,100%{opacity:1;scale:1}}
+@keyframes hs-reach{to{transform:translate(-7%,0) rotate(-5deg)}}
+@keyframes hs-wash{to{transform:rotate(4deg) translateY(-3%)}}
+@keyframes hs-read{to{transform:rotate(-3deg) translateY(2%)}}
+@keyframes hs-write{to{transform:translate(2%,1%) rotate(3deg)}}
+@keyframes hs-arrive{from{opacity:0;transform:translateY(5%)}}
+@media(max-width:680px){
+  #jp-study-app .hs-header.bk-setup-header{grid-template-columns:minmax(0,1fr) auto;grid-template-areas:"title voice" "picker start"}
+  #jp-study-app .hs-full-title{display:none}
+  #jp-study-app .hs-short-title{display:inline}
+  #jp-study-app .hs-layout{grid-template-columns:minmax(0,1fr)}
+  #jp-study-app .hs-stories{gap:4px;margin-top:6px}
+  #jp-study-app .hs-story{gap:4px;min-height:46px;padding:3px 4px;font-size:.76rem;border-radius:10px}
+  #jp-study-app .hs-story img{width:24px;height:28px}
+  #jp-study-app .hs-scene{border-radius:14px}
+  #jp-study-app .hs-scene-head{padding-left:8px;min-height:44px}
+  #jp-study-app .hs-scene-head strong{font-size:.86rem}
+  #jp-study-app .hs-board .hs-door{padding:2px 6px;min-height:44px}
+}
+@media(prefers-reduced-motion:reduce){#jp-study-app .hs-board *{animation:none!important;transition:none!important}}

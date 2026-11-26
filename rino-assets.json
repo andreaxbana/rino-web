@@ -696,6 +696,156 @@
       "path": "rino/kitchen/kitchen-v2.css",
       "sha256": "ec1e8c98223a48b82cb38ff8422a594d0fa4928effd73820e2dfd6c8a111e306",
       "bytes": 12734
+    },
+    {
+      "path": "rino/house/house-game.mjs",
+      "sha256": "d27ac2bcbd0437b3a9a3e264e15d6e458994bc38eec5aba2f09ce31de02360da",
+      "bytes": 20510
+    },
+    {
+      "path": "rino/house/house-data.mjs",
+      "sha256": "3614e011f8e89eb75df042772941ce61f09bd49b762f07e0124173e34f6fff99",
+      "bytes": 7557
+    },
+    {
+      "path": "rino/house/house-board.mjs",
+      "sha256": "db144e6bd0fff967d0341d4ba867ab1213fb09e863a39aff8951928465affa78",
+      "bytes": 4631
+    },
+    {
+      "path": "rino/house/house.css",
+      "sha256": "ccbefec22053ffaaa0521e59f1f6b366de850325bb24a25e6446a66d8b7ac680",
+      "bytes": 8457
+    },
+    {
+      "path": "rino/house/credits.txt",
+      "sha256": "6074685cc5b95a437ffb7421c430a3b6c932106d61ca3cad7070cc7ac2c525a8",
+      "bytes": 2783
+    },
+    {
+      "path": "rino/house/kitchen.webp",
+      "sha256": "0f4c09c6a642156288e2783362cde2dda9e14e1cf3b6e94691f523a26c2d3e2c",
+      "bytes": 251428
+    },
+    {
+      "path": "rino/house/sitting.webp",
+      "sha256": "2d1f1b4c7db6b1e8aa7a1d8f62640f8396a14c9e78b977297835c9f145befaf6",
+      "bytes": 284530
+    },
+    {
+      "path": "rino/house/study.webp",
+      "sha256": "d0e6db5afb45e442b579dff78c7ce10e34f18719d3dd336f97e1674731670b17",
+      "bytes": 284200
+    },
+    {
+      "path": "rino/house/fridge.webp",
+      "sha256": "bd62323567a3eabd944670f00db93b4333b2562ba7608f045d45768706d2c41a",
+      "bytes": 61970
+    },
+    {
+      "path": "rino/house/cupboard.webp",
+      "sha256": "229a886d303378c54da1d1cb98a1f961a8930b52222d7b6c73bc5b48ad13f183",
+      "bytes": 81856
+    },
+    {
+      "path": "rino/house/chest.webp",
+      "sha256": "8c8c7edf14ba1124fc030b98bfdc25d6aefb477fcc26a41eb16d3f504cfe6ae2",
+      "bytes": 106416
+    },
+    {
+      "path": "rino/house/drawer.webp",
+      "sha256": "764d3279d922f8b96d0e6f76fa7055b06d978f7a85593aff77dbf8aa193be89b",
+      "bytes": 91420
+    },
+    {
+      "path": "rino/house/umbrella.webp",
+      "sha256": "783ed38fe7e656e0ae5304e6321a9dd813c8665927c2c65b862cd86e97847733",
+      "bytes": 18274
+    },
+    {
+      "path": "rino/house/handkerchief.webp",
+      "sha256": "c32935ef7a10c9d01b40eb925219c6e8754ec1d30cbe5b6be37fc44f9dcd5ee6",
+      "bytes": 33952
+    },
+    {
+      "path": "rino/house/book.webp",
+      "sha256": "78766ab3f9b26ea6fd83aab7e0cd2e6b575d09a443238edcdd03e375bc5aa7c1",
+      "bytes": 28050
+    },
+    {
+      "path": "rino/house/pencil.webp",
+      "sha256": "be7f76e89e92088e89f9bc4c87d43b8d8e01b97b0cbc06c2e236a9a856a74f9a",
+      "bytes": 12790
+    },
+    {
+      "path": "rino/house/paper.webp",
+      "sha256": "1d674cb0e8f10f27dea02bf2c39c993084b490a9897111f377986b6ec622c83a",
+      "bytes": 21938
+    },
+    {
+      "path": "rino/house/letter.webp",
+      "sha256": "50a8890f1d735d86ed32782df2a5b8dde0cc1ecec5aa191bb670dbc6af60bbba",
+      "bytes": 30222
+    },
+    {
+      "path": "rino/house/actor-open.webp",
+      "sha256": "c7d6bac7fef6657131de6bfbdf000f5e15281e382bcb04b3b956f319660bffbe",
+      "bytes": 35358
+    },
+    {
+      "path": "rino/house/actor-wash.webp",
+      "sha256": "2ca23b8f7b45ddef6892fedf059834e50c950d975ed4d8131321ff104cd932ee",
+      "bytes": 36088
+    },
+    {
+      "path": "rino/house/actor-read.webp",
+      "sha256": "d1c5d39dd24acaeabbbed730baf21d4d6557cf0ce32cb7e4797816bec5327bac",
+      "bytes": 36640
+    },
+    {
+      "path": "rino/house/actor-write.webp",
+      "sha256": "314d1814e9ed8662a72563a6bec68277e80587ab2207304bab18cf7b970c4858",
+      "bytes": 41266
+    },
+    {
+      "path": "rino/kitchen/book.wav",
+      "sha256": "8d894c7f1986c3fab84f2fdd0019062c1d5b984216a9a073c6d7b32ef6fb2555",
+      "bytes": 74540
+    },
+    {
+      "path": "rino/kitchen/handkerchief.wav",
+      "sha256": "999653f80f3b473aa4f4ffce8644f76b0cc6724f01e7f24fa445979a62b8ffe3",
+      "bytes": 111660
+    },
+    {
+      "path": "rino/kitchen/umbrella.wav",
+      "sha256": "fded0877f18a26e2fd76fe79f210dd9063e0955a52f5d80384929bf2a433d007",
+      "bytes": 91180
+    },
+    {
+      "path": "rino/kitchen/pencil.wav",
+      "sha256": "da9e1d463d10532c1f6c794a45f8b0b057073edc2a88a5e771e21bc37650ef1b",
+      "bytes": 122156
+    },
+    {
+      "path": "rino/kitchen/paper.wav",
+      "sha256": "153f6720218a5482d3b9f3c2e7a5ba336256e1e3aea9e529d43dd7a5a6612848",
+      "bytes": 86572
+    },
+    {
+      "path": "rino/kitchen/letter.wav",
+      "sha256": "f32c0c359dcf2a67fa39db2bb0d39bfc19fbc99c5ccb78bead7222e4bdb9b002",
+      "bytes": 83884
+    },
+    {
+      "path": "rino/kitchen/read.wav",
+      "sha256": "7e79732a1bf9f8a7ad4e185c929a9424240ac3813e7454ac165b46ebf466bbeb",
+      "bytes": 90156
+    },
+    {
+      "path": "rino/kitchen/write.wav",
+      "sha256": "35425131f252edb37869938cb573b5fb73b598df297d6fa80111d689b7abf05a",
+      "bytes": 86828
     }
   ]
 }
