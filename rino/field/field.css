@@ -1,0 +1,33 @@
+#jp-study-app .fs-bank{margin:0 0 10px;border:1px solid var(--jp-line);border-radius:13px;background:var(--jp-panel);overflow:hidden}
+#jp-study-app .fs-bank .fs-bank-toggle{display:flex;justify-content:space-between;align-items:center;gap:10px;width:100%;min-height:44px;padding:6px 13px;border:0;background:transparent;color:var(--jp-text);border-radius:12px;text-align:left}
+#jp-study-app .fs-bank-toggle>span{color:var(--jp-muted);font-size:.85rem}
+#jp-study-app .fs-bank-toggle i{margin-left:5px;font-style:normal;color:var(--jp-text)}
+#jp-study-app .fs-bank-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(142px,1fr));gap:5px;padding:6px 9px 10px}
+#jp-study-app .fs-bank-grid[hidden]{display:none}
+#jp-study-app .fs-bank-grid .fs-word{display:flex;align-items:center;gap:8px;min-height:54px;text-align:left;background:var(--jp-panel);color:var(--jp-text);padding:4px 6px;line-height:1.2;border:1px solid var(--jp-line)}
+#jp-study-app .fs-word small{display:block;color:var(--jp-muted);font-size:.76rem;font-weight:400}
+#jp-study-app .fs-thumb{display:block;flex:none;aspect-ratio:1;width:44px;border-radius:9px;background-image:url('./field-atlas.webp');background-repeat:no-repeat}
+#jp-study-app .bk-detail-art>.fs-thumb{width:100%;height:auto}
+#jp-study-app .fs-question{display:flex;align-items:center;gap:12px;min-height:68px}
+#jp-study-app .fs-question .fs-thumb{width:66px}
+#jp-study-app .fs-question :is(h2,p){margin:2px 0}
+#jp-study-app .hs-story img[src$="/classroom.webp"],#jp-study-app .hs-story img[src$="/beach.webp"],#jp-study-app .hs-story img[src$="/forest.webp"]{object-fit:cover;border-radius:6px}
+#jp-study-app .hs-board .hs-motion:has(.hs-player){z-index:4}
+#jp-study-app .act-eat,#jp-study-app .act-drink,#jp-study-app .act-listen,#jp-study-app .act-look{animation:fs-tilt .95s ease-in-out alternate 4}
+#jp-study-app .act-sit,#jp-study-app .act-stand,#jp-study-app .act-pickup,#jp-study-app .act-dig{animation:fs-lower .85s ease-in-out alternate 4}
+#jp-study-app .act-sleep{animation:fs-breathe 1.55s ease-in-out alternate 3}
+#jp-study-app .act-draw,#jp-study-app .act-erase,#jp-study-app .act-cut{animation:hs-write .48s ease-in-out alternate 6}
+#jp-study-app .act-swim,#jp-study-app .act-walk{animation:fs-stride .8s ease-in-out alternate 4}
+#jp-study-app .act-climb,#jp-study-app .act-throw{animation:fs-rise 1s ease-out alternate 4}
+@keyframes fs-tilt{to{transform:rotate(-6deg)}}
+@keyframes fs-lower{to{transform:translateY(9%) rotate(3deg)}}
+@keyframes fs-breathe{to{transform:scale(1.04,1.06)}}
+@keyframes fs-stride{to{transform:translate(10%,-3%) rotate(-3deg)}}
+@keyframes fs-rise{to{transform:translate(4%,-13%) rotate(-5deg)}}
+@media(min-width:1050px){#jp-study-app .hs-stories{grid-template-columns:repeat(6,minmax(0,1fr))}}
+@media(max-width:680px){
+  #jp-study-app .fs-bank{margin-bottom:6px}
+  #jp-study-app .fs-bank-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  #jp-study-app .fs-word{overflow-wrap:anywhere}
+}
+@media(prefers-reduced-motion:reduce){#jp-study-app .hs-board .hs-player{animation:none!important}}

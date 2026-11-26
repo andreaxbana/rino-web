@@ -280,7 +280,7 @@
       const seen=new Set();
       return examples.filter(s=>s.occurrence&&!seen.has(s.example_ja)&&seen.add(s.example_ja));
     }
-    function wordHelp({word,reading,id,meaning_en}) {
+    function wordHelp({word,reading,id,level,meaning_en}) {
       const match=index.words.get(id);
       const exact=match&&key(match.reading)===key(reading)&&[match.word,...match.alternate_forms || []].some(form=>key(form)===key(word));
       const pair=index.words.get(index.pairs.get(key(word)+'\0'+key(reading)));
@@ -293,7 +293,7 @@
       const examples=guidance&&editorial?.length?editorial:entry?wordExamples({...entry,learner_examples:editorial || entry.learner_examples}):[];
       const senses=entry?.senses?.filter(sense=>!sense.forms?.length||sense.forms.includes(word));
       const type=readingWords?.partOfSpeech({...entry,word,reading});
-      return {word,reading,type:guidance?.type || entry?.learner?.pos || (type?.short==='?'?'':type?.full),
+      return {word,reading,level:level || entry?.level,type:guidance?.type || entry?.learner?.pos || (type?.short==='?'?'':type?.full),
         definition:guidance?.definition || entry?.learner?.definition,
         senses:senses?.length?senses.map(sense=>sense.glosses.slice(0,3).join(', ')):[meaning_en || entry?.meaning_en],
         usage:guidance?.usage || entry?.learner?.usage || entry?.example_sense_note,compare:guidance?.compare,
@@ -603,7 +603,9 @@
       if(workerReady&&state.wordId&&!getWord(state.wordId))worker.postMessage({type:'entry',id:state.wordId});
     }
     navigate(state);
-    return {render,mount,beforeRender,handle,navigate,wordHelp,isCommonSpelling:index.reference?.isCommonSpelling,navigation:() => ({...state}),hasActiveInput:() => !!activeStroke || !!pending || composing,
+    const referenceWordsForKanji = character => (index.byCharacter.get(character) || []).filter(word => word.reference_key && !word.level);
+    return {render,mount,beforeRender,handle,navigate,wordHelp,isCommonSpelling:index.reference?.isCommonSpelling,
+      commonWordPriority:index.reference?.commonWordPriority,referenceWordsForKanji,navigation:() => ({...state}),hasActiveInput:() => !!activeStroke || !!pending || composing,
       announcement:() => 'Dictionary · all levels' + (state.character ? ' · ' + state.character : ''),
       // Read-only snapshots support regression checks without saving ink to progress.
       drawing:() => ink.map(stroke => stroke.map(point => point.slice()))};

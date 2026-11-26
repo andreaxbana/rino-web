@@ -1,8 +1,8 @@
 {
-  "build_id": "k1-7de3a0cfb603de56",
-  "source_sha256": "7de3a0cfb603de56b8c4d91ec5b16b16316f97e6d2bf232f0c63646a50eb133f",
-  "fragment_sha256": "e640533a6a73d9546fbd2a9f4051115b8cfa7a2100f5a755ffa81afd51c9802b",
-  "standalone_sha256": "b94344fbb1c64640058eb21bd3ad9f244a39a525567a944bd0296f255ab4008e",
+  "build_id": "k1-98d987bf70348356",
+  "source_sha256": "98d987bf70348356279fba020b510ae64f29e8a62c4c56f91d99fd7e86621e01",
+  "fragment_sha256": "351c32266b8ba5bb84543f4792fb17843da1c8da32c39881c88f228fb6903f4c",
+  "standalone_sha256": "29db2458919cdc061424ef6c9eab747b9b3f113c3979ab027f7fd9f265bc8d69",
   "recognition": {
     "entry": "./recognition/offline-recognizer.mjs",
     "id": "kotoba-offline-trained-ensemble",
@@ -14,17 +14,17 @@
   "rino": {
     "id": "rino-study-world",
     "version": 1,
-    "assetsSha256": "b72d5676a59e7d30f0a521c96cddce86f402e32cd841c7526c50083f7a8ad8d9",
-    "bytes": 16256135
+    "assetsSha256": "d162c91548db98273500516fcfba9453886e31d07c2c15910c03d92cf023866e",
+    "bytes": 25693672
   },
   "dictionary": {
-    "assetsSha256": "5aa22f8e17d99d4164f1072f24cf91779640de6b765862c9adb87feb074cfd89",
+    "assetsSha256": "10fc564cf978c89e53e956db5756a921c99180696a0d2fb204939cedcff5a575",
     "sourceSha256": "3846524394e7b149f88f1cf09d9d6b10aa0b0e05267cd180bfb5eea31873952b",
     "entries": 218920,
     "coreEntries": 24092,
-    "workerPath": "dictionary/9550747072daa19e60680163e01900115eb22d66771d7123c8d340ed967cda49/dictionary-worker.js",
+    "workerPath": "dictionary/47d9e0a7d89781d2420cc2c945eaf5992ab4c536dc3047d10ee20189a2b720ff/dictionary-worker.js",
     "reference": {
-      "path": "dictionary/9550747072daa19e60680163e01900115eb22d66771d7123c8d340ed967cda49/reference.json.gz",
+      "path": "dictionary/47d9e0a7d89781d2420cc2c945eaf5992ab4c536dc3047d10ee20189a2b720ff/reference.json.gz",
       "bytes": 9402307,
       "sha256": "50baa00c1dd80172cf37c67bee951133fa9e3420d5f024b1e13f45e3b8e24fa4"
     },
@@ -299,8 +299,8 @@
   },
   "offline": {
     "workerPath": "rino-offline-sw.js",
-    "workerSha256": "386edfb56dd46716433214760f0e4059d0ec28dfb8b9ad10130d50ff6500f315",
-    "workerBytes": 54781,
-    "shellSha256": "b94344fbb1c64640058eb21bd3ad9f244a39a525567a944bd0296f255ab4008e"
+    "workerSha256": "7320c87e39ff3df2768199ef376f00db01582e96e5a1517e78321c616a861f9d",
+    "workerBytes": 92554,
+    "shellSha256": "29db2458919cdc061424ef6c9eab747b9b3f113c3979ab027f7fd9f265bc8d69"
   }
 }

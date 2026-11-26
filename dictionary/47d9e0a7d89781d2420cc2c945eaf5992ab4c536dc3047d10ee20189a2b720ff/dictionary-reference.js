@@ -13,6 +13,9 @@
   const pair = (word,reading) => norm(word) + '\0' + norm(reading);
   const allowedForms = (entry,reading) => reading[2] ? [] : entry[1].filter(form => !reading[1]?.length || reading[1].includes(form[0]));
   const hasPriority = tags => tags?.some(tag => /^(news1|ichi1|spec1|gai1)$/.test(tag));
+  // Unranked forms sort after every two-digit JMdict newspaper band.
+  const unranked = 100;
+  const frequencyBand = tags => Math.min(unranked,...tags.filter(tag => /^nf\d{2}$/.test(tag)).map(tag => Number(tag.slice(2))));
   function expand(entry,reading = entry[2][0]) {
     const forms = allowedForms(entry,reading), spellings = forms.map(form => form[0]);
     const senses = entry[3].filter(sense => (!sense[4]?.length || sense[4].includes(reading[0])) && (!sense[3]?.length || sense[3].some(form => spellings.includes(form)))).map(sense => ({
@@ -36,17 +39,42 @@
       for(const form of [word.word,...word.alternate_forms]) {const k=pair(form,word.reading);if(!byPair.has(k))byPair.set(k,[]);byPair.get(k).push(word);}
     }
     const resolve = item => byIdentity.get(identity(item.jmdict_id,item.reading)) || (byPair.get(pair(item.word,item.reading)) || []).find(word=>!item.jmdict_id || word.jmdict_id===String(item.jmdict_id));
-    let spellingsById;
-    function isCommonSpelling({word,reading,jmdict_id}) {
+    let entriesById;
+    function sourceEntry({word,reading,jmdict_id}) {
       const matches = byPair.get(pair(word,reading)) || [];
       const match = jmdict_id ? matches.find(entry => entry.jmdict_id === String(jmdict_id))
         : matches.length === 1 ? matches[0] : null;
-      if (!match) return false;
-      // A common flag on one spelling must not promote its rare variants.
-      spellingsById ??= new Map(source.entries.map(entry => [entry[0],entry[1]]));
-      return spellingsById.get(match.jmdict_id).some(([form,,tags]) => norm(form) === norm(word) && hasPriority(tags));
+      if (!match) return null;
+      entriesById ??= new Map(source.entries.map(entry => [entry[0],entry]));
+      return entriesById.get(match.jmdict_id);
     }
-    return {words,byIdentity,byPair,resolve,isCommonSpelling,labels:source.labels || {},source:source.source};
+    function isCommonSpelling(item) {
+      // A common flag on one spelling must not promote its rare variants.
+      return sourceEntry(item)?.[1].some(([form,,tags]) => norm(form) === norm(item.word) && hasPriority(tags)) || false;
+    }
+    function commonWordPriority(item) {
+      const entry = sourceEntry(item);
+      if (!entry) return null;
+      const form = entry[1].find(([text]) => text === item.word);
+      const reading = entry[2].find(([text]) => text === item.reading);
+      if (!form || !reading || reading[2] || (reading[1]?.length && !reading[1].includes(item.word))) return null;
+      if (form[1]?.some(tag => /^(iK|io|oK|rK|sK)$/.test(tag)) || reading[3]?.some(tag => /^(ik|ok|rk|sk)$/.test(tag))) return null;
+      // JMdict records priorities on both the spelling and the pronunciation.
+      // Only a shared mark is evidence for the particular pair shown in Learn.
+      const shared = (form[2] || []).filter(tag => reading[4]?.includes(tag));
+      const general = shared.some(tag => /^(ichi1|gai1|spec[12])$/.test(tag));
+      if (!general && !shared.includes('news1')) return null;
+      const currentSenses = entry[3].filter(([, , , forms, readings, misc]) =>
+        (!forms?.length || forms.includes(item.word)) && (!readings?.length || readings.includes(item.reading)) &&
+        !misc?.some(tag => /^(arch|dated|obs|rare)$/.test(tag)));
+      if (!currentSenses.length) return null;
+      const usuallyKana = currentSenses.every(sense => sense[5]?.includes('uk'));
+      const band = frequencyBand(shared);
+      if (usuallyKana && band === unranked) return null;
+      return {entryId:entry[0],general,usuallyKana,frequencyBand:band,spellingBand:frequencyBand(form[2]),
+        wholeWordReading:reading[3]?.includes('gikun') || false};
+    }
+    return {words,byIdentity,byPair,resolve,isCommonSpelling,commonWordPriority,labels:source.labels || {},source:source.source};
   }
   // Evidence is an exact surface + reading span, including conjugated forms.
   // A structural match is not a claim of human linguistic review.

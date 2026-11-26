@@ -1,0 +1,8 @@
+RiNO Japanese pronunciation audio
+
+Synthesized with Open JTalk using the HTS voice “Mei” from the MMDAgent Project Team.
+Voice copyright © 2009–2013 Nagoya Institute of Technology, Department of Computer Science.
+Creative Commons Attribution 3.0. https://creativecommons.org/licenses/by/3.0/
+Voice and attribution: https://github.com/tsukumijima/pyopenjtalk-plus/tree/master/pyopenjtalk/htsvoice
+
+RiNO generated the speech from its study readings and encoded the resulting audio as mono MP3 clips.

@@ -11,29 +11,674 @@
   "entries": 218920,
   "files": [
     {
-      "path": "dictionary/9550747072daa19e60680163e01900115eb22d66771d7123c8d340ed967cda49/reference.json.gz",
+      "path": "dictionary/47d9e0a7d89781d2420cc2c945eaf5992ab4c536dc3047d10ee20189a2b720ff/reference.json.gz",
       "bytes": 9402307,
       "sha256": "50baa00c1dd80172cf37c67bee951133fa9e3420d5f024b1e13f45e3b8e24fa4"
     },
     {
-      "path": "dictionary/9550747072daa19e60680163e01900115eb22d66771d7123c8d340ed967cda49/dictionary-worker.js",
+      "path": "dictionary/47d9e0a7d89781d2420cc2c945eaf5992ab4c536dc3047d10ee20189a2b720ff/dictionary-worker.js",
       "bytes": 5148,
       "sha256": "f1b669854b7509c7945f032d727cf25bcd7c58cc8911c2501174c42d11890617"
     },
     {
-      "path": "dictionary/9550747072daa19e60680163e01900115eb22d66771d7123c8d340ed967cda49/dictionary-reference.js",
-      "bytes": 7518,
-      "sha256": "06f2a32190e9ff6f0142d768415193bdaad7f0789570dea44654f21efe5efcff"
+      "path": "dictionary/47d9e0a7d89781d2420cc2c945eaf5992ab4c536dc3047d10ee20189a2b720ff/dictionary-reference.js",
+      "bytes": 9382,
+      "sha256": "40f1cbdfdc34b64294eef2598b1946a942cde94c86e97f15119e0b8c2128869c"
     },
     {
-      "path": "dictionary/9550747072daa19e60680163e01900115eb22d66771d7123c8d340ed967cda49/dictionary.js",
-      "bytes": 69167,
-      "sha256": "fffddfb0fa23062a7bd40b16af446e80558f13716bc6dd587a280e63c29abadf"
+      "path": "dictionary/47d9e0a7d89781d2420cc2c945eaf5992ab4c536dc3047d10ee20189a2b720ff/dictionary.js",
+      "bytes": 69426,
+      "sha256": "ac653009343a07e1102954388035037741903a005570ce44c23594d59fc67d0e"
     },
     {
-      "path": "dictionary/9550747072daa19e60680163e01900115eb22d66771d7123c8d340ed967cda49/word-forms.js",
+      "path": "dictionary/47d9e0a7d89781d2420cc2c945eaf5992ab4c536dc3047d10ee20189a2b720ff/word-forms.js",
       "bytes": 39701,
       "sha256": "6604451648f753c8a9a7bf77beb2a149b1f36b4b27e6c7de414e40201f0a617b"
+    },
+    {
+      "path": "dictionary/voice-2c498253db3c48a296809e4312e24240783868b8cb5c33690a4d87a728249f90/00.bin",
+      "bytes": 553162,
+      "sha256": "e470fa11da4840fc351051de3265189edb1566a0ddc0d1620f3499de3522dbcb"
+    },
+    {
+      "path": "dictionary/voice-2c498253db3c48a296809e4312e24240783868b8cb5c33690a4d87a728249f90/01.bin",
+      "bytes": 462096,
+      "sha256": "cee90d6a187e237cd41c3888e1d0360d89700f52c8c882ccdedb47433d5bfd4b"
+    },
+    {
+      "path": "dictionary/voice-2c498253db3c48a296809e4312e24240783868b8cb5c33690a4d87a728249f90/02.bin",
+      "bytes": 369542,
+      "sha256": "412c248c18606a97b41c58c12f31d4d55846241368a6e8b9ee287146c0b534ea"
+    },
+    {
+      "path": "dictionary/voice-2c498253db3c48a296809e4312e24240783868b8cb5c33690a4d87a728249f90/03.bin",
+      "bytes": 419137,
+      "sha256": "0698f38a1ce6b2e7393a69b407eb84e290a48909ec40b2b02e593bb9b9716bd8"
+    },
+    {
+      "path": "dictionary/voice-2c498253db3c48a296809e4312e24240783868b8cb5c33690a4d87a728249f90/04.bin",
+      "bytes": 434448,
+      "sha256": "65d13fb0560773929d3e8b2c9bad7fd605a88314b9905fbd245cc116e0a3908c"
+    },
+    {
+      "path": "dictionary/voice-2c498253db3c48a296809e4312e24240783868b8cb5c33690a4d87a728249f90/05.bin",
+      "bytes": 483383,
+      "sha256": "8be77219bc6f66e0879ab5ae4a1f9993fe1b9cd21609e7d4016e6295f3bb190b"
+    },
+    {
+      "path": "dictionary/voice-2c498253db3c48a296809e4312e24240783868b8cb5c33690a4d87a728249f90/06.bin",
+      "bytes": 449045,
+      "sha256": "14569cc1755eb8400007a19870fca39954e96f969c8e6139aef171b6127a5ed2"
+    },
+    {
+      "path": "dictionary/voice-2c498253db3c48a296809e4312e24240783868b8cb5c33690a4d87a728249f90/07.bin",
+      "bytes": 450004,
+      "sha256": "6bda0716de35bb5f03b6556dc5ac8a65b3ea4cef101111df0e2f0c03e8b5e261"
+    },
+    {
+      "path": "dictionary/voice-2c498253db3c48a296809e4312e24240783868b8cb5c33690a4d87a728249f90/08.bin",
+      "bytes": 434374,
+      "sha256": "d9132cf28523092edc70ea63c0606d40274e9b346de0faebedc36b09006627be"
+    },
+    {
+      "path": "dictionary/voice-2c498253db3c48a296809e4312e24240783868b8cb5c33690a4d87a728249f90/09.bin",
+      "bytes": 466453,
+      "sha256": "663974ec1810d42ae5c7c54e890686fb1db4666b99aca6ae7fc28337514e971a"
+    },
+    {
+      "path": "dictionary/voice-2c498253db3c48a296809e4312e24240783868b8cb5c33690a4d87a728249f90/0a.bin",
+      "bytes": 421203,
+      "sha256": "c45517359570f82a41fd607c3440b387e74b2992664b563ab539cfda326942cf"
+    },
+    {
+      "path": "dictionary/voice-2c498253db3c48a296809e4312e24240783868b8cb5c33690a4d87a728249f90/0b.bin",
+      "bytes": 527547,
+      "sha256": "fd3ba405c0c6d4685d20ea407569748817f7e86826a1bd06b6fc2b2e89e5c243"
+    },
+    {
+      "path": "dictionary/voice-2c498253db3c48a296809e4312e24240783868b8cb5c33690a4d87a728249f90/0c.bin",
+      "bytes": 409870,
+      "sha256": "e81878cd53c75677746c1ee63136d1161d8bb0d14a9ca9a6b8e1850d637bb184"
+    },
+    {
+      "path": "dictionary/voice-2c498253db3c48a296809e4312e24240783868b8cb5c33690a4d87a728249f90/0d.bin",
+      "bytes": 472122,
+      "sha256": "aa3583e1f9e66610fdab681c11e62814127103c204b43b04f6c69dd06b9645f1"
+    },
+    {
+      "path": "dictionary/voice-2c498253db3c48a296809e4312e24240783868b8cb5c33690a4d87a728249f90/0e.bin",
+      "bytes": 490476,
+      "sha256": "a80938e6f33e2c0348dbfc2f40105d2f82bb32a7fe06d4804018566738cb721c"
+    },
+    {
+      "path": "dictionary/voice-2c498253db3c48a296809e4312e24240783868b8cb5c33690a4d87a728249f90/0f.bin",
+      "bytes": 344317,
+      "sha256": "c630eabdfadb8dfcf67faea817c3f8070fe51a96abbf39ffae8351c983a32c85"
+    },
+    {
+      "path": "dictionary/voice-2c498253db3c48a296809e4312e24240783868b8cb5c33690a4d87a728249f90/10.bin",
+      "bytes": 413130,
+      "sha256": "43077dc6b7ef9065cdd41b9be8d48f8c7f67ab94a5d39204cf91291bc2694b3e"
+    },
+    {
+      "path": "dictionary/voice-2c498253db3c48a296809e4312e24240783868b8cb5c33690a4d87a728249f90/11.bin",
+      "bytes": 480472,
+      "sha256": "35d4dbef2f20aa494ee459412820852592abed8fca0573df8188f16d0d35541e"
+    },
+    {
+      "path": "dictionary/voice-2c498253db3c48a296809e4312e24240783868b8cb5c33690a4d87a728249f90/12.bin",
+      "bytes": 410925,
+      "sha256": "f61bf1222acbacf4ce856dce83e0346b654f80ffee5aa88fcc4c9bf4261b5816"
+    },
+    {
+      "path": "dictionary/voice-2c498253db3c48a296809e4312e24240783868b8cb5c33690a4d87a728249f90/13.bin",
+      "bytes": 480707,
+      "sha256": "43161689a1bd65b62ed7475b367b08a57efb2827698ba43a686156465ee25fb6"
+    },
+    {
+      "path": "dictionary/voice-2c498253db3c48a296809e4312e24240783868b8cb5c33690a4d87a728249f90/14.bin",
+      "bytes": 440248,
+      "sha256": "0560be9b451a0aa802ad062a8d3297863d5098c3d93a667d6d6c3d9ef655ea02"
+    },
+    {
+      "path": "dictionary/voice-2c498253db3c48a296809e4312e24240783868b8cb5c33690a4d87a728249f90/15.bin",
+      "bytes": 465978,
+      "sha256": "ad8e43e4bf82b4b27748d07d0f3b07302c33d0e23f15525f595ae8f65d398c76"
+    },
+    {
+      "path": "dictionary/voice-2c498253db3c48a296809e4312e24240783868b8cb5c33690a4d87a728249f90/16.bin",
+      "bytes": 466430,
+      "sha256": "08a9fa83bb5d28450c16ab63d829a4eb7732347c26a1c6cebc2d42cb7699b23b"
+    },
+    {
+      "path": "dictionary/voice-2c498253db3c48a296809e4312e24240783868b8cb5c33690a4d87a728249f90/17.bin",
+      "bytes": 491253,
+      "sha256": "abe8dc41775e8694cbc616c1bc106118ee65c0d0e6dadee70d34756fb4838a57"
+    },
+    {
+      "path": "dictionary/voice-2c498253db3c48a296809e4312e24240783868b8cb5c33690a4d87a728249f90/18.bin",
+      "bytes": 440533,
+      "sha256": "4684616de683f9871f41acf7905ffd550c88ff244b5d9a8ed2e15a2cba3c4d51"
+    },
+    {
+      "path": "dictionary/voice-2c498253db3c48a296809e4312e24240783868b8cb5c33690a4d87a728249f90/19.bin",
+      "bytes": 414429,
+      "sha256": "1401015045391d42e738379b5e717d3bef5dd5d7384bc971fd16d79046e9fa5e"
+    },
+    {
+      "path": "dictionary/voice-2c498253db3c48a296809e4312e24240783868b8cb5c33690a4d87a728249f90/1a.bin",
+      "bytes": 468370,
+      "sha256": "b0bcd7f98cf122ba9ed5d2dbf0a87b45b10b402aa06cd996224c35709cede69e"
+    },
+    {
+      "path": "dictionary/voice-2c498253db3c48a296809e4312e24240783868b8cb5c33690a4d87a728249f90/1b.bin",
+      "bytes": 463796,
+      "sha256": "cbf576036ccbed4642d3729197f2b560c690bf54087bcb43b777bc8f6d93e74a"
+    },
+    {
+      "path": "dictionary/voice-2c498253db3c48a296809e4312e24240783868b8cb5c33690a4d87a728249f90/1c.bin",
+      "bytes": 437590,
+      "sha256": "202085f0d70eeee70f0a3a36f38f86a9c4430bd8bceef9c343f810afe2325405"
+    },
+    {
+      "path": "dictionary/voice-2c498253db3c48a296809e4312e24240783868b8cb5c33690a4d87a728249f90/1d.bin",
+      "bytes": 408776,
+      "sha256": "ad0aed2d8a72d93d1e0fd7cfb660dea15fb55c0edaf9bb67353611e7637cf4ef"
+    },
+    {
+      "path": "dictionary/voice-2c498253db3c48a296809e4312e24240783868b8cb5c33690a4d87a728249f90/1e.bin",
+      "bytes": 455113,
+      "sha256": "72794ba846ad32867a3694e03de032f3338d91298b9fc3004094f810afb868b6"
+    },
+    {
+      "path": "dictionary/voice-2c498253db3c48a296809e4312e24240783868b8cb5c33690a4d87a728249f90/1f.bin",
+      "bytes": 452897,
+      "sha256": "9bf82da5661753f7d3cb0da1b57873376041da4601d322ce5db8b84afec5f7c5"
+    },
+    {
+      "path": "dictionary/voice-2c498253db3c48a296809e4312e24240783868b8cb5c33690a4d87a728249f90/20.bin",
+      "bytes": 409517,
+      "sha256": "9e9ded59b21e4e8930b8dd2caba7184a06778ede30e4168c22f5d15eb3679ccb"
+    },
+    {
+      "path": "dictionary/voice-2c498253db3c48a296809e4312e24240783868b8cb5c33690a4d87a728249f90/21.bin",
+      "bytes": 474253,
+      "sha256": "8106793bac39ce23f00081d136ac3f769d7a8941695795262b2db7223b995901"
+    },
+    {
+      "path": "dictionary/voice-2c498253db3c48a296809e4312e24240783868b8cb5c33690a4d87a728249f90/22.bin",
+      "bytes": 420362,
+      "sha256": "93d308f4a53e49d17d2983a1054970876b8822849d6b5fc230506f66d493f075"
+    },
+    {
+      "path": "dictionary/voice-2c498253db3c48a296809e4312e24240783868b8cb5c33690a4d87a728249f90/23.bin",
+      "bytes": 467671,
+      "sha256": "8d066bc8a74309e095e5062e18319d51caad838701d475963ae23ea0fd4b9ee6"
+    },
+    {
+      "path": "dictionary/voice-2c498253db3c48a296809e4312e24240783868b8cb5c33690a4d87a728249f90/24.bin",
+      "bytes": 472357,
+      "sha256": "09ac0bbcae7bb0d0653779e0047838b86dd83c5763e31d34e9d9964f19cc9683"
+    },
+    {
+      "path": "dictionary/voice-2c498253db3c48a296809e4312e24240783868b8cb5c33690a4d87a728249f90/25.bin",
+      "bytes": 502925,
+      "sha256": "84516ed93e9fdaec06cd7a03973c0284b15211e952aa9c6ed453b90f88458386"
+    },
+    {
+      "path": "dictionary/voice-2c498253db3c48a296809e4312e24240783868b8cb5c33690a4d87a728249f90/26.bin",
+      "bytes": 400555,
+      "sha256": "b34bec96518bd8204de2d491147cb79959c5a1e4895a7b49e9b7e0261f5dc03a"
+    },
+    {
+      "path": "dictionary/voice-2c498253db3c48a296809e4312e24240783868b8cb5c33690a4d87a728249f90/27.bin",
+      "bytes": 511552,
+      "sha256": "a1a9b29864d6a364c7b2184f83859f8097e8c36c7907fb5a02d1a5265d65ea76"
+    },
+    {
+      "path": "dictionary/voice-2c498253db3c48a296809e4312e24240783868b8cb5c33690a4d87a728249f90/28.bin",
+      "bytes": 501988,
+      "sha256": "f5008b05a4ac61af558255a46e97bcf83307790a83ce9d9edec4015a36d64a1b"
+    },
+    {
+      "path": "dictionary/voice-2c498253db3c48a296809e4312e24240783868b8cb5c33690a4d87a728249f90/29.bin",
+      "bytes": 439924,
+      "sha256": "2d3817e438401cd3f340c2b616d3291275b1cb9cc6c3a033d0fba32652d277c8"
+    },
+    {
+      "path": "dictionary/voice-2c498253db3c48a296809e4312e24240783868b8cb5c33690a4d87a728249f90/2a.bin",
+      "bytes": 397470,
+      "sha256": "8af7d28936c38efb7a250846442555db835c6e9c25c5bb59b6a976f053ba8b9b"
+    },
+    {
+      "path": "dictionary/voice-2c498253db3c48a296809e4312e24240783868b8cb5c33690a4d87a728249f90/2b.bin",
+      "bytes": 457893,
+      "sha256": "72033c6d2c428023b7c54f3e8814100c37c4416cc7f7e186bd9c025d6c84753e"
+    },
+    {
+      "path": "dictionary/voice-2c498253db3c48a296809e4312e24240783868b8cb5c33690a4d87a728249f90/2c.bin",
+      "bytes": 531459,
+      "sha256": "248be6042d5c28cef493065b42a189d64e35b062f29d52defd00e77aa0a1a1f8"
+    },
+    {
+      "path": "dictionary/voice-2c498253db3c48a296809e4312e24240783868b8cb5c33690a4d87a728249f90/2d.bin",
+      "bytes": 467631,
+      "sha256": "41f6ae99807d1d3b3f675f88c6a027aefa535009bb8acc878e81b0bfeaf459c9"
+    },
+    {
+      "path": "dictionary/voice-2c498253db3c48a296809e4312e24240783868b8cb5c33690a4d87a728249f90/2e.bin",
+      "bytes": 468460,
+      "sha256": "fbf5c4944a30cd962f307e9fc9b07f664fff5acdb61dd9ed21741abd9d94ee40"
+    },
+    {
+      "path": "dictionary/voice-2c498253db3c48a296809e4312e24240783868b8cb5c33690a4d87a728249f90/2f.bin",
+      "bytes": 381807,
+      "sha256": "ffd8b44f5f22be442d2d3bf72f444fda37bbe164d5c971a6aeb4597968c977ce"
+    },
+    {
+      "path": "dictionary/voice-2c498253db3c48a296809e4312e24240783868b8cb5c33690a4d87a728249f90/30.bin",
+      "bytes": 463276,
+      "sha256": "fe590242bd24bf5985df453dd4311d3eac00a2768674cb73085ce7533d3a4b49"
+    },
+    {
+      "path": "dictionary/voice-2c498253db3c48a296809e4312e24240783868b8cb5c33690a4d87a728249f90/31.bin",
+      "bytes": 481000,
+      "sha256": "b061db72c077f2e77ddcc80020f18a519a43b8f249ecb11fd35e7bd034146b2c"
+    },
+    {
+      "path": "dictionary/voice-2c498253db3c48a296809e4312e24240783868b8cb5c33690a4d87a728249f90/32.bin",
+      "bytes": 410400,
+      "sha256": "a1d1eb2566e7944205eed102c28ca24fd6373ac915307f58ae31ac9ea60d3e29"
+    },
+    {
+      "path": "dictionary/voice-2c498253db3c48a296809e4312e24240783868b8cb5c33690a4d87a728249f90/33.bin",
+      "bytes": 574556,
+      "sha256": "2f1e9679d4a89b63a1ac682fc3621feaf982409dd350a766c3db7430d43b5a18"
+    },
+    {
+      "path": "dictionary/voice-2c498253db3c48a296809e4312e24240783868b8cb5c33690a4d87a728249f90/34.bin",
+      "bytes": 428214,
+      "sha256": "7646a53068f4ac81b3c2da0c9f0e049a1cc7d101e1aa19703e43d5a45c377a84"
+    },
+    {
+      "path": "dictionary/voice-2c498253db3c48a296809e4312e24240783868b8cb5c33690a4d87a728249f90/35.bin",
+      "bytes": 517900,
+      "sha256": "23d27644ee9e85d2c6f79ff9ddae6b87f6fe9656e237378aa80f942289c5c391"
+    },
+    {
+      "path": "dictionary/voice-2c498253db3c48a296809e4312e24240783868b8cb5c33690a4d87a728249f90/36.bin",
+      "bytes": 446340,
+      "sha256": "4a5c114b8c2c0d0e9b6e9325036f507245c8108495fad11dba4a8ad94c53151e"
+    },
+    {
+      "path": "dictionary/voice-2c498253db3c48a296809e4312e24240783868b8cb5c33690a4d87a728249f90/37.bin",
+      "bytes": 463281,
+      "sha256": "6d20e0313c966ac17acb76ced8bb39f083c805ecbd6334ffe1504bc34f8452c8"
+    },
+    {
+      "path": "dictionary/voice-2c498253db3c48a296809e4312e24240783868b8cb5c33690a4d87a728249f90/38.bin",
+      "bytes": 459901,
+      "sha256": "4ef30af45620c10e3ea08e29580b24b2404c3064dc41660d9cb0440669c04a6a"
+    },
+    {
+      "path": "dictionary/voice-2c498253db3c48a296809e4312e24240783868b8cb5c33690a4d87a728249f90/39.bin",
+      "bytes": 525062,
+      "sha256": "1aa1947d572463898f38fddedaaf7fb21f9584cb73b3f9a81aded22f3ab3a64a"
+    },
+    {
+      "path": "dictionary/voice-2c498253db3c48a296809e4312e24240783868b8cb5c33690a4d87a728249f90/3a.bin",
+      "bytes": 385427,
+      "sha256": "befb51e79d5d9e39e3bd5a98c26f3d0c7858084d77b563376dca02f50bb73690"
+    },
+    {
+      "path": "dictionary/voice-2c498253db3c48a296809e4312e24240783868b8cb5c33690a4d87a728249f90/3b.bin",
+      "bytes": 432950,
+      "sha256": "d5fbbd2452926f06ec2ee560f8b5c1ea576db02e3417129c3cf2a1b4deb0a8bd"
+    },
+    {
+      "path": "dictionary/voice-2c498253db3c48a296809e4312e24240783868b8cb5c33690a4d87a728249f90/3c.bin",
+      "bytes": 499346,
+      "sha256": "3a4ca3ae5483bfd827cde1283f413dbf42376ce88d7c124fff00efa05b0a1977"
+    },
+    {
+      "path": "dictionary/voice-2c498253db3c48a296809e4312e24240783868b8cb5c33690a4d87a728249f90/3d.bin",
+      "bytes": 429826,
+      "sha256": "262222d10dadf90efce28fddc969a2972481b37ad64fbcbaf65067c31febdd00"
+    },
+    {
+      "path": "dictionary/voice-2c498253db3c48a296809e4312e24240783868b8cb5c33690a4d87a728249f90/3e.bin",
+      "bytes": 500633,
+      "sha256": "6aa10c39752be198b71c6dc4e48a6405d980ca6362acc57307157e69204c684b"
+    },
+    {
+      "path": "dictionary/voice-2c498253db3c48a296809e4312e24240783868b8cb5c33690a4d87a728249f90/3f.bin",
+      "bytes": 430009,
+      "sha256": "5c408083c959b91c7eab72f2fef82ae542d2f7ed46aa12bad64c51bccf352df8"
+    },
+    {
+      "path": "dictionary/voice-2c498253db3c48a296809e4312e24240783868b8cb5c33690a4d87a728249f90/40.bin",
+      "bytes": 534906,
+      "sha256": "6c2de6e35d34a521ab8ee28657e6284bffce81c0f9f6701b0e7920440e696aba"
+    },
+    {
+      "path": "dictionary/voice-2c498253db3c48a296809e4312e24240783868b8cb5c33690a4d87a728249f90/41.bin",
+      "bytes": 467193,
+      "sha256": "b0ccedcc6d4ce89b999e26754d37b49e0214fc10866c62489069ccb717551ca1"
+    },
+    {
+      "path": "dictionary/voice-2c498253db3c48a296809e4312e24240783868b8cb5c33690a4d87a728249f90/42.bin",
+      "bytes": 446496,
+      "sha256": "745bea90160a693f0919e2aaf992beafb1031ff49267b4f5bcd47f569b468a22"
+    },
+    {
+      "path": "dictionary/voice-2c498253db3c48a296809e4312e24240783868b8cb5c33690a4d87a728249f90/43.bin",
+      "bytes": 428200,
+      "sha256": "062dba7cc17827a685a4f4999d6833a13a9a921cd3d3a9b6b7e6c48f4b9f3903"
+    },
+    {
+      "path": "dictionary/voice-2c498253db3c48a296809e4312e24240783868b8cb5c33690a4d87a728249f90/44.bin",
+      "bytes": 429931,
+      "sha256": "2e084ed8413d4dfeea3a488b75423d191645e3918bac0e0777aacc69ddb4335d"
+    },
+    {
+      "path": "dictionary/voice-2c498253db3c48a296809e4312e24240783868b8cb5c33690a4d87a728249f90/45.bin",
+      "bytes": 465118,
+      "sha256": "b06c2d146f4314c24c2c5e7e09e8d91da2496072b868698f67d5bda578b17cb4"
+    },
+    {
+      "path": "dictionary/voice-2c498253db3c48a296809e4312e24240783868b8cb5c33690a4d87a728249f90/46.bin",
+      "bytes": 463465,
+      "sha256": "720c840af8397c3bef2d99b38b863a63d6f87f3fd502eb2e49a5d938f8db80a8"
+    },
+    {
+      "path": "dictionary/voice-2c498253db3c48a296809e4312e24240783868b8cb5c33690a4d87a728249f90/47.bin",
+      "bytes": 521358,
+      "sha256": "f25a11fac4b426b33f6d114899ed4d95c9e16fcbe512d74555762b58f5f62315"
+    },
+    {
+      "path": "dictionary/voice-2c498253db3c48a296809e4312e24240783868b8cb5c33690a4d87a728249f90/48.bin",
+      "bytes": 446783,
+      "sha256": "fb1e5cf7702e14b47147bbef0c81e40da07e2ad26751fe87b56e4adcb684f2cd"
+    },
+    {
+      "path": "dictionary/voice-2c498253db3c48a296809e4312e24240783868b8cb5c33690a4d87a728249f90/49.bin",
+      "bytes": 487144,
+      "sha256": "3e25f521cbeea2b74dd733639883666d0284d02874e39eb945853e62e404a2f9"
+    },
+    {
+      "path": "dictionary/voice-2c498253db3c48a296809e4312e24240783868b8cb5c33690a4d87a728249f90/4a.bin",
+      "bytes": 472975,
+      "sha256": "6915eba7ffa1ed22f053ac0ee1137d425eb0ff86b80ba239adf7c5d9de2f5d9e"
+    },
+    {
+      "path": "dictionary/voice-2c498253db3c48a296809e4312e24240783868b8cb5c33690a4d87a728249f90/4b.bin",
+      "bytes": 499956,
+      "sha256": "2dbddb9e0e858943b56412494cdae533e34877e990946723cd922e6ccf55ccd5"
+    },
+    {
+      "path": "dictionary/voice-2c498253db3c48a296809e4312e24240783868b8cb5c33690a4d87a728249f90/4c.bin",
+      "bytes": 497321,
+      "sha256": "c755330c6d26d3ed1486079448505e10e84cea3b6964690d7063fd07b5a25b24"
+    },
+    {
+      "path": "dictionary/voice-2c498253db3c48a296809e4312e24240783868b8cb5c33690a4d87a728249f90/4d.bin",
+      "bytes": 474975,
+      "sha256": "35e677d13611e50f412e74d319784f524b951c876f95618f501e4badd35b317a"
+    },
+    {
+      "path": "dictionary/voice-2c498253db3c48a296809e4312e24240783868b8cb5c33690a4d87a728249f90/4e.bin",
+      "bytes": 420678,
+      "sha256": "ae97378e01db64b78eaf5d007a6ebf6acac051ec506bd150d74f02315db4fb06"
+    },
+    {
+      "path": "dictionary/voice-2c498253db3c48a296809e4312e24240783868b8cb5c33690a4d87a728249f90/4f.bin",
+      "bytes": 483388,
+      "sha256": "9754677684b6245b7c741e6641d662eda87df521707fec52396b9748c91db505"
+    },
+    {
+      "path": "dictionary/voice-2c498253db3c48a296809e4312e24240783868b8cb5c33690a4d87a728249f90/50.bin",
+      "bytes": 489518,
+      "sha256": "c80e255dd08606cf83595ca364991031ad4d6d0628e6641a7ab52c9777e955be"
+    },
+    {
+      "path": "dictionary/voice-2c498253db3c48a296809e4312e24240783868b8cb5c33690a4d87a728249f90/51.bin",
+      "bytes": 378763,
+      "sha256": "ecdf100fc73b09d1c5d669362f58a6648c5cad8ad34c803bbc032f5e306fbbe4"
+    },
+    {
+      "path": "dictionary/voice-2c498253db3c48a296809e4312e24240783868b8cb5c33690a4d87a728249f90/52.bin",
+      "bytes": 477760,
+      "sha256": "037a4ce30f2f7301bee5ffb460e311b567639bc5f7ef87559bf00033e4e2328f"
+    },
+    {
+      "path": "dictionary/voice-2c498253db3c48a296809e4312e24240783868b8cb5c33690a4d87a728249f90/53.bin",
+      "bytes": 470862,
+      "sha256": "23f9ee79c58222aa4523eccd17f408b9dae749725ceaa36dd49f4a7c092a05c7"
+    },
+    {
+      "path": "dictionary/voice-2c498253db3c48a296809e4312e24240783868b8cb5c33690a4d87a728249f90/54.bin",
+      "bytes": 500105,
+      "sha256": "4c3dd631fd48231f1ba31134dd1b6631a6af69c97988d6bd64d55f29e4f35308"
+    },
+    {
+      "path": "dictionary/voice-2c498253db3c48a296809e4312e24240783868b8cb5c33690a4d87a728249f90/55.bin",
+      "bytes": 424627,
+      "sha256": "c4e6f478c08b37faadf928e0fc5056ae1aa13292c73b17520dce622c4a3123f2"
+    },
+    {
+      "path": "dictionary/voice-2c498253db3c48a296809e4312e24240783868b8cb5c33690a4d87a728249f90/56.bin",
+      "bytes": 477533,
+      "sha256": "0b91c06e80c7359a212f41e8147553bbab549b73e1c4847e5b3d756375cf93c7"
+    },
+    {
+      "path": "dictionary/voice-2c498253db3c48a296809e4312e24240783868b8cb5c33690a4d87a728249f90/57.bin",
+      "bytes": 518354,
+      "sha256": "c06b0e4ed9b679675589fdc4d20787cf308f39a079c729caadc77604aab3b793"
+    },
+    {
+      "path": "dictionary/voice-2c498253db3c48a296809e4312e24240783868b8cb5c33690a4d87a728249f90/58.bin",
+      "bytes": 462285,
+      "sha256": "707fc0f9e168dc6b7abee035e4e3a6964e368ee798bdf94eb9173a9602b389aa"
+    },
+    {
+      "path": "dictionary/voice-2c498253db3c48a296809e4312e24240783868b8cb5c33690a4d87a728249f90/59.bin",
+      "bytes": 521684,
+      "sha256": "65e41a39ba6f366efdb75919979ca2e8121cb573156f44a51e212fd385fe3cfe"
+    },
+    {
+      "path": "dictionary/voice-2c498253db3c48a296809e4312e24240783868b8cb5c33690a4d87a728249f90/5a.bin",
+      "bytes": 428225,
+      "sha256": "91b5ddf1b76ce425f24d53c1664447968c87479995b96b01a2fec80052141a5b"
+    },
+    {
+      "path": "dictionary/voice-2c498253db3c48a296809e4312e24240783868b8cb5c33690a4d87a728249f90/5b.bin",
+      "bytes": 433767,
+      "sha256": "159619913303ff9cba96fc455bef7e83425a136e8f2eb67b089120e2aed8ebd5"
+    },
+    {
+      "path": "dictionary/voice-2c498253db3c48a296809e4312e24240783868b8cb5c33690a4d87a728249f90/5c.bin",
+      "bytes": 385751,
+      "sha256": "4c579ef63a75b904c2683abd745d3e569f4fbf5336d6df39c440a8676f99922f"
+    },
+    {
+      "path": "dictionary/voice-2c498253db3c48a296809e4312e24240783868b8cb5c33690a4d87a728249f90/5d.bin",
+      "bytes": 411564,
+      "sha256": "62bb465e21f95da78940210d25d92b25fda2670429dacc1832bf78d4e8972bb5"
+    },
+    {
+      "path": "dictionary/voice-2c498253db3c48a296809e4312e24240783868b8cb5c33690a4d87a728249f90/5e.bin",
+      "bytes": 428157,
+      "sha256": "44ca36ce8ce5e29c5e1e655e24212c2ff61f399cd41081e3dc5ece4c780cdd3d"
+    },
+    {
+      "path": "dictionary/voice-2c498253db3c48a296809e4312e24240783868b8cb5c33690a4d87a728249f90/5f.bin",
+      "bytes": 523019,
+      "sha256": "5be993ee2a307d69b24f6e321c8859d63e6ec044bebbc4a59be1d5af7fc1ce50"
+    },
+    {
+      "path": "dictionary/voice-2c498253db3c48a296809e4312e24240783868b8cb5c33690a4d87a728249f90/60.bin",
+      "bytes": 480879,
+      "sha256": "8e002f093cba2f6acb51695fb789f8519701b3d9990a222410d1df7543f67d0c"
+    },
+    {
+      "path": "dictionary/voice-2c498253db3c48a296809e4312e24240783868b8cb5c33690a4d87a728249f90/61.bin",
+      "bytes": 538026,
+      "sha256": "3edce945e5a037e810fd1984763ef4d386434d7fc46d500c6ff38cd242117543"
+    },
+    {
+      "path": "dictionary/voice-2c498253db3c48a296809e4312e24240783868b8cb5c33690a4d87a728249f90/62.bin",
+      "bytes": 398807,
+      "sha256": "3b9507ec901e656b579c658b3105b3ed6f2f177591617dcca7ccc1c69de48cfb"
+    },
+    {
+      "path": "dictionary/voice-2c498253db3c48a296809e4312e24240783868b8cb5c33690a4d87a728249f90/63.bin",
+      "bytes": 473609,
+      "sha256": "553f87d683d829c909b05f9888137a388b67769436ef2b95a234eb0e15b0e3f7"
+    },
+    {
+      "path": "dictionary/voice-2c498253db3c48a296809e4312e24240783868b8cb5c33690a4d87a728249f90/64.bin",
+      "bytes": 340711,
+      "sha256": "b0de08d00e84a8262f72f267767953b92fbbe1515cc94a77fe45394c9617ea38"
+    },
+    {
+      "path": "dictionary/voice-2c498253db3c48a296809e4312e24240783868b8cb5c33690a4d87a728249f90/65.bin",
+      "bytes": 508531,
+      "sha256": "1f5616f0d0f584a60ed4d7da86a9c520cbfc3ee988552dd6f3605d0d27e57060"
+    },
+    {
+      "path": "dictionary/voice-2c498253db3c48a296809e4312e24240783868b8cb5c33690a4d87a728249f90/66.bin",
+      "bytes": 528598,
+      "sha256": "dc3344e87140bca06dcf946e1099aa06d330dda4d0f0123b4b0a5dd3766c5a0d"
+    },
+    {
+      "path": "dictionary/voice-2c498253db3c48a296809e4312e24240783868b8cb5c33690a4d87a728249f90/67.bin",
+      "bytes": 501114,
+      "sha256": "2f42468c24a5da725cfcd6f0b2db49c74f989a0bd9e3814e028f930e9eddf6c4"
+    },
+    {
+      "path": "dictionary/voice-2c498253db3c48a296809e4312e24240783868b8cb5c33690a4d87a728249f90/68.bin",
+      "bytes": 487273,
+      "sha256": "c133cbe54fb0679601786b936549a6b13307047d59242ffbeb88479a7ebba9ca"
+    },
+    {
+      "path": "dictionary/voice-2c498253db3c48a296809e4312e24240783868b8cb5c33690a4d87a728249f90/69.bin",
+      "bytes": 479445,
+      "sha256": "9bedbb358185b4faa6321c571f54a357c99aae52d511f480cdd3b8327806b0cd"
+    },
+    {
+      "path": "dictionary/voice-2c498253db3c48a296809e4312e24240783868b8cb5c33690a4d87a728249f90/6a.bin",
+      "bytes": 405527,
+      "sha256": "d86e6adf03898f42f988dcf6d3eb13d12b8a57b57274c9bc73f826148617c95b"
+    },
+    {
+      "path": "dictionary/voice-2c498253db3c48a296809e4312e24240783868b8cb5c33690a4d87a728249f90/6b.bin",
+      "bytes": 450314,
+      "sha256": "d81aeff51db42c368d01512590181af4407d99952ccb2e1c9132e1440cbb8ad1"
+    },
+    {
+      "path": "dictionary/voice-2c498253db3c48a296809e4312e24240783868b8cb5c33690a4d87a728249f90/6c.bin",
+      "bytes": 406996,
+      "sha256": "90b298aad4790d5238388f8f45e2f77516689f6db2007fc17e7fa8f744138821"
+    },
+    {
+      "path": "dictionary/voice-2c498253db3c48a296809e4312e24240783868b8cb5c33690a4d87a728249f90/6d.bin",
+      "bytes": 433659,
+      "sha256": "c9055b4fd1a6b58ad0876b6750fd1a41a96173015b8ed41edc946a4a68ffdb06"
+    },
+    {
+      "path": "dictionary/voice-2c498253db3c48a296809e4312e24240783868b8cb5c33690a4d87a728249f90/6e.bin",
+      "bytes": 470820,
+      "sha256": "dc97c186350f05abddd04706775653039950d605c034ba259257fede4e549386"
+    },
+    {
+      "path": "dictionary/voice-2c498253db3c48a296809e4312e24240783868b8cb5c33690a4d87a728249f90/6f.bin",
+      "bytes": 449180,
+      "sha256": "fb95f5d3cf7dab9f3b98cd066346d0012c7d3756f33e818651554a379e4da622"
+    },
+    {
+      "path": "dictionary/voice-2c498253db3c48a296809e4312e24240783868b8cb5c33690a4d87a728249f90/70.bin",
+      "bytes": 468795,
+      "sha256": "a92c93deaad4bc498c99eb6e8cb26f61ad95c9ba393caf1a648211f0186e4285"
+    },
+    {
+      "path": "dictionary/voice-2c498253db3c48a296809e4312e24240783868b8cb5c33690a4d87a728249f90/71.bin",
+      "bytes": 380312,
+      "sha256": "bbb65809fc30bca4924b8d24dbbe40ea4a371bf944faa6f3e945ec2a63c23fc9"
+    },
+    {
+      "path": "dictionary/voice-2c498253db3c48a296809e4312e24240783868b8cb5c33690a4d87a728249f90/72.bin",
+      "bytes": 426037,
+      "sha256": "238f50a6ba38e53007b13ca5ce887307a2c840576b9686519c3b3af48e7c04b2"
+    },
+    {
+      "path": "dictionary/voice-2c498253db3c48a296809e4312e24240783868b8cb5c33690a4d87a728249f90/73.bin",
+      "bytes": 460108,
+      "sha256": "a8e65a924a4f2f08ecbf93d10664f64fc25b090cdc53acf90d2b9af894c1f72d"
+    },
+    {
+      "path": "dictionary/voice-2c498253db3c48a296809e4312e24240783868b8cb5c33690a4d87a728249f90/74.bin",
+      "bytes": 500584,
+      "sha256": "717dc7c48f4ef88b5762f8aa33abce5d03a28e886e06056881663c218f3fcc39"
+    },
+    {
+      "path": "dictionary/voice-2c498253db3c48a296809e4312e24240783868b8cb5c33690a4d87a728249f90/75.bin",
+      "bytes": 445189,
+      "sha256": "a177a13838ad16f5544639e7861429db95ec7678c6e410347c12f265fced01c7"
+    },
+    {
+      "path": "dictionary/voice-2c498253db3c48a296809e4312e24240783868b8cb5c33690a4d87a728249f90/76.bin",
+      "bytes": 450070,
+      "sha256": "086cd25848b8a51548c1b9df4222d0d1417a8e077c14ff8161d6bd667c0583bf"
+    },
+    {
+      "path": "dictionary/voice-2c498253db3c48a296809e4312e24240783868b8cb5c33690a4d87a728249f90/77.bin",
+      "bytes": 473910,
+      "sha256": "5636a783ea98bbebd31b65bc50259df5cf0656fb77f436cd8e788028868a31bc"
+    },
+    {
+      "path": "dictionary/voice-2c498253db3c48a296809e4312e24240783868b8cb5c33690a4d87a728249f90/78.bin",
+      "bytes": 416402,
+      "sha256": "e43f148e415ce5f76ffda0aa687fa9f5a4d24680709a753f663b84745a039e0c"
+    },
+    {
+      "path": "dictionary/voice-2c498253db3c48a296809e4312e24240783868b8cb5c33690a4d87a728249f90/79.bin",
+      "bytes": 431847,
+      "sha256": "a29d86a0e849001ec93472cb146a255c42f489996bdafe35f48f266bfe4af4f1"
+    },
+    {
+      "path": "dictionary/voice-2c498253db3c48a296809e4312e24240783868b8cb5c33690a4d87a728249f90/7a.bin",
+      "bytes": 453673,
+      "sha256": "eda8fb3da4c67e513f43c6f78b4289f881cebc00a041bfb153f266e047b19fb0"
+    },
+    {
+      "path": "dictionary/voice-2c498253db3c48a296809e4312e24240783868b8cb5c33690a4d87a728249f90/7b.bin",
+      "bytes": 547354,
+      "sha256": "315e1e8afb2cc7b245b1e966b1403daae37117d2f88875f2bf90518d7df077e6"
+    },
+    {
+      "path": "dictionary/voice-2c498253db3c48a296809e4312e24240783868b8cb5c33690a4d87a728249f90/7c.bin",
+      "bytes": 419336,
+      "sha256": "f8d1f752e6d19f3f0ea01ca96cd3c496c07bfbabef90de057f5fe38ebcbab3ef"
+    },
+    {
+      "path": "dictionary/voice-2c498253db3c48a296809e4312e24240783868b8cb5c33690a4d87a728249f90/7d.bin",
+      "bytes": 442057,
+      "sha256": "55391299a97e77e125359d71c532c7870d031364d6552ec2061b142e1dd47ad5"
+    },
+    {
+      "path": "dictionary/voice-2c498253db3c48a296809e4312e24240783868b8cb5c33690a4d87a728249f90/7e.bin",
+      "bytes": 423340,
+      "sha256": "55a41ed6e561b43761755272afb20a07be0e7af84b3d6dfca755fedd115c284a"
+    },
+    {
+      "path": "dictionary/voice-2c498253db3c48a296809e4312e24240783868b8cb5c33690a4d87a728249f90/7f.bin",
+      "bytes": 452012,
+      "sha256": "3d712d9aa06d8c37853b7b0bfece066e6a1cdd4ea3d81d7c5aacb50c5762a6ca"
+    },
+    {
+      "path": "dictionary/voice-2c498253db3c48a296809e4312e24240783868b8cb5c33690a4d87a728249f90/NOTICE.txt",
+      "bytes": 505,
+      "sha256": "1ae51232923c2f73bb52561d18a5c913e840360ce2a502086ebc4825e9a8c699"
     }
   ]
 }

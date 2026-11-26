@@ -846,6 +846,531 @@
       "path": "rino/kitchen/write.wav",
       "sha256": "35425131f252edb37869938cb573b5fb73b598df297d6fa80111d689b7abf05a",
       "bytes": 86828
+    },
+    {
+      "path": "rino/field/actor-climb.webp",
+      "sha256": "2701e739c05cd502c4a330c61688011e5d7853b153aa19f64bbc761a7d39ff63",
+      "bytes": 36148
+    },
+    {
+      "path": "rino/field/actor-cut.webp",
+      "sha256": "4b9cd4748c87ecc6d8419dbc6c484cfd3d5f80bae10aa777bc04eeee51b649de",
+      "bytes": 30432
+    },
+    {
+      "path": "rino/field/actor-dig.webp",
+      "sha256": "a22b6ad147fa08d9140ad27fc71dfdd460e8f100bfaac415ff58f2585528e489",
+      "bytes": 37112
+    },
+    {
+      "path": "rino/field/actor-draw.webp",
+      "sha256": "beffdd90c8a6eac6f8b319c1fbdfc63fdae60e7885d8e679760d2428868a390c",
+      "bytes": 27756
+    },
+    {
+      "path": "rino/field/actor-drink.webp",
+      "sha256": "472c56f08d40d87d4a80ab5f7954f5937938c9bef7b787c68b9d7d5bd51f6b47",
+      "bytes": 24370
+    },
+    {
+      "path": "rino/field/actor-eat.webp",
+      "sha256": "8b601fd1e741f482c2df88516587a975a7e862a42106ee2393e6eff6beffba0b",
+      "bytes": 24800
+    },
+    {
+      "path": "rino/field/actor-erase.webp",
+      "sha256": "cbf386d6cd1d32c489a6675e2235c4865acacfd84aea3e31f2b4d04ee44e1e1e",
+      "bytes": 45968
+    },
+    {
+      "path": "rino/field/actor-listen.webp",
+      "sha256": "2ae9d3c8a8231a9fda3bfba9bc514b58d2bb4a1742389b172b3926c5953fa3da",
+      "bytes": 34092
+    },
+    {
+      "path": "rino/field/actor-look.webp",
+      "sha256": "fafaa3c94975286db82a4b89fe09e2dd28fab6ececceade9926c81e8d36bb30b",
+      "bytes": 27360
+    },
+    {
+      "path": "rino/field/actor-pickup.webp",
+      "sha256": "d0e95f9787759146f864909a55218b6cc523fb461cffa39c2968bb26f70e44de",
+      "bytes": 39572
+    },
+    {
+      "path": "rino/field/actor-sit.webp",
+      "sha256": "a8eef0ac6319852b97fac95a07ef273544facf0c89f19e95e9066c5667b2b57e",
+      "bytes": 23590
+    },
+    {
+      "path": "rino/field/actor-sleep.webp",
+      "sha256": "40703abf9863dd4f6922ceaa6d6abc4854e4458613d66efc8b9fc7adda1db84a",
+      "bytes": 45482
+    },
+    {
+      "path": "rino/field/actor-stand.webp",
+      "sha256": "6a03853b966dc778a7c65be5e87c80499916e7e1347f49d1db6d31ff42d243be",
+      "bytes": 34578
+    },
+    {
+      "path": "rino/field/actor-swim.webp",
+      "sha256": "aa788bde836e872714f349ffa38d9f4b6f39218898b72a4ab5cce16b788bb4fa",
+      "bytes": 63622
+    },
+    {
+      "path": "rino/field/actor-throw.webp",
+      "sha256": "28f93954da8f5bb7963e2e73e2035ed1381788725f6ad238dbd159582a25abee",
+      "bytes": 30312
+    },
+    {
+      "path": "rino/field/actor-walk.webp",
+      "sha256": "f22ab8875f5ff12dd8a14b946853c0ff585210916c486371abc07db32a66f76b",
+      "bytes": 32386
+    },
+    {
+      "path": "rino/field/apple.webp",
+      "sha256": "030bf72681b4ffa7a5ac7c7b6db40fd9681ac308177e38ab745f4339858ee337",
+      "bytes": 16950
+    },
+    {
+      "path": "rino/field/beach.webp",
+      "sha256": "d738513c46dc70e47d842926127715a88340491b6fa38ed99d3c47d64884e841",
+      "bytes": 257698
+    },
+    {
+      "path": "rino/field/bowl.webp",
+      "sha256": "23c0dcf498b4366451a02a9910fc6d37e46a81348f0c1bc80c0f2f6677117db2",
+      "bytes": 26800
+    },
+    {
+      "path": "rino/field/carrot.webp",
+      "sha256": "84d1051317e050763ec15a0c899c6b795891d70c3e69b5528f54a1af2d93ad60",
+      "bytes": 15932
+    },
+    {
+      "path": "rino/field/case.webp",
+      "sha256": "4ba662a7c885a574b983a44c619d3a28f519ab3401c8a9c5e210502a394536b5",
+      "bytes": 166732
+    },
+    {
+      "path": "rino/field/classroom.webp",
+      "sha256": "4766815c5dfb458285edc7a61434e2bbef72ab5d4377e25d2796f48ce25c27f4",
+      "bytes": 205254
+    },
+    {
+      "path": "rino/field/credits.txt",
+      "sha256": "f5aacc025e1e948a0b8e4b9118e74bdc279860837087c7e96c4854f376d94edd",
+      "bytes": 14807
+    },
+    {
+      "path": "rino/field/egg.webp",
+      "sha256": "ecc7eeb036c56f25d74311742bab8cab3f69d94a32ddde0b5e9244228c248dd1",
+      "bytes": 13244
+    },
+    {
+      "path": "rino/field/field-atlas.webp",
+      "sha256": "162860a3986818ebe3709d089b6bf18314c3d0ec0d5b4caf6d7b39bd8e87f4ce",
+      "bytes": 440178
+    },
+    {
+      "path": "rino/field/field-board.mjs",
+      "sha256": "39184ab3b62d8dc5c97ccfdb7f4b652847bcda191ddf574399b37ffb1fe1edc3",
+      "bytes": 4742
+    },
+    {
+      "path": "rino/field/field-data.mjs",
+      "sha256": "567abcb3b38ad8666af5e8228c2f05c786e0a8525452b3ea50d84d4af0352fad",
+      "bytes": 8902
+    },
+    {
+      "path": "rino/field/field-game.mjs",
+      "sha256": "47c2e055ef397b7c665b97fa1c30c4928a89b652211f5e0dce0a16590b5c1344",
+      "bytes": 22812
+    },
+    {
+      "path": "rino/field/field-words.mjs",
+      "sha256": "5a4fd647825ca0ce285a394bc3a3713d5e070fd1642ce12110cdf2ee86cfe9db",
+      "bytes": 14092
+    },
+    {
+      "path": "rino/field/field.css",
+      "sha256": "2f70a3fa31015a699915d82f6ff33be7a41994e9df8eb0bf658a9c118ff1903c",
+      "bytes": 3076
+    },
+    {
+      "path": "rino/field/forest.webp",
+      "sha256": "490383522a780942094ff719fb38a5714d6ed5dc7e1276f81f983e6384e60f11",
+      "bytes": 382802
+    },
+    {
+      "path": "rino/field/fork.webp",
+      "sha256": "3ce2bdf97e8d0d5a98a76390917313effea3a0a4b71a3d7b70ac1d00fc29b4c2",
+      "bytes": 11474
+    },
+    {
+      "path": "rino/field/pack.webp",
+      "sha256": "2a9d4a508278456a536f4de6056d0ed1a1432af5f8aef38463bfa9af25151a0f",
+      "bytes": 236526
+    },
+    {
+      "path": "rino/field/pool.webp",
+      "sha256": "5300f9458beaf60d8fd637ec330b94c6b928d660479bcff9e660f2b28fcff3de",
+      "bytes": 262170
+    },
+    {
+      "path": "rino/field/spoon.webp",
+      "sha256": "621eacb17912fb08acb8cb99630605bb5b539d50686c9f7d966c2296ad409710",
+      "bytes": 11178
+    },
+    {
+      "path": "rino/kitchen/apple.wav",
+      "sha256": "f443d36d345bbca2798d9aba01cc2c6af29ba5ee57194df06ecf7c910ac2969c",
+      "bytes": 101932
+    },
+    {
+      "path": "rino/kitchen/ball.wav",
+      "sha256": "aa53eb208d61946b68cd433dfc1a0d004e62eaaae379b65dc43dfafd77da091a",
+      "bytes": 104492
+    },
+    {
+      "path": "rino/kitchen/binoculars.wav",
+      "sha256": "ea238f77b18c98b018a466a86f5a2073ece186f061c5a0fb1c6a2f326a1d0547",
+      "bytes": 193768
+    },
+    {
+      "path": "rino/kitchen/board.wav",
+      "sha256": "513cc9c0f33a96ea63a26e2ec9a83e789e4d2eed92c6613bfa858b08bf0397eb",
+      "bytes": 112172
+    },
+    {
+      "path": "rino/kitchen/boat.wav",
+      "sha256": "c10ac93c6b8bc1064388d97f50f2e52666d1d5b27c1e963064dd05c958a935a9",
+      "bytes": 81452
+    },
+    {
+      "path": "rino/kitchen/bottle.wav",
+      "sha256": "230158ff8f473aee734db7b175f474480b0960e1035003d1eb04cab2032494f3",
+      "bytes": 73866
+    },
+    {
+      "path": "rino/kitchen/bowl.wav",
+      "sha256": "d09e9d8cca857d92ff230696121075fb6bac17457f84b4e708fbd5df129e59b2",
+      "bytes": 105164
+    },
+    {
+      "path": "rino/kitchen/bridge.wav",
+      "sha256": "7276e448d8617c95aa0467889847122ece942972c1da2d4e98ddb8b5a7d9f305",
+      "bytes": 93740
+    },
+    {
+      "path": "rino/kitchen/brush.wav",
+      "sha256": "01565165d619ed1fc599e7c50297c4237e4ed743f37e69177483e5068320395f",
+      "bytes": 82732
+    },
+    {
+      "path": "rino/kitchen/camera.wav",
+      "sha256": "e83ec62b163375ec865e8c7bf31f2b8037230fab9fd370df0c4963d44f6ffc00",
+      "bytes": 100396
+    },
+    {
+      "path": "rino/kitchen/carrot.wav",
+      "sha256": "91817a65da5eb296c77edb9bef4614626af0c5672ece0a6c02b47221f3ac63be",
+      "bytes": 119084
+    },
+    {
+      "path": "rino/kitchen/chair.wav",
+      "sha256": "252249d630e95119927b7f95c9223b347062079b2c796c8c92746aa19bacc68d",
+      "bytes": 90924
+    },
+    {
+      "path": "rino/kitchen/climb.wav",
+      "sha256": "5d386ffcd81274f30e395f0715cd82f768863259e4728bfcb586729f8cc660ff",
+      "bytes": 108076
+    },
+    {
+      "path": "rino/kitchen/clock.wav",
+      "sha256": "2b5f79ecafac70455c7dc5f40c4dda4e518e6be115fdeb92045c5669a3e90de4",
+      "bytes": 89644
+    },
+    {
+      "path": "rino/kitchen/crab.wav",
+      "sha256": "45ee9379ac1a05fb971d147fb5a196eb63236fc036e949131087870474490749",
+      "bytes": 82476
+    },
+    {
+      "path": "rino/kitchen/cushion.wav",
+      "sha256": "615af31d24276c388bcca811f76ff9b401933a87f0686a307dc8fbce3a28ffc9",
+      "bytes": 110924
+    },
+    {
+      "path": "rino/kitchen/cut.wav",
+      "sha256": "50d6ec480755ee2bbadcc1d75308492daece86ff2a3a3eea0075d0f70d1899b8",
+      "bytes": 80172
+    },
+    {
+      "path": "rino/kitchen/desk.wav",
+      "sha256": "1516c4974c95300d253f63c3d09ed73fdb7fb9d9d47622e537c78065d595db91",
+      "bytes": 100908
+    },
+    {
+      "path": "rino/kitchen/dig.wav",
+      "sha256": "fe963f276a0da7d5030cc60405a42d1a8c480a5b0f4f3f907d59d149e7db43ca",
+      "bytes": 87784
+    },
+    {
+      "path": "rino/kitchen/draw.wav",
+      "sha256": "f89f19e0e33c413ded6f4d0f65ba248b87f17b4031e4f1623bb32658468523b8",
+      "bytes": 83176
+    },
+    {
+      "path": "rino/kitchen/drink.wav",
+      "sha256": "9084931a0a9884dc8bdffdd6a6f491ce435f24ebeec02a9323351d93b30c8f32",
+      "bytes": 87084
+    },
+    {
+      "path": "rino/kitchen/eat.wav",
+      "sha256": "b88b0c08ee6f9665ad4516bfff8f5ca735f3e1072510a7d882b5e81bb4bb9631",
+      "bytes": 94764
+    },
+    {
+      "path": "rino/kitchen/egg.wav",
+      "sha256": "9a0684e9529d39c8249342ace7259c88d73406e0d511b796cfea8fc90d57da1c",
+      "bytes": 102188
+    },
+    {
+      "path": "rino/kitchen/erase.wav",
+      "sha256": "1df9490882ff2ba68a609acd40efc5a90c4f032df3b5998d36a6b5b666a3d520",
+      "bytes": 88620
+    },
+    {
+      "path": "rino/kitchen/eraser.wav",
+      "sha256": "6fbc94aaa67e7492c4a3126b4a79d48e4307f12faf586d0eab1d8f99394d7d05",
+      "bytes": 119340
+    },
+    {
+      "path": "rino/kitchen/fish.wav",
+      "sha256": "1a22111cc64d87af5c326c9b26be19c6eb28cb3e339f504e4c363820cd3c3ca0",
+      "bytes": 100652
+    },
+    {
+      "path": "rino/kitchen/flower.wav",
+      "sha256": "1e45d1a2e25973dbf247b61e10c3218f3aa85b0b6d2c199f427345710f6ecf3d",
+      "bytes": 83500
+    },
+    {
+      "path": "rino/kitchen/fork.wav",
+      "sha256": "db6c149a9d7f66f95aa46aa0484f13975addcbdcad2c8c02f4b535760597bbc8",
+      "bytes": 98860
+    },
+    {
+      "path": "rino/kitchen/globe.wav",
+      "sha256": "4065c5bc51075c4f52713698a9ebd844b2d5a0d5d3d42b323e790b0bfa95bf1a",
+      "bytes": 120044
+    },
+    {
+      "path": "rino/kitchen/glue.wav",
+      "sha256": "abca5b46fdd5dc7ab24898a7bfe98ce1922e8dc9de5b76627c7c4aa8f0e3abd5",
+      "bytes": 94604
+    },
+    {
+      "path": "rino/kitchen/gull.wav",
+      "sha256": "04296d66387adddfe710cb79cd55e5554cbd77a83500868711f620574160ada9",
+      "bytes": 99628
+    },
+    {
+      "path": "rino/kitchen/hat.wav",
+      "sha256": "8f7745141c540b6e2d2f66b10a308203b8519524e7db14bf1e683f463f5274f3",
+      "bytes": 107564
+    },
+    {
+      "path": "rino/kitchen/island.wav",
+      "sha256": "6d90363d7263d7dbb646b4267fc6b6ebecb6d575e739143ba034059d978e2ae7",
+      "bytes": 79916
+    },
+    {
+      "path": "rino/kitchen/key.wav",
+      "sha256": "31eaa3d84a2d564292247a399aa5fa62f61b7b51609b31c8b44066f74e2967dd",
+      "bytes": 88364
+    },
+    {
+      "path": "rino/kitchen/listen.wav",
+      "sha256": "522af38063246f2616b2ab63d1bc5b5964164bcff990590ca5502ea91ff756c0",
+      "bytes": 88108
+    },
+    {
+      "path": "rino/kitchen/look.wav",
+      "sha256": "a0a2012c87d0ef5ee683230ce4e7d009effd3983f784bf8a1ccf842baffeefb2",
+      "bytes": 80684
+    },
+    {
+      "path": "rino/kitchen/map.wav",
+      "sha256": "0f79b73c08dfe2f3b81734e235d1e9f534796fa729bb5ae05aaaa97ff0489359",
+      "bytes": 85804
+    },
+    {
+      "path": "rino/kitchen/mountain.wav",
+      "sha256": "9b090d503f2ea4ad252fa3e779a509a3195962fa0a5c3ada311d2780ebac98c9",
+      "bytes": 95276
+    },
+    {
+      "path": "rino/kitchen/mushroom.wav",
+      "sha256": "d4c3722d24af0ee760c0c5b42d905f4484a197efbd22cc7e7581eeade31384fc",
+      "bytes": 103212
+    },
+    {
+      "path": "rino/kitchen/notebook.wav",
+      "sha256": "ab81a3f8a69574754a4505561d9a48227584553d81c0367246f5b618e61f5795",
+      "bytes": 105260
+    },
+    {
+      "path": "rino/kitchen/octopus.wav",
+      "sha256": "47c42bbe7cfb532e207eb00d4397c50589bb862acda1462e53b55a17c3e1d65d",
+      "bytes": 87084
+    },
+    {
+      "path": "rino/kitchen/pan.wav",
+      "sha256": "b1b89f12f0ffb34a350752d75e96945f629cd6df9e2ddc840113c9b675f537cf",
+      "bytes": 122924
+    },
+    {
+      "path": "rino/kitchen/path.wav",
+      "sha256": "0cab252671b9a5ed149321a83788629982863baa0adde6df2dc1ec51f52b6d96",
+      "bytes": 97324
+    },
+    {
+      "path": "rino/kitchen/pen.wav",
+      "sha256": "708245a79830229856d76090755b7bd3eb5a0276ce3cfd3ebf1ea03d956b5705",
+      "bytes": 81964
+    },
+    {
+      "path": "rino/kitchen/pickup.wav",
+      "sha256": "ba9e42aea60b51f1bd0657ea42f6ab33dfb5e9465d67c812c0073fafce8da3f7",
+      "bytes": 61484
+    },
+    {
+      "path": "rino/kitchen/river.wav",
+      "sha256": "b2af74fc1c17cf81e3c663ed5e677ca0e5809032a6dfeaf6bf7320b37be35535",
+      "bytes": 79148
+    },
+    {
+      "path": "rino/kitchen/rug.wav",
+      "sha256": "3194233b717c9c5ec0be827ebfb9dcaa695c5c4859ae26993fa5fa2b4a553278",
+      "bytes": 114284
+    },
+    {
+      "path": "rino/kitchen/ruler.wav",
+      "sha256": "34e0cc467f1109845d0f44aea1aee93befe5492f4813a73f1ab9718907ae6e4a",
+      "bytes": 100652
+    },
+    {
+      "path": "rino/kitchen/sand.wav",
+      "sha256": "29571c96260b790bcdedc13d983e95dc143e10f30d4ec373010ba8202d6cce29",
+      "bytes": 83500
+    },
+    {
+      "path": "rino/kitchen/schoolbag.wav",
+      "sha256": "f7ba60a237fc662ab4d2fca4a9b2fa0ba2003367de104ed8738d03a2777c07bc",
+      "bytes": 104492
+    },
+    {
+      "path": "rino/kitchen/scissors.wav",
+      "sha256": "323e0b2fdf140e3dff4a5acf5c79e343768fd65517620096994d6f4f89f77053",
+      "bytes": 105004
+    },
+    {
+      "path": "rino/kitchen/sea.wav",
+      "sha256": "d14157a44e2e1e935d384b6a92dbcb376fcd81f29e4bb8199c42ec0282e22c8d",
+      "bytes": 86060
+    },
+    {
+      "path": "rino/kitchen/seaweed.wav",
+      "sha256": "3ee98ed492f4322cabea4f71d2d2a2a938af3e1745772780b8f25396be52dd74",
+      "bytes": 166120
+    },
+    {
+      "path": "rino/kitchen/shelf.wav",
+      "sha256": "a3ea1bb191a4597c722115dcdd4e6d9d0578008fe875dd3185bd8b749fa33a0a",
+      "bytes": 105004
+    },
+    {
+      "path": "rino/kitchen/shell.wav",
+      "sha256": "71b07abe18e2422dce497b9cd4633f4a37ed87951e6a3ae9678baa501c5f4b66",
+      "bytes": 55434
+    },
+    {
+      "path": "rino/kitchen/shrimp.wav",
+      "sha256": "06fdbbf6d3e0b624a989a6650b524b4d54c01e287f24adcb4dbb11ceddebc4d7",
+      "bytes": 88876
+    },
+    {
+      "path": "rino/kitchen/sit.wav",
+      "sha256": "a80030d37dafa3202da054ed7aef32d8edde9d39e3c2408102e627549d28c761",
+      "bytes": 96812
+    },
+    {
+      "path": "rino/kitchen/sleep.wav",
+      "sha256": "7c4cc051754d79ae8af47ba4cce0175b4e01c843aba0f09f5a889c2f2c0500af",
+      "bytes": 90156
+    },
+    {
+      "path": "rino/kitchen/spoon.wav",
+      "sha256": "409a8c44f1484683e517ae6bfdfc4246eee1dfb8cb7d01445aede900454274cf",
+      "bytes": 92204
+    },
+    {
+      "path": "rino/kitchen/squirrel.wav",
+      "sha256": "0fe596b0d6668128ebd23f94e11b248b0592dfc817a006b3c671b9c3a9899148",
+      "bytes": 90156
+    },
+    {
+      "path": "rino/kitchen/stand.wav",
+      "sha256": "2b0dd9c749826437434c343959382828035e0165665994ecec56c70c4387cad8",
+      "bytes": 87340
+    },
+    {
+      "path": "rino/kitchen/starfish.wav",
+      "sha256": "97379587d86fc83c2a1341bd6b99c093d28e3a9862b176e12b0c9d123ffc553f",
+      "bytes": 113804
+    },
+    {
+      "path": "rino/kitchen/swim.wav",
+      "sha256": "390dc75b0e71f29ff3148156ff487f048446d03a44f070267319f736d0211a0f",
+      "bytes": 103724
+    },
+    {
+      "path": "rino/kitchen/throw.wav",
+      "sha256": "3a200f317ee71125ea5451f33461d413ea8640f8513543d5d2f101c286c9938f",
+      "bytes": 103212
+    },
+    {
+      "path": "rino/kitchen/tree.wav",
+      "sha256": "c997e99fd79779adb1fd4456a9464a9fb82373c58d9c9f4ca7eae5ea359f357d",
+      "bytes": 65836
+    },
+    {
+      "path": "rino/kitchen/vase.wav",
+      "sha256": "0cd1fd22effc93e9d87372b39f1da0f09efc623f04eec61271640e2a2aa3f33b",
+      "bytes": 103468
+    },
+    {
+      "path": "rino/kitchen/walk.wav",
+      "sha256": "28c59c136659d0073e576b0cd07cf2bdaeb39db0b23688ede5bb5c141593d08d",
+      "bytes": 105772
+    },
+    {
+      "path": "rino/kitchen/waterfall.wav",
+      "sha256": "bfdd03ee372f42d4ef7080610fe0c3f1bf7defd888369dbd811ab41211f7905d",
+      "bytes": 87784
+    },
+    {
+      "path": "rino/kitchen/wave.wav",
+      "sha256": "cb1b5839a99651d968618799356f070b05487c9db87f819a55e4bf33900353a1",
+      "bytes": 92392
+    },
+    {
+      "path": "rino/kitchen/window.wav",
+      "sha256": "becbcf4d400145e397d53bc69a9e521ac969d963f8c9f8530cdf891cc31b306e",
+      "bytes": 66220
     }
   ]
 }
