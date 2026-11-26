@@ -1,0 +1,33 @@
+RiNO Japanese pronunciation audio
+
+Native-speaker recordings
+
+Kanji alive, by the Kanji alive team and its Japanese speakers.
+https://kanjialive.com/
+Source recordings and word lists (v2.1):
+https://github.com/kanjialive/kanji-data-media/tree/386d21818fb61a33d2bf09cfa3758ff7bab2179a
+Licensed under Creative Commons Attribution 4.0 International:
+https://creativecommons.org/licenses/by/4.0/
+
+Japanese vocabulary pronunciation audio, by Tofugu and WaniKani.
+https://www.tofugu.com/ and https://www.wanikani.com/
+Source recordings:
+https://github.com/tofugu/japanese-vocabulary-pronunciation-audio/tree/9725e0e7d628ab616e8b14e126d3daa33eba8d36
+These recordings, including RiNO’s edits to them, are licensed under
+Creative Commons Attribution-ShareAlike 4.0 International:
+https://creativecommons.org/licenses/by-sa/4.0/
+
+RiNO matched the recordings to the displayed spelling and kana, retained their
+spoken timing, trimmed surrounding silence, adjusted levels, and encoded the
+clips as 96 kbps mono MP3. In this directory, recordings.json lists the source
+and original audio file for each matched reading|spelling. For bare kanji with
+okurigana, the recording is the complete indicated reading (e.g. 浴・あ.びる).
+
+Additional readings
+
+VOICEVOX Nemo, female voice 2 (女声2, normal), voice provided by 透川ナナ.
+https://voicevox.hiroshiba.jp/nemo/
+Terms for these synthesized clips: https://voicevox.hiroshiba.jp/nemo/term/
+RiNO generated these whole-word clips locally with VOICEVOX Nemo Engine
+0.26.0 and VOICEVOX Core 0.17.0 and applied the same level adjustment and
+MP3 encoding. The original recordings above were used solely for playback.
