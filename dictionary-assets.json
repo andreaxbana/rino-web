@@ -11,27 +11,27 @@
   "entries": 218920,
   "files": [
     {
-      "path": "dictionary/e71315d262589dd50a20b1e40e4c1455140dec99c87022d76501af845d2a9d8d/reference.json.gz",
+      "path": "dictionary/906028fcc30c6b433c84c388baa8c35b77f5caecdaf4278930f28c2e0a3884fa/reference.json.gz",
       "bytes": 9402307,
       "sha256": "50baa00c1dd80172cf37c67bee951133fa9e3420d5f024b1e13f45e3b8e24fa4"
     },
     {
-      "path": "dictionary/e71315d262589dd50a20b1e40e4c1455140dec99c87022d76501af845d2a9d8d/dictionary-worker.js",
+      "path": "dictionary/906028fcc30c6b433c84c388baa8c35b77f5caecdaf4278930f28c2e0a3884fa/dictionary-worker.js",
       "bytes": 5148,
       "sha256": "f1b669854b7509c7945f032d727cf25bcd7c58cc8911c2501174c42d11890617"
     },
     {
-      "path": "dictionary/e71315d262589dd50a20b1e40e4c1455140dec99c87022d76501af845d2a9d8d/dictionary-reference.js",
-      "bytes": 10288,
-      "sha256": "154b101f060b1fb7b20e83ee550509f56717d1ea419295d0761a2354720c0a6e"
+      "path": "dictionary/906028fcc30c6b433c84c388baa8c35b77f5caecdaf4278930f28c2e0a3884fa/dictionary-reference.js",
+      "bytes": 11492,
+      "sha256": "82726aac364fa34850da7dbf25dd6f6d98bca6ea973adb805e8efa686bdd88aa"
     },
     {
-      "path": "dictionary/e71315d262589dd50a20b1e40e4c1455140dec99c87022d76501af845d2a9d8d/dictionary.js",
-      "bytes": 72769,
-      "sha256": "74dffc3f3885c6ba3640f5bcb88f2f6abd9c6921b0cfdc99549364a59897908d"
+      "path": "dictionary/906028fcc30c6b433c84c388baa8c35b77f5caecdaf4278930f28c2e0a3884fa/dictionary.js",
+      "bytes": 75009,
+      "sha256": "f3ee365f4056c5169ed5351cc0745262c3582a18b9a37c46b0a293df1e830728"
     },
     {
-      "path": "dictionary/e71315d262589dd50a20b1e40e4c1455140dec99c87022d76501af845d2a9d8d/word-forms.js",
+      "path": "dictionary/906028fcc30c6b433c84c388baa8c35b77f5caecdaf4278930f28c2e0a3884fa/word-forms.js",
       "bytes": 39701,
       "sha256": "6604451648f753c8a9a7bf77beb2a149b1f36b4b27e6c7de414e40201f0a617b"
     },

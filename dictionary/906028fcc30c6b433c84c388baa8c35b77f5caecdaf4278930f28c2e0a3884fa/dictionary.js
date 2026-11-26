@@ -66,10 +66,15 @@
     ...(finder ? {finder} : {})
     };
   };
+  const characterGlosses=item=>item.display_meanings_en || item.meanings_en || [];
+  const characterTitle=item=>item.title_en || characterGlosses(item).join('; ');
+  const englishAliases=item=>item.character
+    ? [item.title_en,...characterGlosses(item)].filter(Boolean)
+    : [...item.glosses || [],item.meaning_en].filter(Boolean);
   function englishMatch(item,query) {
     const terms=key(query).trim().split(/\s+/).filter(Boolean);
     if(!terms.length)return null;
-    const meanings=[...item.glosses || [],...item.meanings_en || [],item.meaning_en].filter(Boolean);
+    const meanings=englishAliases(item);
     let best=null;
     for(const meaning of meanings){const text=key(meaning);if(!terms.every(term=>(' '+text).includes(' '+term)))continue;
       const score=text===key(query).trim()?300:text.startsWith(key(query).trim())?200:100;
@@ -95,7 +100,10 @@
     return [...result];
   }
   function createIndex(data,notes = {},reference = {}) {
-    const kanji = new Map((data.kanji || []).map(item => [item.character,item]));
+    const kanji = new Map((data.kanji || []).map(item => {
+      const heading=item.title_en || data.kanjiLearnUsage?.guides?.[item.character]?.heading || notes.entries?.[item.character]?.meaning;
+      return [item.character,heading && !item.title_en ? {...item,title_en:heading} : item];
+    }));
     const catalogWords = new Map((data.vocabulary || []).map(item => [item.id,item]));
     const ref = globalThis.RinoDictionaryReference?.create(reference);
     const words = new Map(), pairs = new Map(), preferred = new Map(), identities = new Map(), aliases = new Map();
@@ -161,7 +169,7 @@
     for (const list of byCharacter.values()) list.sort((a,b) => Number(b.level?.slice(1) || 0) - Number(a.level?.slice(1) || 0) || a.word.localeCompare(b.word,'ja'));
     const spokenReadings = {'こんにちは':'konnichiwa','こんばんは':'konbanwa','は':'wa','へ':'e','を':'o'};
     const searchRow = (item,text,readings) => ({item,text:key(text.join(' ')),readings:readings.map(key),romaji:[...new Set(readings.flatMap(reading => [romanize(reading),key(item.word) === key(reading) ? spokenReadings[key(reading)] : ''].flatMap(romajiKeys)))]});
-    const kanjiSearch = [...kanji.values()].map(item => searchRow(item,[item.character,...item.meanings_en || [],...item.on_readings || [],...item.kun_readings || []],[...item.on_readings || [],...item.kun_readings || []]));
+    const kanjiSearch = [...kanji.values()].map(item => searchRow(item,[item.character,...englishAliases(item),...item.on_readings || [],...item.kun_readings || []],[...item.on_readings || [],...item.kun_readings || []]));
     const wordSearch = [...words.values()].map(item => searchRow(item,[item.word,item.reading,...item.alternate_forms || [],...item.alternate_readings || [],item.meaning_en,...item.glosses || []],[item.word,item.reading,...item.alternate_forms || [],...item.alternate_readings || []]));
     function search(query,options = {}) {
       const terms = String(query || '').normalize('NFKC').trim().split(/\s+/).filter(Boolean);
@@ -169,12 +177,12 @@
       const termKeys = terms.map(term => ({term:key(term),romaji:romajiKeys(term)})).filter(({term,romaji}) => term || romaji.length);
       if (!termKeys.length) return {kanji:[],words:[]};
       const english = row => englishMatch(row.item,query);
-      const wholeEnglish=row=>{const tokens=[...row.item.glosses || [],...row.item.meanings_en || [],row.item.meaning_en].filter(Boolean).flatMap(v=>key(v).split(/[^a-z0-9]+/));return termKeys.every(({term})=>tokens.includes(term));};
+      const wholeEnglish=row=>{const tokens=englishAliases(row.item).flatMap(v=>key(v).split(/[^a-z0-9]+/));return termKeys.every(({term})=>tokens.includes(term));};
       const mode = options.mode && options.mode !== 'auto' ? options.mode : wordSearch.some(wholeEnglish) || kanjiSearch.some(wholeEnglish) ? 'english' : terms.length>1?'mixed':/[\p{Script=Han}\p{Script=Hiragana}\p{Script=Katakana}]/u.test(query) ? 'japanese' : 'romaji';
       const matches = list => list.filter(row => mode==='mixed'?termKeys.every(({term,romaji})=>row.text.includes(term)||romaji.some(alias=>row.romaji.some(reading=>reading.includes(alias)))):mode==='english' ? english(row) : mode==='romaji' ? termKeys.every(({romaji})=>romaji.some(alias=>row.romaji.some(reading=>reading.includes(alias)))) : termKeys.every(({term})=>[row.item.character,row.item.word,row.item.reading,...row.item.alternate_forms || [],...row.item.alternate_readings || [],...row.item.on_readings || [],...row.item.kun_readings || []].some(value=>key(value).includes(term))));
       const exact = key(query).trim();
       const exactRomaji = romajiKeys(query);
-      const priority = ({item,readings,romaji}) => [item.character || item.word,...item.alternate_forms || []].some(value => key(value) === exact) ? 3 : readings.includes(exact) || exactRomaji.some(alias => romaji.includes(alias)) ? 2 : [item.meaning_en,...item.glosses || [],...item.meanings_en || []].some(value => value && key(value) === exact) ? 1 : 0;
+      const priority = ({item,readings,romaji}) => [item.character || item.word,...item.alternate_forms || []].some(value => key(value) === exact) ? 3 : readings.includes(exact) || exactRomaji.some(alias => romaji.includes(alias)) ? 2 : englishAliases(item).some(value => value && key(value) === exact) ? 1 : 0;
       const ordered = list => list.map(row=>({...row.item,_match:{score:(mode==='english'?englishMatch(row.item,query).score:priority(row)*100+10)+(row.item.common?2:0),snippet:mode==='english'?englishMatch(row.item,query).snippet:row.item.meaning_en}})).sort((a,b)=>b._match.score-a._match.score);
       let found=ordered(matches(wordSearch));
       if(mode==='japanese') {
@@ -188,7 +196,7 @@
       const seen=new Set();found=found.filter(word=>{const identity=word.reference_key || word.id;if(seen.has(identity))return false;seen.add(identity);return true;});
       return Object.defineProperty({kanji:ordered(matches(kanjiSearch)),words:found},'mode',{value:mode});
     }
-    return {kanji,words,catalogWords,byCharacter,preferred,search,pairs,reference:ref,register,aliases};
+    return {kanji,words,catalogWords,byCharacter,preferred,search,pairs,identities,reference:ref,register,aliases};
   }
   function create({root,data,resources,notes = {},reference = {},saved,esc,button,bilingual = esc,readingWords = globalThis.KotobaKanjiReadingWords?.create(data),workspaceStorage = sessionStorage(),onChange = () => {},onLearn = () => {},lessonButtons = () => '',renderAnime = () => '',renderFinder = () => ''}) {
     const index = createIndex(data,notes,reference);
@@ -263,7 +271,7 @@
       const visible = !state.query && state.character && !matches.includes(state.character) ? [state.character,...matches] : matches;
       const candidates = visible.slice(kanjiPage*12,kanjiPage*12+12).map(character => {
         const item = index.kanji.get(character);
-        return action(`<span lang="ja">${esc(character)}</span>`,'select',character,`aria-label="${esc(character + (item ? ': ' + item.meanings_en.join('; ') : ': entry not bundled'))}" aria-pressed="${state.character === character}"`,'rdict-candidate');
+        return action(`<span lang="ja">${esc(character)}</span>`,'select',character,`aria-label="${esc(character + (item ? ': ' + characterTitle(item) : ': entry not bundled'))}" aria-pressed="${state.character === character}"`,'rdict-candidate');
       }).join('');
       return `<div class="rdict-candidates" role="group" aria-label="Possible kanji matches">${candidates || '<p class="rdict-muted">No kanji matches.</p>'}</div>${pagination('kanji-page',kanjiPage,visible.length,12,'Kanji')}`;
     }
@@ -277,13 +285,44 @@
       return `<details class="rdict-sources"><summary>Sources &amp; entry notes</summary><p>Kanji meanings and selected readings: <a href="https://www.edrdg.org/wiki/KANJIDIC_Project.html" target="_blank" rel="noopener noreferrer">KANJIDIC2 / EDRDG</a>.${note?.sourceUrl ? ` Additional kanji reference: <a href="${safeUrl(note.sourceUrl)}" target="_blank" rel="noopener noreferrer">Kanjipedia ↗</a>. Learner explanations are written for RiNO.` : ''}</p>${k.notes ? `<p>${bilingual(k.notes)}</p>` : ''}<p>Stroke diagrams and component shapes: KanjiVG © Ulrich Apel &amp; contributors, <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank" rel="noopener noreferrer">CC BY-SA 3.0</a>. Adapted stroke data remains under that licence.</p></details>`;
     }
     function wordExamples(word) {
-      const examples=[...(word.learner_examples || []),...(word.context_examples || [])];
-      if(word.example_ja){const occurrence=word.occurrence || globalThis.RinoDictionaryReference?.occurrence(word);if(occurrence)examples.push({...word,occurrence});}
-      for(const sentence of word.additional_examples||[]){const occurrence=globalThis.RinoDictionaryReference?.occurrence(word,sentence);if(occurrence)examples.push({...sentence,occurrence});}
+      const sourced=globalThis.RinoDictionaryReference?.examplesFor?.(reference,word.reference_key,index) || word.learner_examples || [];
+      const examples=[...sourced];
       const learner=word.learner;
-      if(learner?.sentence){const tokens=[],pattern=/([\p{Script=Han}々]+[ぁ-ゖァ-ヺー]*)\[([^\]]+)\]/gu;let offset=0;for(const m of learner.sentence.matchAll(pattern)){if(m.index>offset)tokens.push({text:learner.sentence.slice(offset,m.index)});tokens.push({text:m[1],reading:m[2]});offset=m.index+m[0].length;}if(offset<learner.sentence.length)tokens.push({text:learner.sentence.slice(offset)});const s={example_ja:tokens.map(t=>t.text).join(''),example_ruby:tokens,example_en:learner.translation,example_source:'Original RiNO example'};const occurrence=globalThis.RinoDictionaryReference?.occurrence(word,s);if(occurrence)examples.unshift({...s,occurrence});}
-      const seen=new Set();
-      return examples.filter(s=>s.occurrence&&!seen.has(s.example_ja)&&seen.add(s.example_ja));
+      if(learner?.sentence){
+        const tokens=[], pattern=/([\p{Script=Han}々]+[ぁ-ゖァ-ヺー]*)\[([^\]]+)\]/gu;
+        let offset=0;
+        for(const match of learner.sentence.matchAll(pattern)){
+          if(match.index>offset)tokens.push({text:learner.sentence.slice(offset,match.index)});
+          tokens.push({text:match[1],reading:match[2]});
+          offset=match.index+match[0].length;
+        }
+        if(offset<learner.sentence.length)tokens.push({text:learner.sentence.slice(offset)});
+        const sentence={example_ja:tokens.map(t=>t.text).join(''),example_ruby:tokens,example_en:learner.translation,example_source:'Original RiNO example'};
+        const occurrence=globalThis.RinoDictionaryReference?.occurrence(word,sentence);
+        if(occurrence)examples.push({...sentence,occurrence});
+      }
+      examples.push(...word.context_examples || []);
+      if(word.example_ja){
+        const occurrence=word.occurrence || globalThis.RinoDictionaryReference?.occurrence(word);
+        if(occurrence)examples.push({...word,occurrence,senseId:occurrence.senseId || word.senseId});
+      }
+      for(const sentence of word.additional_examples||[]){const occurrence=globalThis.RinoDictionaryReference?.occurrence(word,sentence);if(occurrence)examples.push({...sentence,occurrence});}
+      const unique=new Map();
+      for(const sentence of examples){
+        if(!sentence.occurrence || !sentence.example_en)continue;
+        const previous=unique.get(sentence.example_ja);
+        if(!previous || (!previous.senseId && sentence.senseId))unique.set(sentence.example_ja,sentence);
+      }
+      // Several course imports copied the entry's first gloss onto every
+      // sentence. Only a source sense ID or an unambiguous entry links a use.
+      const onlySense=word.senses?.length===1 && word.senses[0];
+      return [...unique.values()].map(sentence=>onlySense && !sentence.senseId?{...sentence,senseId:onlySense.id}:sentence);
+    }
+    function uniqueWordEntryId({word,reading}) {
+      const entries=index.reference?.byPair.get(globalThis.RinoDictionaryReference.pair(word,reading));
+      const id=entries?.[0]?.jmdict_id;
+      // Kana variants can identify one entry. Homographs need their own IDs.
+      return id && entries.every(entry=>entry.jmdict_id===id) ? id : undefined;
     }
     function helpEntry({word,reading,id,jmdict_id,meaning_en}) {
       const match=index.words.get(id);
@@ -294,7 +333,8 @@
       const glossHints=new Set((meaning_en || '').split(';').map(gloss=>key(gloss.trim())).filter(Boolean));
       const glossMatches=ref.filter(entry=>entry.glosses.some(gloss=>glossHints.has(key(gloss))));
       const unique=jmdict_id?ref.find(entry=>entry.jmdict_id===String(jmdict_id)):ref.length===1?ref[0]:glossMatches.length===1?glossMatches[0]:null;
-      return unique?(pair?.reference_key===unique.reference_key?pair:unique):!jmdict_id&&!ref.length&&pair&&key(pair.reading)===key(reading)?pair:null;
+      if(unique)return pair?.reference_key===unique.reference_key?pair:index.words.get(index.identities.get(unique.reference_key)) || unique;
+      return !jmdict_id&&!ref.length&&pair&&key(pair.reading)===key(reading)?pair:null;
     }
     function commonWordChoices(words) {
       const seen = new Set(), shared = new Set(), members = new Set();
@@ -313,29 +353,38 @@
       const {word,reading,level,meaning_en}=item, entry=helpEntry(item);
       const wordChoices=(choicesByWord.get(word+'\0'+entry?.reference_key) || []).map(group=>group.note);
       const guidance=notes.wordUsage?.[entry?.reference_key];
-      const editorial=reference.examples?.[entry?.reference_key];
-      const examples=guidance&&editorial?.length?editorial:entry?wordExamples({...entry,learner_examples:editorial || entry.learner_examples}):[];
+      const examples=entry?wordExamples(entry):[];
       const senses=entry?.senses?.filter(sense=>!sense.forms?.length||sense.forms.includes(word)) || [];
-      // The compact panel opens from a particular gloss. Prefer examples
-      // tagged for that sense before falling back to general word contexts.
-      const glossKey=text=>key(text.replace(/\([^()]*\)/g,'').trim());
-      const hints=new Set((meaning_en || '').split(';').map(glossKey).filter(Boolean));
-      const matched=senses.filter(s=>s.glosses.some(gloss=>hints.has(glossKey(gloss))));
-      const senseIds=new Set(matched.map(s=>s.id));
-      const matchingExamples=examples.filter(s=>senseIds.has(s.senseId));
-      const displayExamples=matchingExamples.length?matchingExamples:examples;
-      // A dictionary entry can share senses and readings across spellings.
-      // Keep its conjugated examples, but lead with the kanji the learner tapped.
+      // The selected gloss leads the card. Other senses keep their own
+      // examples, including uses shared with an alternate spelling.
+      const hints=new Set((meaning_en || '').split(';').map(gloss=>key(gloss.trim())).filter(Boolean));
+      const matched=new Set(senses.filter(sense=>sense.glosses.some(gloss=>hints.has(key(gloss)))));
+      if(!matched.size && hints.size){
+        const short=gloss=>key(gloss.replace(/\([^()]*\)/g,'').trim());
+        const shortHints=new Set([...hints].map(short));
+        const candidates=senses.filter(sense=>sense.glosses.some(gloss=>shortHints.has(short(gloss))));
+        if(candidates.length===1)matched.add(candidates[0]);
+      }
       const writtenKanji=text=>text.replace(/[^\p{Script=Han}々]/gu,'');
       const kanji=wordChoices.length && writtenKanji(word);
-      const preferred=kanji && displayExamples.filter(s=>writtenKanji(s.occurrence.surface)===kanji);
-      const ordered=preferred?.length?[...preferred,...displayExamples.filter(s=>!preferred.includes(s))]:displayExamples;
+      const preferred=sentence=>!!kanji && writtenKanji(sentence.occurrence.surface)===kanji;
+      const ordered=examples.sort((a,b)=>Number(preferred(b))-Number(preferred(a)));
+      const compact=sentence=>wordExample(sentence,item,true);
+      const groups=senses.map(sense=>{
+        const sentences=ordered.filter(sentence=>sentence.senseId===sense.id);
+        return {
+          id:sense.id,meaning:guidance?.senseLabels?.[sense.id] || sense.glosses.slice(0,3).join(', '),
+          matched:matched.has(sense),
+          preferred:sentences.some(preferred),examples:sentences.slice(0,3).map(compact),
+        };
+      }).sort((a,b)=>Number(b.matched)-Number(a.matched) || Number(b.preferred)-Number(a.preferred)
+        || Number(!!b.examples.length)-Number(!!a.examples.length));
       const type=readingWords?.partOfSpeech({...entry,word,reading});
       return {word,reading,level:level || entry?.level,type:guidance?.type || entry?.learner?.pos || (type?.short==='?'?'':type?.full),
         definition:guidance?.definition || entry?.learner?.definition,
-        senses:senses.length?[...matched,...senses.filter(s=>!senseIds.has(s.id))].map(s=>s.glosses.slice(0,3).join(', ')):[meaning_en || entry?.meaning_en],
+        senseGroups:groups,senses:groups.length?groups.map(group=>group.meaning):[meaning_en || entry?.meaning_en],
         usage:guidance?.usage || entry?.learner?.usage || entry?.example_sense_note,compare:guidance?.compare,wordChoices,
-        examples:ordered.filter(sentence=>sentence.example_en).slice(0,2).map(sentence=>wordExample(sentence,entry,true)),
+        examples:ordered.filter(sentence=>!sentence.senseId).slice(0,2).map(compact),
         dictionaryId:entry&&index.words.has(entry.id)?entry.id:''};
     }
     function wordDetail(word) {
@@ -359,19 +408,18 @@
       const learn = index.catalogWords.has(word.id) ? action('Open word in Learn','learn',word.id) : '';
       const senses=word.senses?.length?word.senses:[{id:'local:'+word.id,glosses:meanings,pos:word.dictionary_pos || []}];
       const verified=wordExamples(word);
-      for(const s of verified)if(!s.senseId){const matches=s.example_sense?senses.filter(sense=>sense.glosses.some(gloss=>key(gloss)===key(s.example_sense))):[];if(matches.length===1)s.senseId=matches[0].id;else if(senses.length===1)s.senseId=senses[0].id;}
       const label=tag=>reference.labels?.[tag] || tag;
-      const senseMarkup=(sense,i)=>`<li id="rdict-sense-${i+1}" class="rdict-sense"><p class="rdict-sense-label">${esc((sense.pos || []).map(label).join(' · '))}</p><p class="rdict-gloss">${sense.glosses.map(esc).join('; ')}</p>${[...(sense.misc || []),...(sense.fields || []),...(sense.dialects || [])].length?`<p class="rdict-tags">${[...(sense.misc || []),...(sense.fields || []),...(sense.dialects || [])].map(tag=>`<span>${esc(label(tag))}</span>`).join('')}</p>`:''}${sense.forms?.length?`<p class="rdict-muted">Spelling: <span lang="ja">${sense.forms.map(esc).join(' · ')}</span></p>`:''}${(sense.notes || []).map(note=>`<p class="rdict-muted">${esc(note)}</p>`).join('')}${(sense.related || []).length?`<p class="rdict-crossrefs">Related: ${sense.related.map(link=>action(esc(link),'lookup',link.replace(/・\d+$/,'').split('・')[0],'','rdict-text-link')).join(' ')}</p>`:''}${verified.filter(s=>s.senseId===sense.id).slice(0,3).map(s=>wordExample(s,word)).join('')}</li>`;
+      const senseMarkup=(sense,i)=>`<li id="rdict-sense-${i+1}" class="rdict-sense"><p class="rdict-sense-label">${esc((sense.pos || []).map(label).join(' · '))}</p>${guidance?.senseLabels?.[sense.id]?`<p class="rdict-learner-gloss">${esc(guidance.senseLabels[sense.id])}</p>`:''}<p class="rdict-gloss">${sense.glosses.map(esc).join('; ')}</p>${[...(sense.misc || []),...(sense.fields || []),...(sense.dialects || [])].length?`<p class="rdict-tags">${[...(sense.misc || []),...(sense.fields || []),...(sense.dialects || [])].map(tag=>`<span>${esc(label(tag))}</span>`).join('')}</p>`:''}${sense.forms?.length?`<p class="rdict-muted">Spelling: <span lang="ja">${sense.forms.map(esc).join(' · ')}</span></p>`:''}${(sense.notes || []).map(note=>`<p class="rdict-muted">${esc(note)}</p>`).join('')}${(sense.related || []).length?`<p class="rdict-crossrefs">Related: ${sense.related.map(link=>action(esc(link),'lookup',link.replace(/・\d+$/,'').split('・')[0],'','rdict-text-link')).join(' ')}</p>`:''}${verified.filter(s=>s.senseId===sense.id).slice(0,3).map(s=>wordExample(s,word)).join('')}</li>`;
       const extra=senses.slice(6),context=verified.filter(s=>!s.senseId);
       const kanji=[...new Set(Array.from(word.word).filter(c=>index.kanji.has(c)))];
       const spellings=[...new Set(word.alternate_forms || [])].filter(f=>f!==word.word);
-      return `<article class="rdict-word-detail" aria-label="Word definition"><header><div><h3 lang="ja" tabindex="-1" id="rdict-entry-title">${heading}</h3>${heading.includes('<rt>') || word.word === word.reading ? '' : `<p lang="ja" class="rdict-muted">${esc(word.reading)}</p>`}<p class="rdict-muted">${esc(type)}${word.level?' · '+esc(word.level):word.common?' · Common word':''}${word.verb_group?' · '+esc(word.verb_group):''}</p></div>${globalThis.speechSynthesis?action('Listen','speak',word.id,'aria-label="Listen to '+esc(word.word)+'"'):''}</header>${learn?`<div class="rdict-learn">${learn}${lessonButtons(word)}</div>`:''}${conjugations}${spellings.length?`<p class="rdict-variants">Also written <span lang="ja">${spellings.map(esc).join(' · ')}</span></p>`:''}${word.other_readings?.length?`<details><summary>Other readings</summary>${word.other_readings.map(r=>`<p><span lang="ja">${esc(r.reading)}</span>${r.forms.length?` · <span lang="ja">${r.forms.map(esc).join(' / ')}</span>`:''}</p>`).join('')}</details>`:''}${learner?`<p>${bilingual(learner.definition)}</p>`:''}${word.context_only?'<p class="rdict-note">This expression comes from a study sentence. Its independent dictionary meaning has not been established.</p>':''}<section class="rdict-definitions"><h4>Dictionary meanings <span class="rdict-muted">${senses.length}</span></h4><ol class="rdict-numbered-senses">${senses.slice(0,6).map(senseMarkup).join('')}</ol>${extra.length?`<details ${extra.some(s=>s.glosses.includes(word._match?.snippet))?'open':''}><summary>More meanings (${extra.length})</summary><ol class="rdict-numbered-senses" start="7">${extra.map((s,i)=>senseMarkup(s,i+6)).join('')}</ol></details>`:''}</section>${guidance?.usage || learner?.usage || word.example_sense_note?`<p class="rdict-note">${bilingual(guidance?.usage || learner?.usage || word.example_sense_note)}</p>`:''}${guidance?.compare?`<p class="rdict-note">${bilingual(guidance.compare)}</p>`:''}${context.length?`<section><h4>Examples in context</h4>${context.slice(0,3).map(s=>wordExample(s,word)).join('')}</section>`:''}${!verified.length?`<p class="rdict-muted">${word.example_ja?'The saved example needs a target-word check before it can be shown here.':'No example sentence is bundled for this word.'}</p>`:''}${table}${kanji.length?`<section class="rdict-word-kanji"><h4>Kanji in this word</h4>${kanji.map(c=>action(`<span lang="ja">${esc(c)}</span> ${esc(index.kanji.get(c).meanings_en.join('; '))}`,'select',c)).join('')}</section>`:''}<details class="rdict-sources"><summary>Word sources &amp; notes</summary>${word.jmdict_id?`<p>JMdict entry ${esc(word.jmdict_id)} · <a href="https://www.edrdg.org/jmdict/j_jmdict.html" target="_blank" rel="noopener noreferrer">EDRDG / James Breen</a> · <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener noreferrer">CC BY-SA 4.0</a>. Sense order, grammatical labels and spelling restrictions are retained from the bundled reference.</p>`:'<p>Bundled RiNO reference and learner explanations.</p>'}<p>Highlighting checks the written form and reading. It does not certify translation or sense accuracy. New RiNO examples await native-speaker review.</p>${word.spelling_notes?.map(n=>`<p><span lang="ja">${esc(n.word)}</span>: ${n.tags.map(label).map(esc).join('; ')}</p>`).join('') || ''}${word.notes?`<p>${bilingual(word.notes)}</p>`:''}</details></article>`;
+      return `<article class="rdict-word-detail" aria-label="Word definition"><header><div><h3 lang="ja" tabindex="-1" id="rdict-entry-title">${heading}</h3>${heading.includes('<rt>') || word.word === word.reading ? '' : `<p lang="ja" class="rdict-muted">${esc(word.reading)}</p>`}<p class="rdict-muted">${esc(type)}${word.level?' · '+esc(word.level):word.common?' · Common word':''}${word.verb_group?' · '+esc(word.verb_group):''}</p></div>${globalThis.speechSynthesis?action('Listen','speak',word.id,'aria-label="Listen to '+esc(word.word)+'"'):''}</header>${learn?`<div class="rdict-learn">${learn}${lessonButtons(word)}</div>`:''}${conjugations}${spellings.length?`<p class="rdict-variants">Also written <span lang="ja">${spellings.map(esc).join(' · ')}</span></p>`:''}${word.other_readings?.length?`<details><summary>Other readings</summary>${word.other_readings.map(r=>`<p><span lang="ja">${esc(r.reading)}</span>${r.forms.length?` · <span lang="ja">${r.forms.map(esc).join(' / ')}</span>`:''}</p>`).join('')}</details>`:''}${guidance?.definition || learner?.definition?`<p>${bilingual(guidance?.definition || learner.definition)}</p>`:''}${word.context_only?'<p class="rdict-note">This expression comes from a study sentence. Its independent dictionary meaning has not been established.</p>':''}<section class="rdict-definitions"><h4>Dictionary meanings <span class="rdict-muted">${senses.length}</span></h4><ol class="rdict-numbered-senses">${senses.slice(0,6).map(senseMarkup).join('')}</ol>${extra.length?`<details ${extra.some(s=>s.glosses.includes(word._match?.snippet))?'open':''}><summary>More meanings (${extra.length})</summary><ol class="rdict-numbered-senses" start="7">${extra.map((s,i)=>senseMarkup(s,i+6)).join('')}</ol></details>`:''}</section>${guidance?.usage || learner?.usage || word.example_sense_note?`<p class="rdict-note">${bilingual(guidance?.usage || learner?.usage || word.example_sense_note)}</p>`:''}${guidance?.compare?`<p class="rdict-note">${bilingual(guidance.compare)}</p>`:''}${context.length?`<section><h4>Examples in context</h4>${context.slice(0,3).map(s=>wordExample(s,word)).join('')}</section>`:''}${!verified.length?`<p class="rdict-muted">${word.example_ja?'The saved example needs a target-word check before it can be shown here.':'No example sentence is bundled for this word.'}</p>`:''}${table}${kanji.length?`<section class="rdict-word-kanji"><h4>Kanji in this word</h4>${kanji.map(c=>action(`<span lang="ja">${esc(c)}</span> ${esc(characterTitle(index.kanji.get(c)))}`,'select',c)).join('')}</section>`:''}<details class="rdict-sources"><summary>Word sources &amp; notes</summary>${word.jmdict_id?`<p>JMdict entry ${esc(word.jmdict_id)} · <a href="https://www.edrdg.org/jmdict/j_jmdict.html" target="_blank" rel="noopener noreferrer">EDRDG / James Breen</a> · <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener noreferrer">CC BY-SA 4.0</a>. Sense order, grammatical labels and spelling restrictions are retained from the bundled reference.</p>`:'<p>Bundled RiNO reference and learner explanations.</p>'}<p>Highlighting checks the written form and reading. It does not certify translation or sense accuracy. New RiNO examples await native-speaker review.</p>${word.spelling_notes?.map(n=>`<p><span lang="ja">${esc(n.word)}</span>: ${n.tags.map(label).map(esc).join('; ')}</p>`).join('') || ''}${word.notes?`<p>${bilingual(word.notes)}</p>`:''}</details></article>`;
     }
     function wordExample(sentence,word,compact=false){
       const occurrence=sentence.occurrence;let offset=0;
       const marked=(sentence.example_ruby || []).map(token=>{const start=offset,end=offset+token.text.length;offset=end;if(end<=occurrence.start||start>=occurrence.end)return ruby(token.text,'',[token]);if(token.reading)return `<mark class="rdict-target">${ruby(token.text,'',[token])}</mark>`;const a=Math.max(0,occurrence.start-start),b=Math.min(token.text.length,occurrence.end-start);return esc(token.text.slice(0,a))+`<mark class="rdict-target">${esc(token.text.slice(a,b))}</mark>`+esc(token.text.slice(b));}).join('');
-      const form=compact&&occurrence.surface===word.word?'':`<p class="rdict-form-note"><span lang="ja">${esc(occurrence.surface)}</span> · ${esc(occurrence.form)}${occurrence.surface!==word.word?` of <span lang="ja">${esc(word.word)}</span>`:''}</p>`;
-      return `<section class="rdict-example"><p lang="ja" class="rdict-sentence">${marked}</p><p>${esc(sentence.example_en)}</p>${form}${!sentence.senseId&&sentence.example_sense?`<p class="rdict-muted">Context meaning: ${esc(sentence.example_sense)}</p>`:''}<small>${esc(sentence.example_source || 'Original RiNO example')}${sentence.example_source_url?` · <a href="${safeUrl(sentence.example_source_url)}" target="_blank" rel="noopener noreferrer">Source ↗</a>`:''}${sentence.english_source_url?` · <a href="${safeUrl(sentence.english_source_url)}" target="_blank" rel="noopener noreferrer">Translation source ↗</a>`:''}${sentence.example_license?' · '+esc(sentence.example_license):''}</small></section>`;
+      const form=compact&&occurrence.surface===word.word?'':`<p class="rdict-form-note"><span lang="ja">${esc(occurrence.surface)}</span> · ${esc(occurrence.form)}${!compact&&occurrence.surface!==word.word?` of <span lang="ja">${esc(word.word)}</span>`:''}</p>`;
+      return `<section class="rdict-example"><p lang="ja" class="rdict-sentence">${marked}</p><p>${esc(sentence.example_en)}</p>${form}<small>${esc(sentence.example_source || 'Original RiNO example')}${sentence.example_source_url?` · <a href="${safeUrl(sentence.example_source_url)}" target="_blank" rel="noopener noreferrer">Source ↗</a>`:''}${sentence.english_source_url?` · <a href="${safeUrl(sentence.english_source_url)}" target="_blank" rel="noopener noreferrer">Translation source ↗</a>`:''}${sentence.example_license?' · '+esc(sentence.example_license):''}</small></section>`;
     }
     function exampleSentenceMarkup(sentence,note) {
       const context = note?.contexts?.[sentence.target_word];
@@ -402,8 +450,11 @@
           return indexed ? action(content,'search-word',indexed.id,'','rdict-reading-example') : `<div class="rdict-reading-example">${content}</div>`;
         }).join('') || '<span class="rdict-muted">No verified word example for this reading yet.</span>'}</dd></div>`;
       }).join('');
+      const glosses=characterGlosses(k).join('; ');
+      const dictionaryMeanings=glosses && glosses.toLowerCase()!==characterTitle(k).toLowerCase()
+        ? `<details><summary>Dictionary meanings</summary><p>${esc(glosses)}</p></details>` : '';
       const meanings = note?.senses ? `<dl class="rdict-senses">${note.senses.map(([sense,explanation]) => `<div><dt>${esc(sense)}</dt><dd>${bilingual(explanation)}</dd></div>`).join('')}</dl>` : `<p class="rdict-usage">${bilingual(k.usage_en || 'The complete word determines the meaning. Learn the readings with the words below.')}</p>`;
-      return `<section aria-label="Meanings and readings"><div class="rdict-meaning-overview"><section><h3>Meaning &amp; use</h3>${meanings}${note?.extra ? `<details><summary>Further senses &amp; less common uses</summary><p>${bilingual(note.extra)}</p></details>` : ''}</section>${sentences.length ? `<section class="rdict-context"><h3>Example in context</h3>${exampleSentenceMarkup(sentences[0],note)}${sentences.length > 1 ? `<details><summary>More example sentences</summary>${sentences.slice(1).map(sentence => exampleSentenceMarkup(sentence,note)).join('')}</details>` : ''}</section>` : ''}</div><section class="rdict-readings-section"><h3>Readings</h3><div class="rdict-readings-grid">${[['on','On readings','音読み'],['kun','Kun readings','訓読み']].map(([type,label,japanese]) => `<section><h4>${label} <span lang="ja">${japanese}</span></h4>${k[type + '_readings']?.length ? `<dl class="rdict-readings">${examplesFor(k[type + '_readings'],type)}</dl>` : '<p class="rdict-muted">None listed.</p>'}</section>`).join('')}</div><details class="rdict-reading-notes"><summary>About these readings</summary><p>${bilingual(note?.readingNote || 'On readings come from Chinese; kun readings are native Japanese. A dot marks the kana ending written after a kanji; a hyphen marks an attached reading. The list contains selected dictionary readings.')}</p>${note?.onExamples ? `<p>${bilingual(note.onExamples)}</p>` : ''}${note?.kunExamples ? `<p>${bilingual(note.kunExamples)}</p>` : ''}</details></section>${renderAnime(k)}${action('Explore words & examples','view','words')}${sourceMarkup(k,note)}</section>`;
+      return `<section aria-label="Meanings and readings"><div class="rdict-meaning-overview"><section><h3>Meaning &amp; use</h3>${meanings}${dictionaryMeanings}${note?.extra ? `<details><summary>Further senses &amp; less common uses</summary><p>${bilingual(note.extra)}</p></details>` : ''}</section>${sentences.length ? `<section class="rdict-context"><h3>Example in context</h3>${exampleSentenceMarkup(sentences[0],note)}${sentences.length > 1 ? `<details><summary>More example sentences</summary>${sentences.slice(1).map(sentence => exampleSentenceMarkup(sentence,note)).join('')}</details>` : ''}</section>` : ''}</div><section class="rdict-readings-section"><h3>Readings</h3><div class="rdict-readings-grid">${[['on','On readings','音読み'],['kun','Kun readings','訓読み']].map(([type,label,japanese]) => `<section><h4>${label} <span lang="ja">${japanese}</span></h4>${k[type + '_readings']?.length ? `<dl class="rdict-readings">${examplesFor(k[type + '_readings'],type)}</dl>` : '<p class="rdict-muted">None listed.</p>'}</section>`).join('')}</div><details class="rdict-reading-notes"><summary>About these readings</summary><p>${bilingual(note?.readingNote || 'On readings come from Chinese; kun readings are native Japanese. A dot marks the kana ending written after a kanji; a hyphen marks an attached reading. The list contains selected dictionary readings.')}</p>${note?.onExamples ? `<p>${bilingual(note.onExamples)}</p>` : ''}${note?.kunExamples ? `<p>${bilingual(note.kunExamples)}</p>` : ''}</details></section>${renderAnime(k)}${action('Explore words & examples','view','words')}${sourceMarkup(k,note)}</section>`;
     }
     function wordsMarkup(k,words) {
       const pageSize = WORD_PAGE_SIZE;
@@ -433,7 +484,11 @@
       }
       if (!k) return `<section class="rdict-empty"><h2 lang="ja">${esc(state.character)}</h2><p>This character’s entry is not in RiNO’s offline catalogue yet.</p><a href="https://jisho.org/search/${encodeURIComponent(state.character + ' #kanji')}" target="_blank" rel="noopener noreferrer">Open a dictionary reference ↗</a></section>`;
       const note = noteFor(k.character), words = relatedWords(k.character);
-      return `<article class="rdict-entry"><header class="rdict-entry-heading"><span class="rdict-character" lang="ja">${esc(k.character)}</span><div><h2 id="rdict-entry-title" tabindex="-1">${esc(note?.meaning || k.meanings_en.join('; '))}</h2><p class="rdict-muted">${esc(k.level)} · ${k.stroke_count} strokes${k.radical ? ' · radical ' + esc(k.radical.form || k.radical.character) : ''}</p><div class="rdict-learn">${action('Open in Learn','learn',k.id)}${lessonButtons(k)}</div></div></header>${state.finder?renderFinder(state):''}<nav class="rdict-entry-nav" aria-label="Dictionary entry sections">${[['meaning','Meaning'],['words','Words'],['writing','Writing']].map(([value,label]) => action(label,'view',value,`aria-pressed="${state.view === value}"`)).join('')}</nav><div id="rdict-entry-body">${state.view === 'words' ? wordsMarkup(k,words) : state.view === 'writing' ? writingMarkup(k,note) : meaningMarkup(k,note,words)}</div></article>`;
+      const info=[k.level,k.stroke_count && k.stroke_count+' strokes',k.radical && 'radical '+(k.radical.form || k.radical.character)].filter(Boolean).join(' · ');
+      const views=[['meaning','Meaning'],['words','Words']];
+      if(k.stroke_count || k.radical)views.push(['writing','Writing']);
+      const view=views.some(([value])=>value===state.view)?state.view:'meaning';
+      return `<article class="rdict-entry"><header class="rdict-entry-heading"><span class="rdict-character" lang="ja">${esc(k.character)}</span><div><h2 id="rdict-entry-title" tabindex="-1">${esc(characterTitle(k))}</h2><p class="rdict-muted">${esc(info || 'Kanji reference')}</p>${k.id?`<div class="rdict-learn">${action('Open in Learn','learn',k.id)}${lessonButtons(k)}</div>`:''}</div></header>${state.finder?renderFinder(state):''}<nav class="rdict-entry-nav" aria-label="Dictionary entry sections">${views.map(([value,label]) => action(label,'view',value,`aria-pressed="${view === value}"`)).join('')}</nav><div id="rdict-entry-body">${view === 'words' ? wordsMarkup(k,words) : view === 'writing' ? writingMarkup(k,note) : meaningMarkup(k,note,words)}</div></article>`;
     }
     function render() {
       return `<section class="rdict-app" data-entry-open="${entryOpen}"><header class="rdict-heading"><h1 id="rdict-title" tabindex="-1">Dictionary</h1><p>Words, meanings and examples · Kanji readings and writing</p></header><section class="rdict-lookup" aria-label="Dictionary lookup"><form id="rdict-search-form" role="search"><label for="rdict-search">Search Japanese, English or romaji</label><div><input type="search" id="rdict-search" maxlength="120" value="${esc(searchDraft)}" autocomplete="off" spellcheck="false" placeholder="学校 · 食べました · gakkou · water">${action('Search','search','','','rdict-search-submit')}</div></form><div class="rdict-lookup-options"><div class="rdict-search-modes" role="group" aria-label="Search language">${[['auto','Auto'],['japanese','Japanese'],['english','English'],['romaji','Romaji']].map(([mode,label])=>action(label,'mode',mode,`aria-pressed="${searchMode===mode}"`)).join('')}</div><details class="rdict-handwriting" ${handwritingOpen?'open':''}><summary>Draw a kanji</summary><div class="rdict-handwriting-body"><div class="rdict-pad-wrap"><svg id="rdict-pad" viewBox="0 0 109 109" role="img" aria-label="Kanji drawing area"><path class="rdict-guides" d="M54.5 4V105M4 54.5H105"/><text id="rdict-selected-glyph" class="rdict-selected-glyph" x="54.5" y="51" text-anchor="middle" dominant-baseline="central" lang="ja">${!ink.length&&state.character?esc(state.character):''}</text><g id="rdict-ink"></g></svg><div class="rdict-tools">${action('Undo','undo')}${action('Clear','clear')}</div></div>${action('Find matches','find','','','rdict-primary')}</div></details></div><p id="rdict-status" class="rdict-status" role="status" aria-live="polite">${esc(message)}</p><p class="rdict-reference-status" id="rdict-reference-status">${esc(referenceStatus)}</p></section><div class="rdict-workspace"><aside class="rdict-results" aria-label="Dictionary results"><div id="rdict-word-matches">${searchWordMarkup()}</div><div class="rdict-matchbar"><h2 class="rdict-match-heading">Kanji <span id="rdict-kanji-total">${matches.length}</span></h2><div id="rdict-matches">${candidateMarkup()}</div></div></aside><div class="rdict-detail-pane">${action('Back to results','back','','','rdict-back')}<div id="rdict-entry">${entryMarkup()}</div></div></div></section>`;
@@ -662,7 +717,8 @@
       return result;
     }
     return {render,mount,beforeRender,handle,navigate,wordHelp,isCommonSpelling:index.reference?.isCommonSpelling,
-      commonWordPriority:index.reference?.commonWordPriority,referenceWordsForKanji,kunReadingCandidates,commonWordChoices,navigation:() => ({...state}),hasActiveInput:() => !!activeStroke || !!pending || composing,
+      uniqueWordEntryId,commonWordPriority:index.reference?.commonWordPriority,
+      referenceWordsForKanji,kunReadingCandidates,commonWordChoices,navigation:() => ({...state}),hasActiveInput:() => !!activeStroke || !!pending || composing,
       announcement:() => 'Dictionary · all levels' + (state.character ? ' · ' + state.character : ''),
       // Read-only snapshots support regression checks without saving ink to progress.
       drawing:() => ink.map(stroke => stroke.map(point => point.slice()))};
