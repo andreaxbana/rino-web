@@ -119,7 +119,13 @@
     };
     for (const item of catalogWords.values()) {
       const rich=ref?.resolve(item);
-      register({...rich,...item,...rich?{senses:rich.senses,glosses:rich.glosses,alternate_forms:[...new Set([...(item.alternate_forms || []),rich.word,...rich.alternate_forms].filter(w=>w!==item.word))]}:{},occurrence:reference.occurrences?.[item.id]});
+      const grouped=data.kanjiWordFormReviews?.[item.id] || [];
+      const separate=new Set(grouped.flatMap(form=>[form.word,...form.alternate_forms || []]));
+      const spellings=[...(item.alternate_forms || []),...(rich?[rich.word,...rich.alternate_forms]:[])];
+      register({...rich,...item,...rich?{senses:rich.senses,glosses:rich.glosses}:{},
+        alternate_forms:[...new Set(spellings.filter(form=>form!==item.word && !separate.has(form)))],
+        alternate_readings:(item.alternate_readings || []).filter(reading=>!grouped.some(form=>form.reading===reading)),
+        occurrence:reference.occurrences?.[item.id]});
     }
     for(const item of ref?.words || [])if(!identities.has(item.reference_key))register(item);
     for (const [character,note] of Object.entries(notes.entries || {})) {
@@ -347,7 +353,12 @@
           seen.add(group);
         }
       }
-      return [...shared].map(group => ({words: group.members.map(member => member.split('\0')[0]), note: group.note, parts: group.parts}));
+      return [...shared].map(group => {
+        const words=group.members.map(member=>member.split('\0')[0]);
+        const labels=group.members.map((member,i)=>words.indexOf(words[i])===words.lastIndexOf(words[i])
+          ? words[i] : words[i]+' ('+member.slice(member.lastIndexOf(':')+1)+')');
+        return {words,labels,note:group.note,parts:group.parts};
+      });
     }
     function commonWordChoices(words) {
       return commonWordChoiceGroups(words).map(group => group.note);

@@ -1,8 +1,8 @@
 {
-  "build_id": "k1-9e417a40f467e5de",
-  "source_sha256": "9e417a40f467e5def851c87d1929f0c30215503673f79c9440fa84ca71b45936",
-  "fragment_sha256": "acc0196b3316ba73c2f31ecdc40400b8fbe45e151f2df3efbe827417eef220d6",
-  "standalone_sha256": "dc0927e7cbf8564ebe43183ffaaad47b31ec01a464e1822a860df75c4e5f9b8e",
+  "build_id": "k1-624e9fc26c0d31ee",
+  "source_sha256": "624e9fc26c0d31ee9bf4517135eb491f484118d2e889e6622040d4b6326d24e1",
+  "fragment_sha256": "e17e8825378431dfd09935ebaf5bce256d61b510b7a429b43d007f9f46bf7138",
+  "standalone_sha256": "b5840d4c9fb132d66899b8290afa714201af2b5e64c7b9c34e18465eb66586b3",
   "recognition": {
     "entry": "./recognition/offline-recognizer.mjs",
     "id": "kotoba-offline-trained-ensemble",
@@ -18,13 +18,13 @@
     "bytes": 25789146
   },
   "dictionary": {
-    "assetsSha256": "fe21a58ff278e981267d675ca661d63f62b6c0b3a5f1b8d67280a837a312c3d5",
+    "assetsSha256": "e7982fb78d2efabce19569644fff82d2c04059c1797b2a675926effde246721e",
     "sourceSha256": "3846524394e7b149f88f1cf09d9d6b10aa0b0e05267cd180bfb5eea31873952b",
     "entries": 218920,
-    "coreEntries": 26007,
-    "workerPath": "dictionary/773a8f15ad73bb63a73e979068f7b9cec19184e0f7f588013101298fdbf42819/dictionary-worker.js",
+    "coreEntries": 26014,
+    "workerPath": "dictionary/d5cc436f17546a67590764249bbb5b859cc686e257f8880e110e0f692f397831/dictionary-worker.js",
     "reference": {
-      "path": "dictionary/773a8f15ad73bb63a73e979068f7b9cec19184e0f7f588013101298fdbf42819/reference.json.gz",
+      "path": "dictionary/d5cc436f17546a67590764249bbb5b859cc686e257f8880e110e0f692f397831/reference.json.gz",
       "bytes": 9402307,
       "sha256": "50baa00c1dd80172cf37c67bee951133fa9e3420d5f024b1e13f45e3b8e24fa4"
     },
@@ -299,8 +299,8 @@
   },
   "offline": {
     "workerPath": "rino-offline-sw.js",
-    "workerSha256": "83088fe16c895e7fd2b3bb3b9d72dbd5d7945f8e554f522c3cba65be9c6d643f",
+    "workerSha256": "fac4f621c15fbf7a68694cfedfba42bbf1de74543e481955c09f264ad993d27a",
     "workerBytes": 118098,
-    "shellSha256": "dc0927e7cbf8564ebe43183ffaaad47b31ec01a464e1822a860df75c4e5f9b8e"
+    "shellSha256": "b5840d4c9fb132d66899b8290afa714201af2b5e64c7b9c34e18465eb66586b3"
   }
 }
