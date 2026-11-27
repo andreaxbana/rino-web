@@ -1,0 +1,123 @@
+#jp-study-app .cr-play {
+  --cr-good:#28734a;
+  min-width:0; width:100%; container-type:inline-size; color:var(--jp-text);
+  font:inherit; line-height:1.38; outline:none;
+}
+#jp-study-app[data-theme="dark"] .cr-play { --cr-good:#a5dbb4; }
+#jp-study-app .cr-play * { box-sizing:border-box; }
+#jp-study-app .cr-play [hidden] { display:none !important; }
+#jp-study-app .cr-play :is(h1,h2,h3,p,fieldset,dl,dd) { margin:0; }
+#jp-study-app :is(.cr-top,.cr-stats,.cr-tools,.cr-prompt,.cr-ref-head,.cr-dialog-actions) { display:flex; align-items:center; flex-wrap:wrap; }
+#jp-study-app .cr-top { gap:8px 18px; margin:0 0 10px; }
+#jp-study-app .cr-top h1 { margin-right:auto; font-size:clamp(22px,3.4cqw,34px); font-weight:680; line-height:1.12; letter-spacing:-.035em; }
+#jp-study-app .cr-stats { gap:8px 14px; font-size:14px; color:var(--jp-muted); font-variant-numeric:tabular-nums; }
+#jp-study-app .cr-stats b { color:var(--jp-text); }
+#jp-study-app .cr-tools { gap:5px; }
+#jp-study-app .cr-tools .game-button { font-size:13px; padding:5px 10px; }
+#jp-study-app .cr-stage {
+  position:relative; isolation:isolate; overflow:hidden; min-width:0;
+  height:clamp(320px,61svh,760px); border:1px solid var(--jp-line);
+  border-radius:20px; background:var(--jp-panel); color:var(--jp-text);
+}
+#jp-study-app .cr-rails,#jp-study-app .cr-moving,#jp-study-app .cr-paused { position:absolute; inset:0; }
+#jp-study-app .cr-rails { display:grid; grid-template-columns:repeat(var(--cr-lanes),1fr); pointer-events:none; }
+#jp-study-app .cr-rails i { position:relative; }
+#jp-study-app .cr-rails i+i { border-left:1px dashed var(--jp-line); }
+#jp-study-app .cr-rails i::after {
+  content:""; position:absolute; inset:auto 10% 4px; height:3px; border-radius:4px;
+  background:repeating-linear-gradient(105deg,var(--jp-companion-line) 0 4px,transparent 4px 8px);
+}
+#jp-study-app .cr-stage[data-layout="belt"] .cr-rails { grid-template-columns:1fr; grid-template-rows:repeat(var(--cr-lanes),1fr); }
+#jp-study-app .cr-stage[data-layout="belt"] .cr-rails i+i { border-left:0; border-top:1px dashed var(--jp-line); }
+#jp-study-app .cr-stage[data-layout="belt"] .cr-rails i::after { inset:auto 0 1px; height:4px; }
+#jp-study-app .cr-moving { pointer-events:none; }
+#jp-study-app .cr-object {
+  position:absolute; top:0; left:0; width:var(--cr-card-w); height:var(--cr-card-h);
+  display:flex; flex-direction:column; align-items:center; justify-content:flex-end; min-width:0;
+}
+#jp-study-app .cr-art { flex:1 1 0; width:100%; min-height:0; display:flex; align-items:center; justify-content:center; }
+#jp-study-app .cr-art canvas { display:block; width:100%; height:100%; object-fit:contain; }
+#jp-study-app .cr-object[data-target="true"] .cr-art canvas { animation:cr-object-bounce 1.3s ease-in-out infinite; }
+#jp-study-app .cr-object[data-target="true"]:is([data-glyph="匹"],[data-glyph="羽"]) .cr-art canvas { animation:cr-animal-step 1.4s ease-in-out infinite; }
+#jp-study-app .cr-object[data-target="true"][data-glyph="隻"] .cr-art canvas { animation:cr-vessel 1.7s ease-in-out infinite; }
+#jp-study-app .cr-object[data-result="correct"] .cr-art { animation:cr-catch .4s ease-out; }
+#jp-study-app .cr-play[data-frozen="true"] .cr-art canvas { animation-play-state:paused; }
+@keyframes cr-object-bounce { 0%,100% { transform:translateY(0); } 50% { transform:translateY(-3px) rotate(-2deg); } }
+@keyframes cr-animal-step { 0%,60%,100% { transform:translateY(0); } 24% { transform:translateY(-4px) rotate(2deg); } 43% { transform:translateY(-1px) rotate(-2deg); } }
+@keyframes cr-vessel { 0%,100% { transform:rotate(-3deg); } 50% { transform:translateY(-2px) rotate(3deg); } }
+@keyframes cr-catch { 0% { transform:scale(1); } 42% { transform:translateY(-6px) scale(1.08); } 100% { transform:scale(1); } }
+#jp-study-app .cr-name {
+  display:inline-flex; align-items:baseline; justify-content:center; max-width:100%; gap:3px; padding:2px 5px;
+  border-radius:7px; font:600 clamp(13px,2cqw,20px)/1.25 "Yu Gothic","Meiryo",system-ui,sans-serif;
+  white-space:nowrap; color:var(--jp-text);
+}
+#jp-study-app .cr-name b { font:700 .72em/1.2 system-ui,sans-serif; font-variant-numeric:tabular-nums; }
+#jp-study-app .cr-name rt { font-size:.49em; font-weight:500; }
+#jp-study-app .cr-object[data-target="true"] .cr-name { background:var(--jp-feature); color:var(--jp-feature-text); box-shadow:0 0 0 1px var(--jp-feature-line); }
+#jp-study-app .cr-paused { z-index:1; display:grid; place-items:center; background:color-mix(in srgb,var(--jp-bg) 82%,transparent); }
+#jp-study-app .cr-time { height:3px; background:var(--jp-line); margin:5px 0 2px; border-radius:5px; overflow:hidden; }
+#jp-study-app .cr-time i { display:block; background:var(--jp-progress); width:100%; height:100%; transform-origin:left; }
+#jp-study-app .cr-prompt { justify-content:space-between; gap:2px 10px; min-height:36px; font-size:15px; }
+#jp-study-app .cr-prompt strong { font-size:clamp(16px,2.6cqw,23px); font-weight:650; }
+#jp-study-app .cr-prompt [data-rush-status] { color:var(--jp-muted); }
+#jp-study-app .cr-prompt [data-tone="correct"] { color:var(--cr-good); font-weight:650; animation:cr-right .22s ease-out; }
+@keyframes cr-right { from { opacity:.4; transform:translateY(3px); } to { opacity:1; transform:translateY(0); } }
+#jp-study-app .cr-keys { display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,86px),1fr)); gap:6px; }
+#jp-study-app .cr-compose { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:clamp(8px,2cqw,24px); }
+#jp-study-app .cr-compose fieldset { padding:0; min-width:0; border:0; }
+#jp-study-app .cr-compose legend { display:block; padding:0; margin:0 0 4px; color:var(--jp-muted); font-size:13px; font-weight:650; }
+#jp-study-app .cr-part-keys { display:grid; grid-auto-columns:minmax(0,1fr); grid-auto-flow:column; gap:4px; }
+#jp-study-app .cr-pad.game-button {
+  position:relative; width:100%; min-width:0; min-height:54px; padding:5px 2px 4px; display:flex;
+  flex-direction:column; gap:2px; background:var(--jp-panel); line-height:1.12; touch-action:manipulation;
+}
+#jp-study-app .cr-pad.game-button[aria-pressed="true"] { opacity:1; color:var(--jp-text); background:var(--jp-selection); border:1px solid var(--jp-selection-line); }
+#jp-study-app .cr-pad-glyph { font:650 clamp(20px,2.8cqw,31px)/1.08 "Yu Gothic","Meiryo",system-ui,sans-serif; }
+#jp-study-app .cr-pad-sound { font-size:clamp(11px,1.8cqw,15px); font-weight:550; }
+#jp-study-app .cr-pad kbd { position:absolute; left:5px; top:4px; color:var(--jp-muted); font:600 10px/1.2 ui-monospace,monospace; }
+#jp-study-app .cr-dialog {
+  position:fixed; inset:0; margin:auto; padding:clamp(14px,2.8cqw,28px);
+  background:var(--jp-panel); color:var(--jp-text); border:1px solid var(--jp-line);
+  border-radius:20px; width:min(660px,calc(100% - 24px)); max-width:calc(100vw - 24px);
+  max-height:calc(100dvh - 30px); overflow:auto; box-shadow:0 16px 52px var(--jp-popover-shadow);
+}
+#jp-study-app .cr-dialog[data-view="reference"] { width:min(1360px,calc(100% - 24px)); }
+#jp-study-app .cr-dialog::backdrop { background:rgb(27 23 17 / .56); }
+#jp-study-app .cr-dialog h2 { font-size:clamp(20px,3.5cqw,27px); letter-spacing:-.025em; line-height:1.25; }
+#jp-study-app .cr-dialog h2:focus { outline:none; }
+#jp-study-app .cr-dialog h3 { font-size:14px; color:var(--jp-muted); }
+#jp-study-app .cr-summary { padding-top:8px; font-size:18px; font-weight:650; }
+#jp-study-app .cr-compare { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:8px; padding:12px 0; }
+#jp-study-app .cr-compare div { background:var(--jp-bg); padding:10px; border-radius:12px; }
+#jp-study-app .cr-compare div:last-child { background:var(--jp-companion); }
+#jp-study-app .cr-compare dt { font-size:13px; color:var(--jp-muted); font-weight:600; }
+#jp-study-app .cr-compare dd { padding-top:4px; font-weight:700; font-size:17px; overflow-wrap:anywhere; }
+#jp-study-app .cr-examples { display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr)); gap:10px; margin:10px 0; }
+#jp-study-app .cr-rule { padding:10px; border:1px solid var(--jp-line); border-radius:12px; }
+#jp-study-app .cr-rule p { margin:.3em 0 0; font-size:14px; }
+#jp-study-app .cr-ref-head { justify-content:space-between; gap:8px; margin-bottom:12px; }
+#jp-study-app .cr-dialog-actions { justify-content:flex-end; }
+@container (max-width:580px) {
+  #jp-study-app .cr-top { gap:4px 8px; }
+  #jp-study-app .cr-top h1 { font-size:21px; }
+  #jp-study-app .cr-stats { font-size:12px; gap:7px; }
+  #jp-study-app .cr-tools { gap:3px; }
+  #jp-study-app .cr-tools .game-button { padding:4px 7px; }
+  #jp-study-app .cr-stage { height:clamp(247px,42svh,380px); border-radius:14px; }
+  #jp-study-app .cr-compose legend { font-size:12px; }
+  #jp-study-app .cr-pad.game-button { border-radius:10px; }
+  #jp-study-app .cr-pad kbd { display:none; }
+  #jp-study-app .cr-keys { grid-template-columns:repeat(auto-fit,minmax(min(100%,47px),1fr)); gap:4px; }
+  #jp-study-app .cr-prompt { font-size:13px; }
+  #jp-study-app .cr-stage[data-layout="belt"] .cr-name { font-size:clamp(10px,2.65cqw,14px); padding-inline:2px; }
+}
+@container (max-width:350px) {
+  #jp-study-app .cr-top h1 { flex:1; }
+  #jp-study-app .cr-top .cr-tools { flex-basis:100%; justify-content:flex-end; }
+  #jp-study-app .cr-name { font-size:12px; }
+  #jp-study-app .cr-compose { gap:6px; }
+  #jp-study-app .cr-compose legend { font-size:11px; }
+  #jp-study-app .cr-part-keys { gap:2px; }
+}
+@media (pointer:coarse) { #jp-study-app .cr-pad kbd { display:none; } }
+@media (prefers-reduced-motion:reduce) { #jp-study-app .cr-play * { animation:none !important; } }

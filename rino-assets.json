@@ -1381,6 +1381,21 @@
       "path": "rino/kitchen/window.wav",
       "sha256": "becbcf4d400145e397d53bc69a9e521ac969d963f8c9f8530cdf891cc31b306e",
       "bytes": 66220
+    },
+    {
+      "path": "rino/counters/counter-rush-game.css",
+      "sha256": "021f04e1c027df30d9a054dae897524d261c7d68e006aa2d0844564f8b29ba83",
+      "bytes": 9637
+    },
+    {
+      "path": "rino/counters/counter-rush-game.js",
+      "sha256": "10a5674e8c000bc965bf54fc68ae11cd4f1161632543e801892f8eb508fb4cf3",
+      "bytes": 50116
+    },
+    {
+      "path": "rino/counters/counter-rush-setup.css",
+      "sha256": "5260a1d9ca42768223c4318fb84797f4b783a0d92fd4d8385c89b1462b63c6c0",
+      "bytes": 7455
     }
   ]
 }
