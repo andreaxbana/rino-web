@@ -1,8 +1,8 @@
 {
-  "build_id": "k1-5053955a33595d5a",
-  "source_sha256": "5053955a33595d5a1fa25e743c6bd93e259c9d43a7172fc6ff0627f7bbdbbf09",
-  "fragment_sha256": "70da1963fa91a4808903c24177dc225eb3618195452ee3937b7550296b641b46",
-  "standalone_sha256": "17fb08de66e102cf7ae0fe0fc3fa338d4b1a6f04d19fd6ca87c06c3e68b5efa1",
+  "build_id": "k1-766f11119d03a794",
+  "source_sha256": "766f11119d03a794362a15db2dfd04238ce0862ca3d17f4bd58a02820d47a664",
+  "fragment_sha256": "37efda9ecb05a47e6e9984fef16c54f49c83befa4c6a023c5ec499aea24f22d8",
+  "standalone_sha256": "1e7d79e63a28f719b9101e322eb63f47d2717d75872505ab12eeb8f6fe5ecf79",
   "recognition": {
     "entry": "./recognition/offline-recognizer.mjs",
     "id": "kotoba-offline-trained-ensemble",
@@ -18,13 +18,13 @@
     "bytes": 25789146
   },
   "dictionary": {
-    "assetsSha256": "38af1990abd993e13c1cf9b1a5ace31493314bd700a0d496f93f123d35c3f72d",
+    "assetsSha256": "fe21a58ff278e981267d675ca661d63f62b6c0b3a5f1b8d67280a837a312c3d5",
     "sourceSha256": "3846524394e7b149f88f1cf09d9d6b10aa0b0e05267cd180bfb5eea31873952b",
     "entries": 218920,
     "coreEntries": 26007,
-    "workerPath": "dictionary/906028fcc30c6b433c84c388baa8c35b77f5caecdaf4278930f28c2e0a3884fa/dictionary-worker.js",
+    "workerPath": "dictionary/773a8f15ad73bb63a73e979068f7b9cec19184e0f7f588013101298fdbf42819/dictionary-worker.js",
     "reference": {
-      "path": "dictionary/906028fcc30c6b433c84c388baa8c35b77f5caecdaf4278930f28c2e0a3884fa/reference.json.gz",
+      "path": "dictionary/773a8f15ad73bb63a73e979068f7b9cec19184e0f7f588013101298fdbf42819/reference.json.gz",
       "bytes": 9402307,
       "sha256": "50baa00c1dd80172cf37c67bee951133fa9e3420d5f024b1e13f45e3b8e24fa4"
     },
@@ -299,8 +299,8 @@
   },
   "offline": {
     "workerPath": "rino-offline-sw.js",
-    "workerSha256": "b189930ca0cc432e30eb6c730589d242573d926e3524065f95429466b40829a7",
+    "workerSha256": "c3c036e1643bcfc29c0fc74d71bdf10d902d73dfe434d396898689e07879a53f",
     "workerBytes": 118098,
-    "shellSha256": "17fb08de66e102cf7ae0fe0fc3fa338d4b1a6f04d19fd6ca87c06c3e68b5efa1"
+    "shellSha256": "1e7d79e63a28f719b9101e322eb63f47d2717d75872505ab12eeb8f6fe5ecf79"
   }
 }

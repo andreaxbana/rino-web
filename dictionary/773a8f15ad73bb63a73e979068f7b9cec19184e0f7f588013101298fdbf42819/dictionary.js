@@ -336,7 +336,7 @@
       if(unique)return pair?.reference_key===unique.reference_key?pair:index.words.get(index.identities.get(unique.reference_key)) || unique;
       return !jmdict_id&&!ref.length&&pair&&key(pair.reading)===key(reading)?pair:null;
     }
-    function commonWordChoices(words) {
+    function commonWordChoiceGroups(words) {
       const seen = new Set(), shared = new Set(), members = new Set();
       for (const word of words) {
         const member = word.word + '\0' + helpEntry(word)?.reference_key;
@@ -347,7 +347,10 @@
           seen.add(group);
         }
       }
-      return [...shared].map(group => group.note);
+      return [...shared].map(group => ({words: group.members.map(member => member.split('\0')[0]), note: group.note, parts: group.parts}));
+    }
+    function commonWordChoices(words) {
+      return commonWordChoiceGroups(words).map(group => group.note);
     }
     function wordHelp(item) {
       const {word,reading,level,meaning_en}=item, entry=helpEntry(item);
@@ -718,7 +721,7 @@
     }
     return {render,mount,beforeRender,handle,navigate,wordHelp,isCommonSpelling:index.reference?.isCommonSpelling,
       uniqueWordEntryId,commonWordPriority:index.reference?.commonWordPriority,
-      referenceWordsForKanji,kunReadingCandidates,commonWordChoices,navigation:() => ({...state}),hasActiveInput:() => !!activeStroke || !!pending || composing,
+      referenceWordsForKanji,kunReadingCandidates,commonWordChoiceGroups,commonWordChoices,navigation:() => ({...state}),hasActiveInput:() => !!activeStroke || !!pending || composing,
       announcement:() => 'Dictionary · all levels' + (state.character ? ' · ' + state.character : ''),
       // Read-only snapshots support regression checks without saving ink to progress.
       drawing:() => ink.map(stroke => stroke.map(point => point.slice()))};
