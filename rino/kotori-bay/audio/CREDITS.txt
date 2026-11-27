@@ -1,0 +1,6 @@
+Japanese dialogue synthesized with Open JTalk and the HTS voice Mei (normal).
+Voice released by the MMDAgent Project Team.
+Copyright (c) 2009–2013 Nagoya Institute of Technology, Department of Computer Science.
+Voice model licensed under Creative Commons Attribution 3.0.
+https://creativecommons.org/licenses/by/3.0/
+https://www.mmdagent.jp/

@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>Summer in Kotori Bay · RiNO</title>
+  <link rel="stylesheet" href="./game.css">
+  <script type="module" src="./game.js"></script>
+</head>
+<body>
+<div id="rino-bay">
+ <section class="kt-app" aria-label="Summer in Kotori Bay adventure">
+  <header class="kt-header">
+   <div class="bay-location"><span>August 1</span><h1>Kotori Bay</h1></div>
+   <button type="button" class="kt-logbtn" aria-expanded="false"><i class="bay-book-icon" aria-hidden="true"></i>Notebook <strong class="kt-count">1</strong></button>
+  </header>
+  <div class="kt-world">
+   <canvas class="bay-panorama" aria-hidden="true" hidden></canvas>
+   <button type="button" class="kt-walk" aria-label="Walk along the shore. Use the arrow keys to move, and Enter to speak to a nearby villager."></button>
+   <div class="bay-plane">
+    <canvas class="kt-map" width="320" height="176" aria-hidden="true"></canvas>
+    <canvas class="bay-beach" width="320" height="165" aria-hidden="true"></canvas>
+    <div class="kt-npcs" aria-label="Villagers"></div>
+    <div class="kt-player" aria-hidden="true"><canvas width="32" height="28"></canvas><span class="kt-carry" hidden>Ⅱ</span></div>
+   </div>
+  </div>
+  <div class="bay-closeup" hidden><canvas width="320" height="140" role="img" aria-label="A close look inside the blue bucket"></canvas><button type="button" class="bay-back">Back to the harbour</button></div>
+  <div class="kt-hud"><span class="kt-objective"></span><span class="kt-controls">Tap a person or a path</span></div>
+  <section class="kt-dialog" aria-label="Conversation">
+   <div class="kt-dialoghead"><div class="kt-who"><span class="kt-emblem" aria-hidden="true">家</span><strong class="kt-name"></strong><span class="kt-job"></span></div>
+    <div class="bay-dtools"><button type="button" data-tool="listen" hidden>Listen</button><button type="button" data-tool="grammar" aria-expanded="false">Grammar</button><button type="button" class="bay-shut-talk" aria-label="Close dialogue">×</button></div>
+   </div>
+   <div class="kt-line" lang="ja" aria-label="Select a phrase for grammar"></div>
+   <p class="kt-en"></p>
+   <div class="kt-replies" role="group" aria-label="Dialogue choices"></div>
+  </section>
+  <section class="kt-journal" hidden aria-label="Summer notebook">
+    <div class="kt-jhead"><h2>Summer notebook</h2><button type="button" class="kt-close">Back to the bay</button></div>
+    <div class="bay-tabs" role="group" aria-label="Notebook pages"><button type="button" data-page="log">Conversations</button><button type="button" data-page="diary">Picture diary</button></div>
+    <div class="kt-jlist" aria-label="Heard lines"></div><div class="bay-book-reader"></div>
+    <div class="bay-diary" hidden><div class="bay-sheet"><canvas width="164" height="96" role="img" aria-label="RiNO’s picture diary"></canvas><div><small lang="ja">８月１日　晴れ</small><h3 class="bay-entry"></h3><p class="bay-caption"></p></div></div><div class="bay-memories" role="group" aria-label="Choose a memory"></div></div>
+    <small class="kt-credit">Japanese voice by MMDAgent Project Team, Nagoya Institute of Technology · Mei · <a href="https://creativecommons.org/licenses/by/3.0/" target="_blank" rel="noopener noreferrer">CC BY 3.0</a></small>
+  </section>
+  <section class="bay-study" role="dialog" aria-modal="true" aria-label="Dialogue grammar" hidden>
+    <div class="bay-study-card">
+     <div class="bay-study-head"><h2>Dialogue notes</h2><button type="button" class="bay-close-study" aria-label="Close grammar">×</button></div>
+     <div class="bay-study-phrases" lang="ja" aria-label="Choose a phrase"></div>
+     <p class="bay-study-translation"></p>
+     <div class="kt-explain"><strong class="kt-rule"></strong><p class="kt-explanation"></p></div>
+     <div class="kt-tools" role="group" aria-label="Dialogue display"><button type="button" data-tool="english" aria-pressed="true">English</button><button type="button" data-tool="kana" aria-pressed="true">Readings</button></div>
+    </div>
+  </section>
+  <div class="kt-announce" role="status" aria-live="polite"></div>
+ </section>
+</div>
+</body>
+</html>

@@ -1396,6 +1396,86 @@
       "path": "rino/counters/counter-rush-setup.css",
       "sha256": "48505000e0788b8b507dd9734986e20b1a55313847ed41354390710db3c2c883",
       "bytes": 9360
+    },
+    {
+      "path": "rino/kotori-bay/art.js",
+      "sha256": "50cb5721cc4244326a7c1bb30f5b716de96821f7f386917c61f53bdc9af7255f",
+      "bytes": 25594
+    },
+    {
+      "path": "rino/kotori-bay/audio/CREDITS.txt",
+      "sha256": "24c926a05e7904191562982ef8f92a019fbfa371fb16b4a9a49e0e509fe331a6",
+      "bytes": 344
+    },
+    {
+      "path": "rino/kotori-bay/audio/errand.mp3",
+      "sha256": "addec74a868c1acf8bdd568f9eefa1ada4c8098dd08fc83a846cc665450d0c24",
+      "bytes": 19656
+    },
+    {
+      "path": "rino/kotori-bay/audio/escape.mp3",
+      "sha256": "149520398cfd7da5ec7f61f06d1d92d13a58586721dd89a527cb3abe580cd7d8",
+      "bytes": 15876
+    },
+    {
+      "path": "rino/kotori-bay/audio/homeSoda.mp3",
+      "sha256": "0ae6ce9ece62b4826961219654f36e89be2cc38998d99442c6d2184d410f8d67",
+      "bytes": 20664
+    },
+    {
+      "path": "rino/kotori-bay/audio/melon.mp3",
+      "sha256": "77b06ceab130055431bb1ed29a9ff702482da9b2e0dd05fcacdadd768a94d241",
+      "bytes": 14364
+    },
+    {
+      "path": "rino/kotori-bay/audio/name.mp3",
+      "sha256": "9a733570f5acddfa37b14d96b2e480268c56bfb367a6a11c70869bc47494bb00",
+      "bytes": 19656
+    },
+    {
+      "path": "rino/kotori-bay/audio/orderSoda.mp3",
+      "sha256": "97cc9d71ef2d02cfb706ed2ab6f209ffd26f50d3ad5a2c358b770f1afec41773",
+      "bytes": 15120
+    },
+    {
+      "path": "rino/kotori-bay/audio/peek.mp3",
+      "sha256": "5c7906d85d530d5d031c29aa5fdade971845464655e8d57bca0dac7ececf0f40",
+      "bytes": 16632
+    },
+    {
+      "path": "rino/kotori-bay/audio/share.mp3",
+      "sha256": "040631a32002adcfbf1c234041987f7291a964174c3a5bad78e574793accf232",
+      "bytes": 12348
+    },
+    {
+      "path": "rino/kotori-bay/audio/shop.mp3",
+      "sha256": "884dbc021f509162697230eafcb4a77f727db80af35751892266b7a1ca8668ee",
+      "bytes": 22176
+    },
+    {
+      "path": "rino/kotori-bay/audio/soda.mp3",
+      "sha256": "028c79d2b298255392abd64242c96584a92b096420a8159ef2d5f7e39ddd9e74",
+      "bytes": 15120
+    },
+    {
+      "path": "rino/kotori-bay/dialogue.js",
+      "sha256": "387a7fa267c220ffeac9c1891122272adbb2959d3c16ae435adf41472117a4a3",
+      "bytes": 5971
+    },
+    {
+      "path": "rino/kotori-bay/game.css",
+      "sha256": "0744ae583509ca0153b8a1e661b66d68e031781d93a78b68880308f9adf9d4fc",
+      "bytes": 15718
+    },
+    {
+      "path": "rino/kotori-bay/game.js",
+      "sha256": "95457f7b98e4e4a7acaab43fb4e5f718d9297f002624d18ef7ed866eec6d0b12",
+      "bytes": 19917
+    },
+    {
+      "path": "rino/kotori-bay/index.html",
+      "sha256": "98aafbe3536459395a4fbdcfcf87d34f62a39daf18b97fafc093189816504fd2",
+      "bytes": 4307
     }
   ]
 }
