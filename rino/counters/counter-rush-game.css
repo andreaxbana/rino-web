@@ -69,8 +69,6 @@
 #jp-study-app .cr-prompt [data-tone="correct"] { color:var(--cr-good); font-weight:650; animation:cr-right .22s ease-out; }
 @keyframes cr-right { from { opacity:.4; transform:translateY(3px); } to { opacity:1; transform:translateY(0); } }
 #jp-study-app .cr-keys { display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,86px),1fr)); gap:6px; }
-#jp-study-app .cr-play[data-many-answers="true"] .cr-keys { grid-template-columns:repeat(auto-fit,minmax(min(100%,64px),1fr)); }
-#jp-study-app .cr-play[data-many-answers="true"] .cr-stage { height:clamp(260px,calc(61svh - 64px),720px); }
 #jp-study-app .cr-compose { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:clamp(8px,2cqw,24px); }
 #jp-study-app .cr-compose fieldset { padding:0; min-width:0; border:0; }
 #jp-study-app .cr-compose legend { display:block; padding:0; margin:0 0 4px; color:var(--jp-muted); font-size:13px; font-weight:650; }
@@ -81,7 +79,8 @@
 }
 #jp-study-app .cr-pad.game-button[aria-pressed="true"] { opacity:1; color:var(--jp-text); background:var(--jp-selection); border:1px solid var(--jp-selection-line); }
 #jp-study-app .cr-pad-glyph { font:650 clamp(20px,2.8cqw,31px)/1.08 "Yu Gothic","Meiryo",system-ui,sans-serif; }
-#jp-study-app .cr-pad-sound { font-size:clamp(11px,1.8cqw,15px); font-weight:550; }
+#jp-study-app .cr-pad-sound { min-width:0; max-width:100%; font-size:clamp(11px,1.8cqw,15px); font-weight:550; white-space:normal; overflow-wrap:anywhere; }
+#jp-study-app .cr-pad-sound:empty { display:none; }
 #jp-study-app .cr-pad kbd { position:absolute; left:5px; top:4px; color:var(--jp-muted); font:600 10px/1.2 ui-monospace,monospace; }
 #jp-study-app .cr-dialog {
   position:fixed; inset:0; margin:auto; padding:clamp(14px,2.8cqw,28px);
@@ -116,9 +115,7 @@
   #jp-study-app .cr-pad.game-button { border-radius:10px; }
   #jp-study-app .cr-pad kbd { display:none; }
   #jp-study-app .cr-keys { grid-template-columns:repeat(auto-fit,minmax(min(100%,47px),1fr)); gap:4px; }
-  #jp-study-app .cr-play[data-many-answers="true"] .cr-keys { grid-template-columns:repeat(auto-fit,minmax(min(100%,47px),1fr)); }
-  #jp-study-app .cr-play[data-many-answers="true"] .cr-stage { height:clamp(174px,calc(42svh - 84px),340px); }
-  #jp-study-app .cr-play[data-many-answers="true"] .cr-keys .cr-pad { min-height:46px; }
+  #jp-study-app .cr-pad-glyph[data-long] { font-size:clamp(13px,3.7cqw,19px); }
   #jp-study-app .cr-prompt { font-size:13px; }
   #jp-study-app .cr-stage[data-layout="belt"] .cr-name { font-size:clamp(10px,2.65cqw,14px); padding-inline:2px; }
   #jp-study-app .cr-stage[data-layout="belt"] .cr-object[data-scene-frame] .cr-name { font-size:11px; }
@@ -126,6 +123,8 @@
 @container (max-width:350px) {
   #jp-study-app .cr-top h1 { flex:1; }
   #jp-study-app .cr-top .cr-tools { flex-basis:100%; justify-content:flex-end; }
+  #jp-study-app .cr-stage { height:clamp(180px,calc(42svh - 48px),320px); }
+  #jp-study-app .cr-keys { grid-template-columns:repeat(auto-fit,minmax(min(100%,44px),1fr)); }
   #jp-study-app .cr-name { font-size:12px; }
   #jp-study-app .cr-compose { gap:6px; }
   #jp-study-app .cr-compose legend { font-size:11px; }

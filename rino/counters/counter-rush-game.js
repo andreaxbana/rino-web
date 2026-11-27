@@ -2,7 +2,7 @@
 (function counterRushGame() {
 'use strict';
 
-function drawCounterObject(kind, document, frame = 0, canvas = document.createElement('canvas')) {
+function drawCounterObject(kind, document, frame = 0, canvas = document.createElement('canvas'), hour) {
   if (canvas.width !== 240 || canvas.height !== 240) canvas.width = canvas.height = 240;
   canvas.setAttribute('aria-hidden', 'true');
   const c = canvas.getContext('2d');
@@ -46,6 +46,165 @@ function drawCounterObject(kind, document, frame = 0, canvas = document.createEl
     c.restore();
   }
   switch (kind) {
+    case 'calendar': {
+      shadow(37);
+      path('M22 35 L78 22 L100 88 L42 99 L22 90Z','#967d67');
+      path('M25 32 L87 25 L93 85 L31 96 L24 91Z','#dac5a0');
+      path('M21 30 Q21 27 25 26 L82 20 Q86 20 86 25 L91 78 Q89 85 80 90 L30 96 Q26 95 26 91Z','#fff2d8');
+      path('M21 30 Q20 26 25 25 L82 19 Q86 19 86 24 L88 37 L23 45Z','#ca8070');
+      for (const x of [33,52,72]) {
+        line('M'+x+' 32 q-7 -14 1 -16 q5 -1 6 7','#6b6460',3.3);
+      }
+      for (let row=0;row<3;row++) for (let col=0;col<5;col++) {
+        const x=33+10*col+row, y=53+11*row-col;
+        path('M'+x+' '+y+' l6 -.6 l.3 4.4 l-6 .7Z',col===0?'#cd8c79':'#a6b5ad',null);
+      }
+      const curl = [0,2,5,2][frame];
+      path('M'+(81-curl)+' 89 L'+(80-curl)+' '+(81-curl)+' L90 '+(78-curl)+' Q90 85 '+(81-curl)+' 89Z','#f0c782','#9c8165',1.5);
+      break;
+    }
+    case 'clock': {
+      shadow(29);
+      line('M42 86 L36 96 M78 85 L85 94',ink,5);
+      line('M33 35 L28 29 M84 34 L90 27',ink,4);
+      path('M17 34 Q17 21 28 18 Q39 16 43 24 L27 37Z','#dd9475');
+      path('M76 23 Q83 15 93 18 Q103 21 103 32 L91 35Z','#dd9475');
+      oval(60,60,34,34,'#86aaa3',ink,3);
+      oval(60,60,28.5,28.5,'#fff0ce',ink,1.8);
+      for (let i=0;i<12;i++) {
+        const angle=i*Math.PI/6;
+        dot(60+Math.sin(angle)*24,60-Math.cos(angle)*24,i%3===0?1.7:1,'#847667');
+      }
+      const angle=(hour ?? 10)*Math.PI/6;
+      line('M60 40 V60 L'+(60+Math.sin(angle)*14)+' '+(60-Math.cos(angle)*14),ink,3.3);
+      const tick=(frame+4)*Math.PI/9;
+      line('M60 60 l'+Math.sin(tick)*20+' '+(-Math.cos(tick)*20),'#c97762',1.5);
+      dot(60,60,2.8,ink);
+      break;
+    }
+    case 'hourglass': {
+      shadow(24);
+      for (const x of [36,84]) line('M'+x+' 29 V87','#ae8c63',3.5);
+      path('M38 27 H82 Q83 45 66 54 Q59 58 64 63 Q81 73 82 88 H38 Q40 73 55 63 Q61 58 54 54 Q38 44 38 27Z','#d0ded7');
+      const top=[38,40,42,41][frame];
+      path('M44 '+top+' H76 Q73 46 62 53 L60 55 L57 52 Q47 46 44 '+top+'Z','#edba65',null);
+      path('M43 84 Q50 82 58 74 Q60 71 63 75 L78 84Z','#e6b15e','#ca9b5a',1.2);
+      line('M60 56 V67','#e0a654',1.5); dot(60,69+frame,1.3,'#d49a51');
+      path('M32 21 Q32 19 36 19 H85 Q89 20 89 23 V28 H32Z M31 88 H89 V93 Q88 96 84 96 H36 Q31 95 31 92Z','#ae8063');
+      line('M43 33 Q44 40 49 44 M45 79 L48 75',shine,2);
+      break;
+    }
+    case 'stopwatch': {
+      shadow(26);
+      path('M53 28 V18 H66 V28 M50 15 H69 V21 H50Z','#bcb1a1');
+      line('M82 36 L90 27',ink,5);
+      oval(59,62,31,33,'#a7b4b0',ink,3);
+      clock(59,61,25,cream);
+      line('M49 94 Q60 96 69 92','#776d65',2.2);
+      break;
+    }
+    case 'birthday': {
+      shadow(35);
+      oval(59,89,39,7,'#adc0b2',ink,2);
+      path('M29 61 Q58 50 91 60 V81 Q88 90 61 91 Q38 91 29 85Z','#d89d76');
+      path('M29 64 Q58 72 91 62 V72 Q65 84 29 74Z','#f4d2a1',null);
+      path('M27 59 Q29 49 58 49 Q88 48 93 57 V65 Q89 71 85 64 Q82 61 79 67 Q75 73 70 67 Q66 64 62 70 Q57 75 52 67 Q49 65 46 69 Q41 73 37 66 Q35 64 32 66 Q28 67 27 62Z','#f4c2bb');
+      path('M53 51 L52 33 L60 32 L62 51 Q58 54 53 51Z','#82afad');
+      line('M54 41 L59 37 M55 48 L60 44',shine,1.5);
+      const tilt=[0,2,1,-2][frame];
+      path('M56 32 Q47 29 52 20 Q55 17 '+(56+tilt)+' 10 Q'+(62+tilt)+' 19 62 23 Q64 29 56 32Z','#efab60',ink,1.7);
+      dot(41,56,2.1,'#c36e69'); dot(74,56,2.4,'#c36e69');
+      star(88,31-frame,'#dfb366');
+      break;
+    }
+    case 'building': {
+      shadow(35);
+      path('M29 30 L70 19 L89 29 L88 91 L49 99 L29 89Z','#99adaa');
+      path('M30 30 L69 21 V89 L30 96Z','#dcc09f');
+      path('M27 27 L69 16 L93 27 L88 32 L69 24 L29 34Z','#8b7e71');
+      for (let row=0;row<4;row++) for (let col=0;col<2;col++) {
+        const x=36+15*col, y=40+12*row-3*col;
+        path('M'+x+' '+y+' l8 -2 v7 l-8 2Z',row===3-frame && col===1?'#ffe4a1':'#92aca9','#7f8374',1.1);
+      }
+      path('M40 94 V84 L50 82 V92Z','#9b7762');
+      line('M76 38 L81 40 M76 50 L82 52 M76 62 L81 64 M76 74 L81 76','#637e7c',2.7);
+      break;
+    }
+    case 'temple': {
+      shadow(36);
+      path('M30 86 H88 L96 95 H23Z','#c0b6a1');
+      path('M37 51 H84 V87 H37Z','#ebc696');
+      path('M44 50 V85 M76 50 V85',null,'#a86651',5);
+      path('M51 64 Q59 61 68 64 V86 H51Z','#82685b');
+      path('M17 53 Q36 46 52 29 L59 22 L64 29 Q78 44 102 48 Q97 53 88 56 Q66 57 59 51 Q46 59 29 59Z','#839994');
+      path('M42 37 Q50 32 58 20 Q62 16 65 20 Q67 27 78 33 L67 31 L61 26 L53 34Z','#647e78');
+      line('M21 54 Q38 55 57 44 M64 45 Q81 50 95 49','#c3ceae',2);
+      path('M86 80 q10 -11 12 -6 q-3 7 -12 6Z','#aaa471',null);
+      for (let i=0;i<2;i++) dot(19+i*8+frame,70+i*9+frame,2.1,'#d7a074');
+      break;
+    }
+    case 'bridge': {
+      shadow(41);
+      path('M14 78 Q48 74 65 78 Q84 81 106 73 L105 85 Q79 91 58 86 Q34 83 14 90Z','#9ab9b2',null);
+      const ripple=frame*2;
+      line('M'+(20+ripple)+' 84 q8 -4 16 -1 M'+(75-ripple)+' 83 q7 1 13 -2','#e1e5ce',1.8);
+      path('M14 63 Q56 33 105 55 L105 72 Q80 59 72 76 L66 77 Q62 59 51 62 Q41 63 37 80 L29 81 Q26 69 14 79Z','#d5ae85');
+      for (const [x,y] of [[18,60],[34,52],[52,47],[71,46],[90,49],[103,54]]) line('M'+x+' '+y+' v-12','#996b54',2.4);
+      line('M16 46 Q58 19 105 42','#996b54',3.3);
+      line('M16 58 Q58 30 104 53','#ae705b',3.3);
+      break;
+    }
+    case 'coins': {
+      shadow(35);
+      for (const [x,y] of [[44,78],[43,71],[44,64],[74,84],[76,77]]) {
+        path('M'+(x-18)+' '+y+' v5 c0 10 36 10 36 0 v-5Z','#c59054','#8d6e4c',1.6);
+        oval(x,y,18,6,'#eac37a','#8d6e4c',1.8);
+      }
+      const x=67, y=44+[0,-2,-4,-2][frame];
+      oval(x,y,18,20,'#f0cb81',ink,2.5); oval(x,y,14,16,null,'#cb9e63',1.5);
+      line('M61 '+(y-7)+' l6 7 l6 -7 M67 '+y+' v10 M62 '+(y+1)+' h10 M62 '+(y+5)+' h10','#9a774b',1.8);
+      star(92,32+frame,'#e1b56b');
+      break;
+    }
+    case 'marbles': {
+      shadow(33);
+      for (const [x,y,r,color,swirl] of [[75,58,17,'#abc2b1','#77a798'],[44,74,20,'#bcd4cd','#80a1b3'],[78,79,14,'#e6c3a4','#d69f7d']]) {
+        oval(x,y,r,r,color,ink,2.4);
+        path('M'+(x-r+2)+' '+(y+1)+' q'+r+' -13 '+(2*r-4)+' 0 q-'+r+' -4 -'+(r+4)+' 5Z',swirl,null);
+        oval(x-5+frame*.6,y-r+6,4,2.4,shine);
+      }
+      break;
+    }
+    case 'sugar': {
+      shadow(35);
+      for (const [x,y] of [[76,64],[40,71],[61,48]]) {
+        c.save(); c.translate(x,y);
+        path('M-16 -8 L1 -15 L17 -7 L0 1Z','#fff6df',ink,1.7);
+        path('M-16 -8 L0 1 V19 L-16 11Z','#e4cfae',ink,1.7);
+        path('M0 1 L17 -7 V11 L0 19Z','#f1e0be',ink,1.7);
+        line('M4 6 h1 M10 2 h1 M6 12 h1','#d0b999',1.3);
+        c.restore();
+      }
+      star(84,27+frame,'#e5bd78');
+      break;
+    }
+    case 'wishes': {
+      shadow(27);
+      c.save(); c.translate(61,56-[0,2,4,2][frame]); c.rotate(.11);
+      path('M0 -32 L10 -13 L30 -11 Q34 -10 31 -5 L16 9 L18 29 Q18 33 14 31 L-2 23 L-20 31 Q-24 31 -22 26 L-18 7 L-32 -7 Q-35 -11 -30 -12 L-10 -14Z','#e9bc6b');
+      line('M-18 -6 L-7 -8 L-1 -20','#fff0bb',3); c.restore();
+      star(27,32+frame,'#d79482'); star(93,62-frame,'#b1b29a');
+      break;
+    }
+    case 'methods': {
+      shadow(33);
+      path('M20 88 L35 32 L85 21 L102 77 L60 94Z','#e7d6a6');
+      path('M22 84 L37 34 L49 31 L52 90Z','#b7c4a4',null);
+      line('M57 84 Q60 72 52 64 Q44 54 56 45 M54 66 Q72 62 75 48','#ac8c64',3);
+      path('M51 46 L56 39 L60 48 M71 49 L76 42 L80 50Z','#ac8c64',null);
+      dot(57,80-frame,3.8,'#cc8669');
+      break;
+    }
     case 'jump': {
       const lift = [0, 10, 22, 10][frame];
       shadow(20 - lift/3);
@@ -714,11 +873,14 @@ function drawCounterObject(kind, document, frame = 0, canvas = document.createEl
   return canvas;
 }
 
+const sceneArt = {
+  'marbles-pieces':'marbles', 'sugar-pieces':'sugar', 'wishes-native':'wishes', 'methods-native':'methods',
+  'temple-years':'temple', 'bridge-years':'bridge', 'stopwatch-seconds':'stopwatch', 'recording-seconds':'stopwatch'
+};
 const numberKeys = ['A', 'S', 'D'];
 const suffixKeys = ['J', 'K', 'L'];
-const counterKeys = [...'1234567890QWERTYUI'];
+const counterKeys = [...'123456'];
 const speeds = {easy:8400, slow:8400, normal:5700, fast:3500};
-const numerals = {1:'一',2:'二',3:'三',4:'四',5:'五',6:'六',7:'七',8:'八',9:'九',10:'十',100:'百',1000:'千'};
 
 function shuffled(list, random) {
   const result = list.slice();
@@ -735,21 +897,19 @@ function create({settings, onAnswer = () => {}, onFinish = () => {}, env = globa
     ...entry, goods:entry.goods.filter(good => !settings.objects || settings.objects.includes(good.kind))
   })).filter(entry => entry.goods.length);
   if (!entries.length) throw Error('Seleziona almeno un esempio per iniziare.');
-  const numbers = data.numbers.filter(n => settings.largeNumbers || n <= 10);
   const level = settings.level === 2 ? 2 : 1;
   const belt = settings.layout === 'belt';
   const duration = (speeds[settings.speed] || speeds.normal) * (level === 2 ? 1.45 : 1);
   const planned = Math.max(1, Math.min(100, Math.round(Number(settings.length) || 12)));
-  const answers = [], jobs = [], objectBags = new Map(), illustrated = new Map();
+  const answers = [], jobs = [], objectBags = new Map(), quantityBags = new Map(), illustrated = new Map();
   const mix = list => shuffled(list,random);
-  let families = [], quantities = [], lastFamily = '', streak = 0, bestStreak = 0;
+  let families = [], lastFamily = '', streak = 0, bestStreak = 0;
   let index = 0, fraction = 0, carry = 0, hold = 0, paused = false, modal = '', ended = false;
   let root = null, doc = null, nodes = new Map(), observer = null, frame = null, lastTime = null;
   let geom = null, modalTrigger = null, sceneTime = 0;
   const target = () => jobs[index];
   const find = name => root?.querySelector('[data-rush-' + name + ']');
   const reduced = () => !!env.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
-  const count = (entry,n) => entry.counts.find(item => item.n === n);
 
   function nextObject(entry, previous) {
     let bag = objectBags.get(entry.glyph);
@@ -762,8 +922,31 @@ function create({settings, onAnswer = () => {}, onFinish = () => {}, env = globa
     }
     return bag.pop();
   }
+  function validNumbers(entry,good) {
+    return entry.counts.map(count => count.n).filter(n => (settings.largeNumbers || n < 100) && data.countFor(entry,n,good));
+  }
+  function nextQuantity(entry,good) {
+    const numbers = validNumbers(entry,good);
+    const key = entry.glyph + '/' + numbers.join(',');
+    let bag = quantityBags.get(key);
+    if (!bag?.length) {
+      bag = mix(numbers);
+      if (!quantityBags.has(key)) {
+        // Include a distinctive reading early, then cover every remaining quantity once.
+        const focus = {日:[1,14,20,24], 月:[4,7,9,11,12], 歳:[20], つ:[10], 時:[4,7,9]};
+        const first = mix(focus[entry.glyph] || []).find(n => bag.includes(n));
+        if (first !== undefined) bag.push(bag.splice(bag.indexOf(first),1)[0]);
+      }
+      quantityBags.set(key,bag);
+    }
+    return bag.pop();
+  }
   function makeJob(entry,n,good) {
-    return {entry,n,good:good || nextObject(entry),parts:data.partsFor(entry,n),selected:{},pads:null};
+    const form = data.countFor(entry,n,good), parts = data.partsFor(entry,n,good);
+    // Some spellings have a lexical reading (一日, 十, 二十歳). Choose the numeral
+    // and the whole pronunciation without inventing a boundary inside the word.
+    const whole = parts.some(part => part.prefix === '') || (entry.glyph === '日' && n === 1);
+    return {entry,n,good,form,parts,whole,art:sceneArt[good.kind] || good.art || good.kind,selected:{},pads:null};
   }
   // Keep incoming goods visible all the way to the last scored target.
   while (jobs.length < planned + 11) {
@@ -773,10 +956,10 @@ function create({settings, onAnswer = () => {}, onFinish = () => {}, env = globa
         [families[0],families[families.length-1]] = [families.at(-1),families[0]];
       }
     }
-    if (!quantities.length) quantities = mix(numbers);
     const entry = families.pop();
+    const good = nextObject(entry);
     lastFamily = entry.glyph;
-    jobs.push(makeJob(entry,quantities.pop()));
+    jobs.push(makeJob(entry,nextQuantity(entry,good),good));
   }
   function report() {
     return {correct:answers.filter(a => a.status === 'correct').length,
@@ -785,7 +968,7 @@ function create({settings, onAnswer = () => {}, onFinish = () => {}, env = globa
       planned,bestStreak,answers:answers.map(a => ({...a}))};
   }
   function markup() {
-    return `<section class="cr-play" lang="it" tabindex="-1" data-many-answers="${level === 1 && entries.length > 12}">
+    return `<section class="cr-play" lang="it" tabindex="-1">
       <header class="cr-top"><h1 id="game-title" tabindex="-1">Counter Rush</h1>
         <div class="cr-stats"><span><b data-rush-score>0</b> punti</span><span>Domanda <b data-rush-round></b></span></div>
         <div class="cr-tools"><button type="button" class="game-button" data-rush-action="reference">Tabella</button>
@@ -802,26 +985,56 @@ function create({settings, onAnswer = () => {}, onFinish = () => {}, env = globa
   }
   function choices(job) {
     if (job.pads) return job.pads;
+    const peers = mix(entries.filter(entry => entry !== job.entry));
+    const contrasts = {月:'か月',か月:'月',時:'時間',時間:'時',年:'歳',歳:'年',日:'泊',泊:'日',秒:'分',分:'秒',つ:'個',個:'つ',階:'回',回:'階'};
+    const ordered = [...peers.filter(e => e.glyph === contrasts[job.entry.glyph]),
+      ...peers.filter(e => e.glyph !== contrasts[job.entry.glyph] && e.theme === job.entry.theme),
+      ...peers.filter(e => e.glyph !== contrasts[job.entry.glyph] && e.theme !== job.entry.theme)];
+    if (level === 1) {
+      // Keep the same key for a short chosen list. With a full catalogue, vary the
+      // alternatives and leave the playfield visible on a narrow phone.
+      const counter = entries.length <= counterKeys.length ? entries : mix([job.entry,...ordered.slice(0,counterKeys.length-1)]);
+      return job.pads = {counter};
+    }
     const nums = [], suffixes = [];
     const add = (list,value,glyph,n) => {
       if (list.length < 3 && !list.some(option => option.value === value && option.glyph === glyph)) list.push({value,glyph,n});
     };
-    const addNum = (prefix,n) => add(nums,prefix,numerals[n],n);
+    const addNum = (prefix,n) => add(nums,job.whole ? '' : prefix,data.numeralFor(n),n);
     const addSuffix = (suffix,entry) => add(suffixes,suffix,entry.glyph);
-    const valid = job.parts[0];
-    addNum(valid.prefix,job.n); addSuffix(valid.suffix,job.entry);
+    const sound = pair => job.whole ? pair.prefix + pair.suffix : pair.suffix;
+    const addPair = pair => { addNum(pair.prefix,job.n); addSuffix(sound(pair),job.entry); };
+    addPair(job.parts[0]);
     const alt = mix(job.parts.slice(1))[0];
-    if (alt) { addNum(alt.prefix,job.n); addSuffix(alt.suffix,job.entry); }
-    const otherFamilies = mix(entries.filter(e => e !== job.entry));
-    if (otherFamilies.length) addSuffix(data.partsFor(otherFamilies[0],job.n)[0].suffix,otherFamilies[0]);
+    if (alt) addPair(alt);
+    if (job.whole) {
+      const allGoods = data.catalog.find(entry => entry.glyph === job.entry.glyph).goods;
+      for (const other of allGoods) {
+        for (const pair of data.partsFor(job.entry,job.n,other)) {
+          if (!job.parts.some(valid => sound(valid) === sound(pair))) addSuffix(sound(pair),job.entry);
+        }
+      }
+    }
+    function addPeer(entry) {
+      const good = entry.goods[0];
+      const n = data.countFor(entry,job.n,good) ? job.n : 1;
+      const pair = data.partsFor(entry,n,good)[0];
+      if (pair && (job.whole || pair.prefix)) addSuffix(sound(pair),entry);
+    }
+    if (ordered.length) addPeer(ordered[0]);
     const stems = {1:['いち','いっ'],2:['に'],4:['よん'],6:['ろく','ろっ'],8:['はち','はっ'],10:['じゅう','じゅっ'],100:['ひゃく','ひゃっ']};
     for (const stem of stems[job.n] || []) {
       if (nums.length >= 2) break;
       addNum(stem,job.n);
     }
-    for (const n of mix(numbers.filter(n => n !== job.n))) addNum(data.partsFor(job.entry,n)[0].prefix,n);
-    for (const suffix of data.counterSoundForms[job.entry.glyph]) addSuffix(suffix,job.entry);
-    for (const entry of otherFamilies) addSuffix(data.partsFor(entry,job.n)[0].suffix,entry);
+    for (const n of mix(validNumbers(job.entry,job.good).filter(n => n !== job.n))) {
+      for (const pair of data.partsFor(job.entry,n,job.good)) {
+        if (!job.whole && !pair.prefix) continue;
+        addNum(pair.prefix,n);
+        addSuffix(sound(pair),job.entry);
+      }
+    }
+    for (const entry of ordered) addPeer(entry);
     job.pads = {number:mix(nums),suffix:mix(suffixes)};
     return job.pads;
   }
@@ -829,28 +1042,30 @@ function create({settings, onAnswer = () => {}, onFinish = () => {}, env = globa
     const {number,suffix,counter} = job.selected;
     if (level === 1) return counter?.glyph || '';
     if (!number && !suffix) return '';
-    return (number?.glyph || '＿') + (suffix?.glyph || '＿') + '（' + (number?.value || '＿') + (suffix?.value || '＿') + '）';
+    const chosenEntry = entries.find(entry => entry.glyph === suffix?.glyph);
+    const written = number && chosenEntry && data.countFor(chosenEntry,number.n,chosenEntry === job.entry ? job.good : chosenEntry.goods[0])?.form;
+    const pronunciation = (job.whole ? '' : (number?.value || '＿')) + (suffix?.value || '＿');
+    return (written || (number?.glyph || '＿') + (suffix?.glyph || '＿')) + '（' + pronunciation + '）';
   }
   function correct(job) {
     if (level === 1) return job.selected.counter?.glyph === job.entry.glyph;
     const {number,suffix} = job.selected;
     return number?.n === job.n && suffix?.glyph === job.entry.glyph &&
-      job.parts.some(pair => pair.prefix === number.value && pair.suffix === suffix.value);
+      job.parts.some(pair => job.whole ? pair.prefix + pair.suffix === suffix.value : pair.prefix === number.value && pair.suffix === suffix.value);
   }
   function insertReview(job) {
     // Revisit the same sound change after two intervening retrievals, with another noun where possible.
     const later = index + 3;
     if (later >= planned) return;
-    const available = job.entry.goods.filter(good => good.kind !== job.good.kind);
+    const available = job.entry.goods.filter(good => good.kind !== job.good.kind && data.countFor(job.entry,job.n,good)?.kana === job.form.kana);
     jobs[later] = makeJob(job.entry,job.n,mix(available)[0] || job.good);
   }
   function record(status) {
     const job = target();
     if (!job || job.status || ended) return;
     job.status = status;
-    const form = count(job.entry,job.n);
     answers.push({glyph:job.entry.glyph,kind:job.good.kind,jp:job.good.jp,n:job.n,
-      form:form.form,kana:form.kana,chosen:shownChoice(job),status});
+      form:job.form.form,kana:job.form.kana,chosen:shownChoice(job),status});
     streak = status === 'correct' ? streak + 1 : 0;
     bestStreak = Math.max(bestStreak,streak);
     if (status === 'correct') hold = level === 2 ? 1000 : 480;
@@ -874,8 +1089,8 @@ function create({settings, onAnswer = () => {}, onFinish = () => {}, env = globa
     const job = target();
     if (!root || ended || !job || paused || modal || job.status || doc.hidden) return;
     if (level === 1) {
-      if (group !== 'counter' || !entries[i]) return;
-      job.selected.counter = entries[i];
+      if (group !== 'counter' || !choices(job).counter[i]) return;
+      job.selected.counter = choices(job).counter[i];
     } else {
       if (!['number','suffix'].includes(group)) return;
       const option = choices(job)[group][i];
@@ -903,8 +1118,8 @@ function create({settings, onAnswer = () => {}, onFinish = () => {}, env = globa
   function pad(group,option,i,key,selected,disabled) {
     return `<button type="button" class="game-button cr-pad" data-rush-group="${group}" data-rush-index="${i}"
       aria-pressed="${selected === option}" ${disabled ? 'disabled' : ''}>${key ? '<kbd aria-hidden="true">'+key+'</kbd>' : ''}
-      <span class="cr-pad-glyph" lang="ja">${option.glyph}</span>
-      <span class="cr-pad-sound" lang="ja">${option.value || option.kana}</span></button>`;
+      <span class="cr-pad-glyph" lang="ja"${option.glyph.length > 2 ? ' data-long' : ''}>${option.glyph}</span>
+      <span class="cr-pad-sound" lang="ja">${option.value ?? option.kana}</span></button>`;
   }
   function paintControls() {
     if (!root || !target()) return;
@@ -913,10 +1128,10 @@ function create({settings, onAnswer = () => {}, onFinish = () => {}, env = globa
     const prev = doc.activeElement;
     const prevKey = controls.contains(prev) && prev.dataset.rushGroup ?
       [prev.dataset.rushGroup,prev.dataset.rushIndex] : null;
-    const correctForm = count(job.entry,job.n);
+    controls.dataset.rushWhole = String(level === 2 && job.whole);
     const cue = job.good.cue || job.good.jp;
     const prompt = job.good.example && job.status === 'correct' && level === 2
-      ? job.good.example.replace('{count}',correctForm.form)
+      ? job.good.example.replace('{count}',job.form.form)
       : cue + (level === 2 ? ' × ' + job.n : '');
     find('prompt').textContent = prompt;
     find('prompt').lang = 'ja';
@@ -925,16 +1140,17 @@ function create({settings, onAnswer = () => {}, onFinish = () => {}, env = globa
     if (job.status === 'correct') {
       status.textContent = '✓ ' + shownChoice(job);
     } else if (level === 2 && (job.selected.number || job.selected.suffix)) {
-      status.textContent = (job.selected.number?.value || '＿') + ' ＋ ' + (job.selected.suffix?.value || '＿');
+      status.textContent = (job.whole ? job.selected.number?.glyph : job.selected.number?.value) || '＿';
+      status.textContent += ' ＋ ' + (job.selected.suffix?.value || '＿');
     } else {
-      status.textContent = level === 2 ? 'Componi il conteggio.' : 'Scegli il contatore.';
+      status.textContent = level === 1 ? 'Scegli il contatore.' : job.whole ? 'Scegli il numero e la lettura intera.' : 'Componi il conteggio.';
     }
     if (level === 1) {
       controls.innerHTML = '<div class="cr-keys" role="group" aria-label="Contatori">' +
-        entries.map((entry,i) => pad('counter',entry,i,counterKeys[i],job.selected.counter,locked)).join('') + '</div>';
+        choices(job).counter.map((entry,i) => pad('counter',entry,i,counterKeys[i],job.selected.counter,locked)).join('') + '</div>';
     } else {
       const panels = choices(job);
-      controls.innerHTML = '<div class="cr-compose">' + [['number','Parte numerica',numberKeys],['suffix','Suffisso del contatore',suffixKeys]]
+      controls.innerHTML = '<div class="cr-compose">' + [['number',job.whole ? 'Numero' : 'Parte numerica',numberKeys],['suffix',job.whole ? 'Lettura intera' : 'Suffisso del contatore',suffixKeys]]
         .map(([group,title,keys]) => `<fieldset><legend>${title}</legend><div class="cr-part-keys">` +
           panels[group].map((option,i) => pad(group,option,i,keys[i],job.selected[group],locked)).join('') + '</div></fieldset>').join('') + '</div>';
     }
@@ -949,8 +1165,9 @@ function create({settings, onAnswer = () => {}, onFinish = () => {}, env = globa
     if (job.good.cue) node.dataset.sceneFrame = '0';
     const image = doc.createElement('div');
     image.className = 'cr-art';
-    if (!illustrated.has(job.good.kind)) illustrated.set(job.good.kind,drawCounterObject(job.good.kind,doc));
-    const source = illustrated.get(job.good.kind);
+    const spriteKey = job.art === 'clock' ? job.art + job.n : job.art;
+    if (!illustrated.has(spriteKey)) illustrated.set(spriteKey,drawCounterObject(job.art,doc,0,undefined,job.n));
+    const source = illustrated.get(spriteKey);
     const sprite = doc.createElement('canvas');
     sprite.width = source.width; sprite.height = source.height;
     const context = sprite.getContext('2d');
@@ -1021,41 +1238,50 @@ function create({settings, onAnswer = () => {}, onFinish = () => {}, env = globa
     const node = nodes.get(job);
     const pose = reduced() ? 0 : Math.floor(sceneTime / 235) % 4;
     if (!node || node.dataset.sceneFrame === String(pose)) return;
-    drawCounterObject(job.good.kind,doc,pose,node.querySelector('canvas'));
+    drawCounterObject(job.art,doc,pose,node.querySelector('canvas'),job.n);
     node.dataset.sceneFrame = String(pose);
   }
-  function renderComparison(title,entry,example,n,suffix) {
-    const f = count(entry,n);
-    const spelling = suffix ? data.partsFor(entry,n).find(pair => pair.suffix === suffix) : undefined;
-    const reading = spelling ? spelling.prefix + spelling.suffix : f.kana;
-    const form = '<ruby>'+f.form+'<rt>'+reading+'</rt></ruby>';
+  function renderComparison(title,entry,example,n,reading) {
+    const f = data.countFor(entry,n,example);
+    const form = '<ruby>'+f.form+'<rt>'+(reading || f.kana)+'</rt></ruby>';
     const phrase = example.example ? example.example.replace('{count}',form) : example.jp + ' × ' + n + ' → ' + form;
     return `<section class="cr-rule"><h3>${title}</h3><p><strong lang="ja">${entry.glyph}（${entry.kana}）</strong> · ${entry.it}</p>
       <p>${entry.note}</p><p lang="ja">${phrase}</p></section>`;
   }
   function correctionHTML() {
-    const job = target(), {entry,n,selected} = job, canonical = count(entry,n);
+    const job = target(), {entry,n,selected,form:canonical} = job;
     const chosenEntry = level === 1 ? selected.counter : entries.find(e => e.glyph === selected.suffix?.glyph);
     const reasons = [];
     if (selected.number && selected.number.n !== n) reasons.push('La quantità richiesta è ' + n + '.');
-    else if (selected.number && !job.parts.some(pair => pair.prefix === selected.number.value))
+    else if (!job.whole && selected.number && !job.parts.some(pair => pair.prefix === selected.number.value))
       reasons.push('Qui la parte numerica si legge ' + job.parts[0].prefix + '.');
     if (chosenEntry && chosenEntry.glyph !== entry.glyph)
       reasons.push(job.good.cue ? 'Qui si usa ' + entry.glyph + ' per ' + entry.it.toLocaleLowerCase('it') + '.' : 'Per ' + job.good.jp + ' si usa ' + entry.glyph + '.');
     if (level === 2 && chosenEntry?.glyph === entry.glyph && !correct(job) && selected.suffix && selected.number) {
-      const pair = job.parts.find(p => p.prefix === selected.number.value);
-      if (!job.parts.some(p => p.suffix === selected.suffix.value) || pair && pair.suffix !== selected.suffix.value)
-        reasons.push('Con ' + (pair || job.parts[0]).prefix + ', il contatore si legge ' + (pair || job.parts[0]).suffix + '.');
+      const pair = job.parts.find(p => p.prefix === selected.number.value) || job.parts[0];
+      if (job.whole) reasons.push('In questa situazione ' + canonical.form + ' si legge ' + canonical.kana + '.');
+      else if (!job.parts.some(p => p.prefix === selected.number.value && p.suffix === selected.suffix.value))
+        reasons.push('Con ' + pair.prefix + ', il contatore si legge ' + pair.suffix + '.');
     }
     const right = level === 1 ? entry.glyph + '（' + entry.kana + '）' : canonical.form + '（' + canonical.kana + '）';
     let comparison = renderComparison('Contatore richiesto',entry,job.good,n);
-    if (chosenEntry && chosenEntry !== entry) {
-      const sameSubject = data.catalog.find(family => family.glyph === chosenEntry.glyph).goods.find(good => good.jp === job.good.jp);
-      comparison += renderComparison('Contatore scelto',chosenEntry,sameSubject || chosenEntry.goods[0],n,selected.suffix?.value);
-    } else if (level === 2 && selected.suffix?.glyph === entry.glyph) {
-      const candidate = data.numbers.find(other => other !== n && data.partsFor(entry,other).some(p =>
-        p.suffix === selected.suffix.value && (!selected.number || selected.number.n === n || other === selected.number.n)));
-      if (candidate) comparison += renderComparison('Un altro conteggio con ' + selected.suffix.value,entry,job.good,candidate,selected.suffix.value);
+    if (chosenEntry) {
+      const goods = data.catalog.find(family => family.glyph === chosenEntry.glyph).goods;
+      const examples = [...goods.filter(g => g.jp === job.good.jp), ...goods.filter(g => g.jp !== job.good.jp)];
+      const quantities = [...new Set([selected.number?.n || n,n,...chosenEntry.counts.map(f => f.n)])];
+      let usage;
+      for (const k of quantities) {
+        for (const good of examples) {
+          const f = data.countFor(chosenEntry,k,good);
+          if (!f || (chosenEntry === entry && f.form === canonical.form && f.kana === canonical.kana)) continue;
+          const pair = data.partsFor(chosenEntry,k,good).find(p => !selected.suffix ||
+            (job.whole ? p.prefix + p.suffix : p.suffix) === selected.suffix.value);
+          if (pair) { usage = {good,k,reading:pair.prefix + pair.suffix}; break; }
+        }
+        if (usage) break;
+      }
+      if (usage) comparison += renderComparison(chosenEntry === entry ? 'Un altro uso della lettura scelta' : 'Contatore scelto',
+        chosenEntry,usage.good,usage.k,usage.reading);
     }
     return `<h2 id="cr-popup-title" tabindex="-1">${job.status === 'missed' ? 'Tempo scaduto' : 'Rivedi la risposta'}</h2>
       <p class="cr-summary"><span lang="ja">${job.good.cue || job.good.jp}${level === 2 ? ' × '+n : ''}</span></p>
