@@ -1,8 +1,8 @@
 {
-  "build_id": "k1-0fc0c857dcf4c2d5",
-  "source_sha256": "0fc0c857dcf4c2d5ac73e36c2f4606979e49dca7389d4ff19aeae223bbf9c149",
-  "fragment_sha256": "4f1025484ecd75459e3785fb309c3be22ca60e204cba569f98b140381f33b510",
-  "standalone_sha256": "89fceb4bc305c046c84d04046ab1ba2b5f9535e43f70905070aa1fe5ee2dd448",
+  "build_id": "k1-94367c00455efc03",
+  "source_sha256": "94367c00455efc039cbc4399be26818d64d7896280831cc3ca2cb8ead8d84953",
+  "fragment_sha256": "80d2fb8791c6baaf91910f9de84e2ca398a577c9e833bc48fc54d1da34433fba",
+  "standalone_sha256": "8b5b5cddbe9fa638437a17d86e67bf80952c441f947a516a6b0f4fe6acbde4f3",
   "recognition": {
     "entry": "./recognition/offline-recognizer.mjs",
     "id": "kotoba-offline-trained-ensemble",
@@ -18,19 +18,19 @@
     "bytes": 26056696
   },
   "dictionary": {
-    "assetsSha256": "e7982fb78d2efabce19569644fff82d2c04059c1797b2a675926effde246721e",
+    "assetsSha256": "0104f8a75ca34d1ca5baa38ac1dbd9f0b02754d4d522a96b75dbed1e5cae6e7e",
     "sourceSha256": "3846524394e7b149f88f1cf09d9d6b10aa0b0e05267cd180bfb5eea31873952b",
     "entries": 218920,
     "coreEntries": 26143,
-    "workerPath": "dictionary/d5cc436f17546a67590764249bbb5b859cc686e257f8880e110e0f692f397831/dictionary-worker.js",
+    "workerPath": "dictionary/81a3e42f8753104c31946e218b71263bff923720a6a02c86323b4c43898758f5/dictionary-worker.js",
     "reference": {
-      "path": "dictionary/d5cc436f17546a67590764249bbb5b859cc686e257f8880e110e0f692f397831/reference.json.gz",
+      "path": "dictionary/81a3e42f8753104c31946e218b71263bff923720a6a02c86323b4c43898758f5/reference.json.gz",
       "bytes": 9402307,
       "sha256": "50baa00c1dd80172cf37c67bee951133fa9e3420d5f024b1e13f45e3b8e24fa4"
     },
     "quality": {
-      "structurallyMatchedVocabularyExamples": 8087,
-      "pendingVocabularyExamples": 261,
+      "structurallyMatchedVocabularyExamples": 8094,
+      "pendingVocabularyExamples": 254,
       "reviewStatus": "Native-speaker review pending",
       "unresolvedIds": [
         "VO-0ce2b98d3b",
@@ -133,7 +133,6 @@
         "V3-22cc737e03",
         "V3-50842f69c2",
         "V2-79169045a2",
-        "V2-e62d8e80cc",
         "V2-f87fab18b5",
         "V2-e34ae82b35",
         "V2-89034be6d9",
@@ -145,7 +144,6 @@
         "V2-06d008d266",
         "V2-d02bfaeccf",
         "V2-0980694b56",
-        "V2-1b80545d83",
         "V2-8a365cb6af",
         "V2-7341f5936d",
         "V2-d8bb5526c4",
@@ -167,7 +165,6 @@
         "V2-239fc6e98a",
         "V2-b8ab4082a1",
         "V2-621e1a42be",
-        "V2-c0a222a559",
         "V2-f8dd76ee4c",
         "V2-9b2486562a",
         "V2-e4d4b6fd93",
@@ -249,7 +246,6 @@
         "V1-3d456d6cf7",
         "V1-692bfa601e",
         "V1-da6e6e95fb",
-        "V1-8926d1d955",
         "V1-43461422a9",
         "V1-fd6d1d2bef",
         "V1-c73ec3073c",
@@ -275,7 +271,6 @@
         "V1-6e3cda5641",
         "V1-360aad068d",
         "V1-6b5f079fa9",
-        "V1-34e2aab83f",
         "V1-de4f14f8da",
         "V1-772d057f4c",
         "V1-c88c1274da",
@@ -287,20 +282,18 @@
         "V1-f1d383593c",
         "V1-2bbc3577e1",
         "V1-553c385823",
-        "V1-8c40174a35",
         "V1-0a4e418b78",
         "V1-4c2d901737",
         "V1-31e870b11a",
         "V1-fd3790e0c9",
-        "V1-6098e9e230",
-        "V1-99dd5e0ee7"
+        "V1-6098e9e230"
       ]
     }
   },
   "offline": {
     "workerPath": "rino-offline-sw.js",
-    "workerSha256": "49001541f317b8d1d259ba6eb090311f3ff361580c980114586b37bd005f6065",
+    "workerSha256": "3eed4aa1607de529b19858d42cb4ebe590c014ece76f9ac1e2ba577b6ae6f92d",
     "workerBytes": 120197,
-    "shellSha256": "89fceb4bc305c046c84d04046ab1ba2b5f9535e43f70905070aa1fe5ee2dd448"
+    "shellSha256": "8b5b5cddbe9fa638437a17d86e67bf80952c441f947a516a6b0f4fe6acbde4f3"
   }
 }

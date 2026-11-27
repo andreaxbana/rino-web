@@ -132,14 +132,14 @@
     const indexed=reference.indexedExamples?.[key];
     if(!indexed)return authored;
     const entryId=key.split(':')[0];
-    return authored.concat(indexed.map(([sense,ja,en,japaneseId,englishId,start,length,reading,form,location])=>{
+    return authored.concat(indexed.map(([sense,ja,en,japaneseId,englishId,start,length,reading,form,location,revisedEnglish])=>{
       const end=start+length,surface=ja.slice(start,end);
       const study=Array.isArray(location)?index?.kanji.get(location[0])?.example_sentences?.[location[1]]:index?.catalogWords.get(location);
       const target=/[\p{Script=Han}々]/u.test(surface)?{text:surface,reading}:{text:surface};
       const parts=study?.example_ja===ja?study.example_ruby:[{text:ja.slice(0,start)},target,{text:ja.slice(end)}].filter(t=>t.text);
       return {senseId:'jm:'+entryId+':s'+sense,example_ja:ja,example_ruby:parts,example_en:en,
         occurrence:{start,end,surface,reading,form,status:'structural-match'},
-        example_source:'Tatoeba contributors, via EDRDG',example_license:'CC BY 2.0 FR',
+        example_source:revisedEnglish?'Tatoeba contributors, via EDRDG; English revised for RiNO':'Tatoeba contributors, via EDRDG',example_license:'CC BY 2.0 FR',
         example_source_url:'https://tatoeba.org/sentences/show/'+japaneseId,
         english_source_url:'https://tatoeba.org/sentences/show/'+englishId};
     }));
