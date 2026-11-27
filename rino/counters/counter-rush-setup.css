@@ -46,6 +46,7 @@
   color: var(--jp-muted);
 }
 #jp-study-app .cr-option-row, #jp-study-app .cr-object-choices { display: flex; flex-wrap: wrap; gap: 5px; }
+#jp-study-app .cr-theme-choices { margin-top: -5px; }
 #jp-study-app .cr-option-row button, #jp-study-app .cr-object-option {
   display: inline-flex;
   align-items: center;
@@ -193,6 +194,39 @@
 }
 #jp-study-app .cr-counter-matrix td b { display: block; font-size: 16px; font-weight: 550; }
 #jp-study-app .cr-counter-matrix td small { display: block; margin-top: 1px; font-size: 13px; color: var(--jp-muted); }
+#jp-study-app .cr-counter-results { display: grid; gap: 6px; min-width: 0; }
+#jp-study-app .cr-counter-result {
+  min-width: 0;
+  border: 1px solid var(--jp-line);
+  border-radius: 12px;
+  background: var(--jp-panel);
+  color: var(--jp-text);
+}
+#jp-study-app .cr-counter-result summary {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  min-height: 48px;
+  padding: 6px 12px;
+  border-radius: inherit;
+  list-style: none;
+  cursor: pointer;
+}
+#jp-study-app .cr-counter-result summary::-webkit-details-marker { display: none; }
+#jp-study-app .cr-counter-result summary::before {
+  content: "";
+  flex: none;
+  width: 6px;
+  height: 6px;
+  border: solid var(--jp-muted);
+  border-width: 0 2px 2px 0;
+  transform: rotate(-45deg);
+}
+#jp-study-app .cr-counter-result[open] summary::before { transform: rotate(45deg); }
+#jp-study-app .cr-counter-result summary:focus-visible { outline: 2px solid var(--jp-focus); }
+#jp-study-app .cr-counter-result summary strong { font-size: 21px; }
+#jp-study-app .cr-counter-result summary b { margin-left: auto; font-size: 14px; white-space: nowrap; font-variant-numeric: tabular-nums; }
+#jp-study-app .cr-counter-result .game-results { margin: 0; padding: 0 12px 6px; border: 0; border-radius: 0; background: transparent; }
 #jp-study-app .cr-visually-hidden {
   position: absolute;
   width: 1px;
@@ -209,6 +243,10 @@
   #jp-study-app .cr-option-row button { font-size: 13px; padding-inline: 8px; }
   #jp-study-app .cr-large { font-size: 13px; }
   #jp-study-app .cr-reference-heading { gap: 3px 12px; }
+}
+@container rush-setup (max-width: 380px) {
+  #jp-study-app .cr-theme-choices { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); }
+  #jp-study-app .cr-theme-choices [data-cr-theme="piano"] { grid-column: 1 / -1; }
 }
 @container rush-setup (max-width: 265px) {
   #jp-study-app .cr-filter-bar > .cr-large { grid-column: 1 / -1; grid-row: 2; }

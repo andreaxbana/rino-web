@@ -2,16 +2,14 @@
 (function counterRushGame() {
 'use strict';
 
-function drawCounterObject(kind, document) {
-  const canvas = document.createElement('canvas');
-  canvas.width = canvas.height = 240;
-
-
+function drawCounterObject(kind, document, frame = 0, canvas = document.createElement('canvas')) {
+  if (canvas.width !== 240 || canvas.height !== 240) canvas.width = canvas.height = 240;
   canvas.setAttribute('aria-hidden', 'true');
   const c = canvas.getContext('2d');
   if (!c) return canvas;
   const ink = '#55483e', cream = '#fff2d0', shine = '#fff9ed';
-  c.scale(2, 2);
+  c.setTransform(2,0,0,2,0,0);
+  c.clearRect(0,0,120,120);
   c.lineJoin = 'round';
   c.lineCap = 'round';
   function path(data, color, stroke = ink, width = 2.8) {
@@ -32,7 +30,200 @@ function drawCounterObject(kind, document) {
     path('M0 -8 Q1 -2 6 0 Q1 1 0 7 Q-1 1 -6 0 Q-1 -2 0 -8Z',color,null);
     c.restore();
   }
+  function clock(x, y, radius, face) {
+    const angle = frame * Math.PI / 2 - Math.PI / 2;
+    oval(x,y,radius,radius,face,ink,2.6);
+    for (let i = 0; i < 4; i++) {
+      const a = i * Math.PI / 2;
+      dot(x + Math.cos(a) * (radius-4), y + Math.sin(a) * (radius-4), 1.1,ink);
+    }
+    line('M'+x+' '+y+' l'+Math.cos(angle)*(radius-6)+' '+Math.sin(angle)*(radius-6),ink,2.7);
+    dot(x,y,2.2,'#c47458');
+  }
+  function musicNote(x, y, color, scale = 1) {
+    c.save(); c.translate(x,y); c.scale(scale,scale);
+    path('M-7 1 V-15 L8 -19 V-2 Q7 4 2 4 Q-3 5 -4 1 Q-4 -3 4 -5 V-13 L-3 -11 V3 Q-4 8 -10 8 Q-15 8 -15 4 Q-15 1 -7 1Z',color,ink,1.4);
+    c.restore();
+  }
   switch (kind) {
+    case 'jump': {
+      const lift = [0, 10, 22, 10][frame];
+      shadow(20 - lift/3);
+      line('M19 98 H101','#96a88d',2);
+      c.save(); c.translate(0,-lift);
+      const knee = lift > 15;
+      line(knee ? 'M54 70 L42 77 L36 70 M66 70 L76 77 L86 71' :
+        'M54 69 L50 82 L46 92 M65 70 L70 82 L74 91',ink,8);
+      line(knee ? 'M35 70 L30 66 M85 71 L90 67' : 'M47 92 L39 92 M74 91 L82 91','#c87961',7);
+      line(knee ? 'M47 52 L34 44 L27 34 M70 52 L83 44 L90 34' :
+        'M47 52 L37 63 L29 62 M70 52 L80 62 L89 60','#c68d6c',6);
+      path('M48 48 Q58 43 69 49 L74 70 Q59 76 44 70Z','#65a3a5');
+      oval(58,35,13,14,'#f1c3a0',ink);
+      path('M45 34 Q44 19 57 19 Q69 18 72 31 L64 27 L61 31 L53 26Z','#6b5151');
+      dot(65,35,1.6,ink); c.restore();
+      break;
+    }
+    case 'clap': {
+      const gap = [7, 3, 0, 4][frame];
+      shadow(34);
+      for (const side of [-1,1]) {
+        c.save(); c.translate(60 + side*(gap+3),69); c.scale(side,1); c.rotate(-.37);
+        path('M-1 18 Q-11 7 -7 -1 L-3 -17 Q-2 -21 1 -18 L1 -4 L4 -30 Q5 -34 8 -32 L7 -12 L11 -31 Q12 -35 15 -32 L13 -9 L18 -26 Q20 -30 22 -27 L19 -5 L26 -17 Q29 -21 31 -18 L25 4 Q21 14 13 21 L13 32 L-2 30Z',side < 0 ? '#e7b58b' : '#f4caa5',ink,2);
+        path('M-4 24 L16 26 L16 35 L-6 33Z',side < 0 ? '#8dabc0' : '#c38b7a',ink,2);
+        c.restore();
+      }
+      if (gap <= 3) line('M60 23 V13 M50 27 L45 19 M70 27 L76 19','#c58b48',3);
+      break;
+    }
+    case 'ring': {
+      shadow(30);
+      c.save(); c.translate(59,37); c.rotate([-.20,.06,.23,-.04][frame]);
+      oval(0,-13,6,7,'#eed3a0',ink); oval(0,44,7,8,'#be8968',ink);
+      path('M-28 36 Q-17 31 -17 9 Q-17 -8 -2 -9 Q17 -10 19 11 Q20 32 31 36 Q30 44 0 44 Q-26 44 -28 36Z','#e8ba65');
+      line('M-23 35 Q-3 40 25 36','#a67546',2); line('M-10 9 Q-11 20 -13 23','#ffe5a1',3);
+      c.restore();
+      line('M20 40 Q13 48 15 55 M98 40 Q105 48 103 55','#76a4ad',2.8);
+      break;
+    }
+    case 'request':
+    case 'order':
+    case 'report': {
+      const lift = [0, 6, 13, 6][frame];
+      shadow(34);
+      c.save(); c.translate(53,52-lift); c.rotate(-.08);
+      path('M-24 -19 L21 -19 L26 -12 L26 25 L-24 25Z','#ffedcf');
+      line('M12 -18 L12 -10 L23 -10','#b39978',1.7);
+      if (kind === 'request') {
+        path('M-15 -6 Q-7 -14 0 -8 Q6 -3 -4 5 L-8 8 L-8 3 Q-18 2 -15 -6Z','#a6c3b9','#6f9086',1.5);
+        dot(-10,-3,1,ink); dot(-6,-3,1,ink);
+      } else if (kind === 'order') {
+        path('M-15 -7 L-11 -7 L-8 1 H1 L5 -5 H-10','#d5ae6d',ink,1.5); dot(-7,5,1.8,ink); dot(1,5,1.8,ink);
+      } else {
+        path('M-8 -10 L2 5 H-18Z','#e5ac6e',ink,1.5);
+        line('M-8 -5 V-1',ink,1.7); dot(-8,2,1,ink);
+      }
+      line('M-15 13 H14 M-15 18 H5','#a49581',2);
+      c.restore();
+      if (kind === 'request') {
+        path('M18 61 L54 48 L92 61 L91 89 L20 89Z','#d89c78');
+        path('M18 61 L53 77 L92 61 L91 89 L20 89Z','#efc58c');
+      } else if (kind === 'order') {
+        path('M16 65 L32 57 L46 62 L36 69Z','#eab986');
+        path('M36 69 L46 62 L63 68 L51 75Z','#f7c995');
+        path('M16 65 L36 69 L51 75 L50 94 L16 85Z','#cf9b6e');
+        path('M51 75 L63 68 L63 86 L50 94Z','#b98463');
+        line('M30 68 L30 77','#f5db9b',4);
+      } else {
+        path('M19 61 H45 L50 68 H96 L90 90 H17Z','#81aab2');
+        path('M17 71 H39 L45 75 H92 L88 94 H19Z','#abc8c5');
+        line('M26 82 H48','#6c9599',2);
+      }
+      break;
+    }
+    case 'arithmetic':
+    case 'riddle':
+    case 'spelling': {
+      shadow(36);
+      path('M18 23 L83 18 L87 85 L22 93Z',kind==='riddle'?'#bdd3ca':kind==='spelling'?'#efc6bd':'#eddbaf');
+      path('M22 27 L78 23 L82 80 L26 87Z','#fff3d9',ink,1.6);
+      if (kind === 'arithmetic') {
+        line('M32 40 Q45 32 44 42 Q44 46 34 54 L46 52 M55 43 L65 42 M60 38 L61 48 M31 65 L45 63 M32 70 L46 68',ink,2.6);
+      } else if (kind === 'spelling') {
+        path('M34 36 L65 33 L68 63 L37 66Z',null,'#c8b9aa',1.6);
+        line('M48 36 L52 64 M36 51 L67 48','#d6c6ae',1.1);
+        line('M40 46 L61 43 M49 39 L51 59 M49 45 Q47 50 41 56 M51 46 L60 54',ink,2.7);
+      } else {
+        path('M32 44 Q33 30 47 31 Q59 30 60 40 Q61 47 52 52 L51 56',null,'#698e98',3.9); dot(51,63,2.7,'#698e98');
+      }
+      const x = 58 + frame*4;
+      c.save(); c.translate(x,74); c.rotate(.56);
+      path('M-3 2 V-35 H4 V2 L0 11Z','#d9a665',ink,1.6);
+      path('M-3 2 H4 L0 11Z','#ead9b6',ink,1.2); c.restore();
+      break;
+    }
+    case 'break': {
+      shadow(35);
+      path('M21 64 Q21 82 34 88 H51 Q64 81 65 64Z','#8bb6a7');
+      path('M64 66 Q76 62 76 69 Q75 78 61 79',null,ink,3.4);
+      oval(43,64,22,6,'#ead5ae',ink,1.9); oval(43,64,17,3.6,'#aa785b');
+      line('M33 94 Q44 98 61 93','#9b9c83',2.4);
+      clock(78,40,20,'#f9e2a4');
+      break;
+    }
+    case 'wait': {
+      shadow(38);
+      path('M13 68 H73 V73 H13Z','#bc9671'); line('M20 75 V91 M67 74 V91',ink,4);
+      oval(39,37,10,11,'#eec19e',ink);
+      path('M28 36 Q26 22 39 24 Q49 23 51 34 L42 30 L37 34Z','#665463');
+      path('M32 49 Q45 44 48 53 L52 64 L39 67 L30 62Z','#929fb4');
+      line('M36 66 L53 67 L57 83 L66 84',ink,5.5);
+      clock(83,33,16,'#f6dbad'); line('M83 50 V85 M72 88 H94','#8a948b',2.4);
+      break;
+    }
+    case 'timer': {
+      shadow(28);
+      path('M53 25 V18 H64 V25 M50 16 H67 V20 H50Z','#b1b8b9');
+      line('M82 34 L87 28 M84 25 L91 31',ink,4);
+      oval(59,60,32,34,'#c88473',ink,2.6);
+      clock(59,59,24,'#fff0cd');
+      break;
+    }
+    case 'hotel':
+    case 'inn':
+    case 'camp': {
+      const moonX = 67 + frame*4;
+      path('M15 81 Q16 33 44 19 Q71 9 94 34 Q105 49 103 81Z','#7d91a1',null);
+      c.save(); c.translate(moonX,29);
+      path('M4 -10 Q-3 -5 1 2 Q4 7 10 7 Q3 14 -5 9 Q-15 3 -10 -6 Q-6 -11 4 -10Z','#ffdb91',null); c.restore();
+      dot(36,40,1.7,'#fff1ca'); dot(52,28,1.4,'#fff1ca'); dot(92,49,1.4,'#fff1ca');
+      if (kind === 'camp') {
+        path('M17 88 L52 43 L86 54 L103 88Z','#be8a64');
+        path('M15 88 L52 43 L74 88Z','#efc37d'); path('M31 88 L51 58 L57 88Z','#76695f');
+        line('M11 94 L19 85 M94 86 L105 95','#99896f',2.4);
+      } else if (kind === 'inn') {
+        path('M21 62 H91 V92 H22Z','#efcaab');
+        path('M12 61 Q23 59 32 45 H83 Q90 57 101 59 L96 65 H15Z','#675e5c');
+        path('M33 71 H53 V87 H33Z','#f4e7be');
+        line('M43 71 V87 M34 79 H52 M62 92 V70 H81 V92','#a27c65',2.1);
+        path('M61 68 H82 V76 H74 V73 L72 77 H61Z','#809e98',ink,1.2);
+      } else {
+        path('M24 46 L67 39 L82 47 V92 H24Z','#deb798');
+        path('M67 39 L82 47 V92 H68Z','#c6957d',ink,1.5);
+        for(const y of [52,68]) for(const x of [32,47]) path('M'+x+' '+y+' h8 v8 h-8Z','#ffde96',ink,1.4);
+        path('M46 92 V80 H57 V92Z','#896f65',ink,1.5);
+      }
+      line('M11 94 H106','#989983',2.5);
+      break;
+    }
+    case 'piano':
+    case 'piano-repeat':
+    case 'piano-minutes':
+    case 'playlist':
+    case 'concert': {
+      shadow(35);
+      if (kind.startsWith('piano')) {
+        path('M20 50 Q36 47 60 38 Q73 33 83 41 L93 62 L40 81 L18 69Z','#77a1a2');
+        path('M20 63 L54 70 L89 56 L92 66 L54 82 L20 72Z','#fff0ca');
+        for (let i = 0; i < 4; i++) line('M'+(26+i*6)+' '+(65+i)+' l-1 7',ink,1.3);
+        line('M24 74 L23 88 M52 82 V95 M88 69 V81',ink,4);
+      } else if (kind === 'playlist') {
+        path('M27 30 Q26 26 32 25 L68 21 Q73 20 75 25 L83 88 Q83 93 77 94 L39 98 Q34 98 33 91Z','#8e9eaa');
+        path('M33 34 L69 30 L75 77 L39 83Z','#e2ded6',ink,1.6);
+        for (let i = 0; i < 3; i++) {
+          const y = 45 + i * 12;
+          dot(44,y,2.1,frame%3===i ? '#ae6d5c' : '#9b9e99'); line('M50 '+y+' l15 -2','#7d9195',2);
+        }
+        oval(57,88,5,3,'#c9c5b4',ink,1.3);
+      } else {
+        path('M18 29 H92 V88 H18Z','#bda2ab');
+        path('M18 29 H45 Q40 49 23 57 L29 85 H16Z M93 29 H68 Q73 49 88 57 L83 85 H96Z','#af6e6e');
+        path('M28 83 H88 L99 92 H15Z','#c59870');
+        line('M57 58 V79 M50 81 H65',ink,2.8);
+        oval(57,52,4,8,'#697a80',ink,1.8);
+      }
+      musicNote(kind==='concert'?78:84,40-[0,3,7,10][frame],'#edbe67',.82);
+      break;
+    }
     case 'pen': {
       shadow(29);
       c.save(); c.translate(58,59); c.rotate(-.7);
@@ -513,8 +704,8 @@ function drawCounterObject(kind, document) {
           line('M'+x+' '+y+' l'+dx+' '+dy,'#b7b8a7',1);
         }
       }
-      const frame='M28 77 L45 49 L60 75 L28 77 L79 46 L60 75 M78 37 L93 73';
-      line(frame,ink,6);line(frame,'#82a79a',3.8);
+      const cycleFrame='M28 77 L45 49 L60 75 L28 77 L79 46 L60 75 M78 37 L93 73';
+      line(cycleFrame,ink,6);line(cycleFrame,'#82a79a',3.8);
       line('M44 49 L40 40 M78 40 L75 30 L86 27',ink,4);
       line('M33 40 L47 39',ink,5);line('M84 27 L90 27','#ad8062',4);
       oval(60,74,5,5,'#cfab7b',ink,2);line('M60 74 L67 81 L72 80',ink,2.2);
@@ -525,7 +716,7 @@ function drawCounterObject(kind, document) {
 
 const numberKeys = ['A', 'S', 'D'];
 const suffixKeys = ['J', 'K', 'L'];
-const counterKeys = [...'1234567890QW'];
+const counterKeys = [...'1234567890QWERTYUI'];
 const speeds = {easy:8400, slow:8400, normal:5700, fast:3500};
 const numerals = {1:'一',2:'二',3:'三',4:'四',5:'五',6:'六',7:'七',8:'八',9:'九',10:'十',100:'百',1000:'千'};
 
@@ -543,7 +734,7 @@ function create({settings, onAnswer = () => {}, onFinish = () => {}, env = globa
   const entries = data.catalog.filter(entry => settings.counters.includes(entry.glyph)).map(entry => ({
     ...entry, goods:entry.goods.filter(good => !settings.objects || settings.objects.includes(good.kind))
   })).filter(entry => entry.goods.length);
-  if (!entries.length) throw Error('Seleziona almeno un oggetto per iniziare.');
+  if (!entries.length) throw Error('Seleziona almeno un esempio per iniziare.');
   const numbers = data.numbers.filter(n => settings.largeNumbers || n <= 10);
   const level = settings.level === 2 ? 2 : 1;
   const belt = settings.layout === 'belt';
@@ -554,7 +745,7 @@ function create({settings, onAnswer = () => {}, onFinish = () => {}, env = globa
   let families = [], quantities = [], lastFamily = '', streak = 0, bestStreak = 0;
   let index = 0, fraction = 0, carry = 0, hold = 0, paused = false, modal = '', ended = false;
   let root = null, doc = null, nodes = new Map(), observer = null, frame = null, lastTime = null;
-  let geom = null, modalTrigger = null;
+  let geom = null, modalTrigger = null, sceneTime = 0;
   const target = () => jobs[index];
   const find = name => root?.querySelector('[data-rush-' + name + ']');
   const reduced = () => !!env.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
@@ -594,9 +785,9 @@ function create({settings, onAnswer = () => {}, onFinish = () => {}, env = globa
       planned,bestStreak,answers:answers.map(a => ({...a}))};
   }
   function markup() {
-    return `<section class="cr-play" lang="it" tabindex="-1">
+    return `<section class="cr-play" lang="it" tabindex="-1" data-many-answers="${level === 1 && entries.length > 12}">
       <header class="cr-top"><h1 id="game-title" tabindex="-1">Counter Rush</h1>
-        <div class="cr-stats"><span><b data-rush-score>0</b> punti</span><span>Oggetto <b data-rush-round></b></span></div>
+        <div class="cr-stats"><span><b data-rush-score>0</b> punti</span><span>Domanda <b data-rush-round></b></span></div>
         <div class="cr-tools"><button type="button" class="game-button" data-rush-action="reference">Tabella</button>
         <button type="button" class="game-button" data-rush-action="pause">Pausa</button>
         <button type="button" class="game-button" data-rush-action="end">Termina</button></div></header>
@@ -676,7 +867,7 @@ function create({settings, onAnswer = () => {}, onFinish = () => {}, env = globa
     index++;
     if (index === planned) { end(); return; }
     carry = reduced() ? 0 : Math.max(-1,Math.min(0,fraction - 1));
-    fraction = 0; hold = 0; lastTime = null;
+    fraction = 0; hold = 0; sceneTime = 0; lastTime = null;
     layOut(); paintControls(); paintStats(); paintTravel();
   }
   function choose(group,i) {
@@ -711,7 +902,7 @@ function create({settings, onAnswer = () => {}, onFinish = () => {}, env = globa
   }
   function pad(group,option,i,key,selected,disabled) {
     return `<button type="button" class="game-button cr-pad" data-rush-group="${group}" data-rush-index="${i}"
-      aria-pressed="${selected === option}" ${disabled ? 'disabled' : ''}><kbd aria-hidden="true">${key}</kbd>
+      aria-pressed="${selected === option}" ${disabled ? 'disabled' : ''}>${key ? '<kbd aria-hidden="true">'+key+'</kbd>' : ''}
       <span class="cr-pad-glyph" lang="ja">${option.glyph}</span>
       <span class="cr-pad-sound" lang="ja">${option.value || option.kana}</span></button>`;
   }
@@ -722,7 +913,11 @@ function create({settings, onAnswer = () => {}, onFinish = () => {}, env = globa
     const prev = doc.activeElement;
     const prevKey = controls.contains(prev) && prev.dataset.rushGroup ?
       [prev.dataset.rushGroup,prev.dataset.rushIndex] : null;
-    const prompt = job.good.jp + (level === 2 ? ' × ' + job.n : '');
+    const correctForm = count(job.entry,job.n);
+    const cue = job.good.cue || job.good.jp;
+    const prompt = job.good.example && job.status === 'correct' && level === 2
+      ? job.good.example.replace('{count}',correctForm.form)
+      : cue + (level === 2 ? ' × ' + job.n : '');
     find('prompt').textContent = prompt;
     find('prompt').lang = 'ja';
     const status = find('status');
@@ -751,6 +946,7 @@ function create({settings, onAnswer = () => {}, onFinish = () => {}, env = globa
     node.dataset.kind = job.good.kind;
     node.dataset.glyph = job.entry.glyph;
     node.dataset.quantity = job.n;
+    if (job.good.cue) node.dataset.sceneFrame = '0';
     const image = doc.createElement('div');
     image.className = 'cr-art';
     if (!illustrated.has(job.good.kind)) illustrated.set(job.good.kind,drawCounterObject(job.good.kind,doc));
@@ -762,7 +958,11 @@ function create({settings, onAnswer = () => {}, onFinish = () => {}, env = globa
     image.append(sprite);
     const name = doc.createElement('span');
     name.className = 'cr-name'; name.lang = 'ja';
-    if (job.good.jp === job.good.reading) name.append(job.good.jp);
+    if (job.good.cue) {
+      const cue = doc.createElement('span');
+      cue.className = 'cr-cue'; cue.textContent = job.good.cue;
+      name.append(cue);
+    } else if (job.good.jp === job.good.reading) name.append(job.good.jp);
     else {
       const ruby = doc.createElement('ruby'), rt = doc.createElement('rt');
       rt.textContent = job.good.reading; ruby.append(job.good.jp,rt); name.append(ruby);
@@ -816,12 +1016,22 @@ function create({settings, onAnswer = () => {}, onFinish = () => {}, env = globa
     find('moving').style.transform = belt ? 'translateX(' + (-offset).toFixed(2) + 'px)' : 'translateY(' + offset.toFixed(2) + 'px)';
     find('time').style.transform = 'scaleX(' + Math.max(0,1-fraction).toFixed(4) + ')';
   }
+  function paintScene(job) {
+    if (!job?.good.cue) return;
+    const node = nodes.get(job);
+    const pose = reduced() ? 0 : Math.floor(sceneTime / 235) % 4;
+    if (!node || node.dataset.sceneFrame === String(pose)) return;
+    drawCounterObject(job.good.kind,doc,pose,node.querySelector('canvas'));
+    node.dataset.sceneFrame = String(pose);
+  }
   function renderComparison(title,entry,example,n,suffix) {
     const f = count(entry,n);
     const spelling = suffix ? data.partsFor(entry,n).find(pair => pair.suffix === suffix) : undefined;
     const reading = spelling ? spelling.prefix + spelling.suffix : f.kana;
+    const form = '<ruby>'+f.form+'<rt>'+reading+'</rt></ruby>';
+    const phrase = example.example ? example.example.replace('{count}',form) : example.jp + ' × ' + n + ' → ' + form;
     return `<section class="cr-rule"><h3>${title}</h3><p><strong lang="ja">${entry.glyph}（${entry.kana}）</strong> · ${entry.it}</p>
-      <p>${entry.note}</p><p lang="ja">${example.jp} × ${n} → ${f.form}（${reading}）</p></section>`;
+      <p>${entry.note}</p><p lang="ja">${phrase}</p></section>`;
   }
   function correctionHTML() {
     const job = target(), {entry,n,selected} = job, canonical = count(entry,n);
@@ -830,7 +1040,8 @@ function create({settings, onAnswer = () => {}, onFinish = () => {}, env = globa
     if (selected.number && selected.number.n !== n) reasons.push('La quantità richiesta è ' + n + '.');
     else if (selected.number && !job.parts.some(pair => pair.prefix === selected.number.value))
       reasons.push('Qui la parte numerica si legge ' + job.parts[0].prefix + '.');
-    if (chosenEntry && chosenEntry.glyph !== entry.glyph) reasons.push('Per ' + job.good.jp + ' si usa ' + entry.glyph + '.');
+    if (chosenEntry && chosenEntry.glyph !== entry.glyph)
+      reasons.push(job.good.cue ? 'Qui si usa ' + entry.glyph + ' per ' + entry.it.toLocaleLowerCase('it') + '.' : 'Per ' + job.good.jp + ' si usa ' + entry.glyph + '.');
     if (level === 2 && chosenEntry?.glyph === entry.glyph && !correct(job) && selected.suffix && selected.number) {
       const pair = job.parts.find(p => p.prefix === selected.number.value);
       if (!job.parts.some(p => p.suffix === selected.suffix.value) || pair && pair.suffix !== selected.suffix.value)
@@ -839,14 +1050,15 @@ function create({settings, onAnswer = () => {}, onFinish = () => {}, env = globa
     const right = level === 1 ? entry.glyph + '（' + entry.kana + '）' : canonical.form + '（' + canonical.kana + '）';
     let comparison = renderComparison('Contatore richiesto',entry,job.good,n);
     if (chosenEntry && chosenEntry !== entry) {
-      comparison += renderComparison('Contatore scelto',chosenEntry,chosenEntry.goods[0],n,selected.suffix?.value);
+      const sameSubject = data.catalog.find(family => family.glyph === chosenEntry.glyph).goods.find(good => good.jp === job.good.jp);
+      comparison += renderComparison('Contatore scelto',chosenEntry,sameSubject || chosenEntry.goods[0],n,selected.suffix?.value);
     } else if (level === 2 && selected.suffix?.glyph === entry.glyph) {
       const candidate = data.numbers.find(other => other !== n && data.partsFor(entry,other).some(p =>
         p.suffix === selected.suffix.value && (!selected.number || selected.number.n === n || other === selected.number.n)));
       if (candidate) comparison += renderComparison('Un altro conteggio con ' + selected.suffix.value,entry,job.good,candidate,selected.suffix.value);
     }
     return `<h2 id="cr-popup-title" tabindex="-1">${job.status === 'missed' ? 'Tempo scaduto' : 'Rivedi la risposta'}</h2>
-      <p class="cr-summary"><span lang="ja">${job.good.jp}${level === 2 ? ' × '+n : ''}</span></p>
+      <p class="cr-summary"><span lang="ja">${job.good.cue || job.good.jp}${level === 2 ? ' × '+n : ''}</span></p>
       <dl class="cr-compare"><div><dt>Hai scelto</dt><dd>${shownChoice(job) || 'Nessuna risposta'}</dd></div>
       <div><dt>Risposta corretta</dt><dd lang="ja">${right}</dd></div></dl>
       ${reasons.length ? '<p>'+reasons.join(' ')+'</p>' : ''}<div class="cr-examples">${comparison}</div>
@@ -914,6 +1126,7 @@ function create({settings, onAnswer = () => {}, onFinish = () => {}, env = globa
         fraction = Math.min(1,fraction + dt/duration);
         carry *= Math.exp(-dt/88);
         paintTravel();
+        sceneTime += dt; paintScene(target());
         if (fraction >= 1) record('missed');
       }
     }

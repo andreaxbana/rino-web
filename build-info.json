@@ -1,8 +1,8 @@
 {
-  "build_id": "k1-624e9fc26c0d31ee",
-  "source_sha256": "624e9fc26c0d31ee9bf4517135eb491f484118d2e889e6622040d4b6326d24e1",
-  "fragment_sha256": "e17e8825378431dfd09935ebaf5bce256d61b510b7a429b43d007f9f46bf7138",
-  "standalone_sha256": "b5840d4c9fb132d66899b8290afa714201af2b5e64c7b9c34e18465eb66586b3",
+  "build_id": "k1-a8e34b90ae76de6e",
+  "source_sha256": "a8e34b90ae76de6ef78e140fbd9540a093fdf44174aebe2bcfc502f367f4dc42",
+  "fragment_sha256": "8e12cb00aa5b8c229a3917774a68262fbcb953820886daa7aa337a3a4fdac7df",
+  "standalone_sha256": "7e12d1b62e0e8c33f8dfb89405ac22e2037325a5c8300f40ac5aad572ae1852c",
   "recognition": {
     "entry": "./recognition/offline-recognizer.mjs",
     "id": "kotoba-offline-trained-ensemble",
@@ -14,14 +14,14 @@
   "rino": {
     "id": "rino-study-world",
     "version": 1,
-    "assetsSha256": "5fd4e4e7d50797481821caa154833a6d99435764134d56acd2f01115dd118ef5",
-    "bytes": 25789146
+    "assetsSha256": "27c23d68f6a997fd722b4961f7b4fb093e4dd516950d91771c16d6fb3705c3d6",
+    "bytes": 25802019
   },
   "dictionary": {
     "assetsSha256": "e7982fb78d2efabce19569644fff82d2c04059c1797b2a675926effde246721e",
     "sourceSha256": "3846524394e7b149f88f1cf09d9d6b10aa0b0e05267cd180bfb5eea31873952b",
     "entries": 218920,
-    "coreEntries": 26014,
+    "coreEntries": 26143,
     "workerPath": "dictionary/d5cc436f17546a67590764249bbb5b859cc686e257f8880e110e0f692f397831/dictionary-worker.js",
     "reference": {
       "path": "dictionary/d5cc436f17546a67590764249bbb5b859cc686e257f8880e110e0f692f397831/reference.json.gz",
@@ -299,8 +299,8 @@
   },
   "offline": {
     "workerPath": "rino-offline-sw.js",
-    "workerSha256": "fac4f621c15fbf7a68694cfedfba42bbf1de74543e481955c09f264ad993d27a",
-    "workerBytes": 118098,
-    "shellSha256": "b5840d4c9fb132d66899b8290afa714201af2b5e64c7b9c34e18465eb66586b3"
+    "workerSha256": "d1fcf78c21101130a49f881c737b30e76651acd4a974c2d7ac25648e93ee809c",
+    "workerBytes": 118099,
+    "shellSha256": "7e12d1b62e0e8c33f8dfb89405ac22e2037325a5c8300f40ac5aad572ae1852c"
   }
 }

@@ -40,6 +40,7 @@
 #jp-study-app .cr-object[data-target="true"] .cr-art canvas { animation:cr-object-bounce 1.3s ease-in-out infinite; }
 #jp-study-app .cr-object[data-target="true"]:is([data-glyph="匹"],[data-glyph="羽"]) .cr-art canvas { animation:cr-animal-step 1.4s ease-in-out infinite; }
 #jp-study-app .cr-object[data-target="true"][data-glyph="隻"] .cr-art canvas { animation:cr-vessel 1.7s ease-in-out infinite; }
+#jp-study-app .cr-object[data-target="true"][data-scene-frame] .cr-art canvas { animation:none; }
 #jp-study-app .cr-object[data-result="correct"] .cr-art { animation:cr-catch .4s ease-out; }
 #jp-study-app .cr-play[data-frozen="true"] .cr-art canvas { animation-play-state:paused; }
 @keyframes cr-object-bounce { 0%,100% { transform:translateY(0); } 50% { transform:translateY(-3px) rotate(-2deg); } }
@@ -53,6 +54,11 @@
 }
 #jp-study-app .cr-name b { font:700 .72em/1.2 system-ui,sans-serif; font-variant-numeric:tabular-nums; }
 #jp-study-app .cr-name rt { font-size:.49em; font-weight:500; }
+#jp-study-app .cr-object[data-scene-frame] .cr-name {
+  align-items:center; font-size:clamp(12px,1.65cqw,17px); line-height:1.14;
+}
+#jp-study-app .cr-cue { min-width:0; white-space:normal; text-align:center; text-wrap:balance; }
+#jp-study-app .cr-object[data-scene-frame] .cr-name b { flex:none; align-self:end; }
 #jp-study-app .cr-object[data-target="true"] .cr-name { background:var(--jp-feature); color:var(--jp-feature-text); box-shadow:0 0 0 1px var(--jp-feature-line); }
 #jp-study-app .cr-paused { z-index:1; display:grid; place-items:center; background:color-mix(in srgb,var(--jp-bg) 82%,transparent); }
 #jp-study-app .cr-time { height:3px; background:var(--jp-line); margin:5px 0 2px; border-radius:5px; overflow:hidden; }
@@ -63,6 +69,8 @@
 #jp-study-app .cr-prompt [data-tone="correct"] { color:var(--cr-good); font-weight:650; animation:cr-right .22s ease-out; }
 @keyframes cr-right { from { opacity:.4; transform:translateY(3px); } to { opacity:1; transform:translateY(0); } }
 #jp-study-app .cr-keys { display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,86px),1fr)); gap:6px; }
+#jp-study-app .cr-play[data-many-answers="true"] .cr-keys { grid-template-columns:repeat(auto-fit,minmax(min(100%,64px),1fr)); }
+#jp-study-app .cr-play[data-many-answers="true"] .cr-stage { height:clamp(260px,calc(61svh - 64px),720px); }
 #jp-study-app .cr-compose { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:clamp(8px,2cqw,24px); }
 #jp-study-app .cr-compose fieldset { padding:0; min-width:0; border:0; }
 #jp-study-app .cr-compose legend { display:block; padding:0; margin:0 0 4px; color:var(--jp-muted); font-size:13px; font-weight:650; }
@@ -108,8 +116,12 @@
   #jp-study-app .cr-pad.game-button { border-radius:10px; }
   #jp-study-app .cr-pad kbd { display:none; }
   #jp-study-app .cr-keys { grid-template-columns:repeat(auto-fit,minmax(min(100%,47px),1fr)); gap:4px; }
+  #jp-study-app .cr-play[data-many-answers="true"] .cr-keys { grid-template-columns:repeat(auto-fit,minmax(min(100%,47px),1fr)); }
+  #jp-study-app .cr-play[data-many-answers="true"] .cr-stage { height:clamp(174px,calc(42svh - 84px),340px); }
+  #jp-study-app .cr-play[data-many-answers="true"] .cr-keys .cr-pad { min-height:46px; }
   #jp-study-app .cr-prompt { font-size:13px; }
   #jp-study-app .cr-stage[data-layout="belt"] .cr-name { font-size:clamp(10px,2.65cqw,14px); padding-inline:2px; }
+  #jp-study-app .cr-stage[data-layout="belt"] .cr-object[data-scene-frame] .cr-name { font-size:11px; }
 }
 @container (max-width:350px) {
   #jp-study-app .cr-top h1 { flex:1; }
